@@ -1,0 +1,32 @@
+[
+  {
+    "model": "tasks.task",
+    "pk": 1,
+    "fields": {
+      "title": "Preparer la reunion de lancement",
+      "status": "A faire",
+      "owner": null,
+      "created_at": "2025-10-21T09:00:00Z"
+    }
+  },
+  {
+    "model": "tasks.task",
+    "pk": 2,
+    "fields": {
+      "title": "Rediger le cahier des charges",
+      "status": "En cours",
+      "owner": null,
+      "created_at": "2025-10-19T14:30:00Z"
+    }
+  },
+  {
+    "model": "tasks.task",
+    "pk": 3,
+    "fields": {
+      "title": "Valider la livraison aupres du client",
+      "status": "Fait",
+      "owner": null,
+      "created_at": "2025-10-15T08:15:00Z"
+    }
+  }
+]
