@@ -3,6 +3,7 @@ from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Task
 from .serializers import TaskSerializer
+from .exceptions import TaskInProgressDeletionError
 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all().order_by("-id")
@@ -15,3 +16,9 @@ class TaskViewSet(ModelViewSet):
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
         serializer.save(owner=user)
+
+    def destroy(self, request, *args, **kwargs):
+        task = self.get_object()
+        if task.status == "En cours":
+            raise TaskInProgressDeletionError()
+        return super().destroy(request, *args, **kwargs)
