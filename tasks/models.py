@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.models import User
 
 
 def validate_status(value):
@@ -15,6 +15,7 @@ class Task(models.Model):
         validators=[validate_status],
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.owner.username if self.owner else 'No Owner'}"
