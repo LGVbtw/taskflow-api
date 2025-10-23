@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_spectacular',
     'django_filters',
     'django_extensions',
     'tasks',
@@ -72,6 +73,8 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
+    # Configuration pour la génération automatique du schéma OpenAPI (drf-spectacular).
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': [
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
@@ -180,4 +183,11 @@ LOGGING = {
             'propagate': False,
         },
     }
+}
+
+# Paramètres pour drf-spectacular (OpenAPI schema)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Taskflow API',
+    'DESCRIPTION': 'API pour gérer des tâches (Taskflow). Documentation auto-générée.',
+    'VERSION': '1.0.0',
 }

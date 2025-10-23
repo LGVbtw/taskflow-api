@@ -267,3 +267,328 @@
 [2025-10-23 11:55:49,716] [INFO] [metrics] timestamp:2025-10-23T09:55:49.716364+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:2
 [2025-10-23 11:55:56,843] [INFO] [metrics] timestamp:2025-10-23T09:55:56.843918+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:39
 [2025-10-23 11:56:02,277] [INFO] [metrics] timestamp:2025-10-23T09:56:02.277355+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:11
+[2025-10-23 11:56:42,836] [INFO] Watching for file changes with StatReloader
+[2025-10-23 11:56:51,945] [INFO] [metrics] timestamp:2025-10-23T09:56:51.945453+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 11:56:52,026] [INFO] [metrics] timestamp:2025-10-23T09:56:52.026422+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:52,076] [INFO] [metrics] timestamp:2025-10-23T09:56:52.076713+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:52,113] [INFO] [metrics] timestamp:2025-10-23T09:56:52.113127+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:52,192] [INFO] [metrics] timestamp:2025-10-23T09:56:52.192318+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 11:56:52,284] [INFO] [metrics] timestamp:2025-10-23T09:56:52.284227+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 11:56:52,345] [INFO] [metrics] timestamp:2025-10-23T09:56:52.345265+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:52,371] [INFO] [metrics] timestamp:2025-10-23T09:56:52.371480+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:56:52,409] [INFO] [metrics] timestamp:2025-10-23T09:56:52.409857+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:52,445] [INFO] [metrics] timestamp:2025-10-23T09:56:52.445636+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:56:55,911] [INFO] [metrics] timestamp:2025-10-23T09:56:55.911504+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:39
+[2025-10-23 11:57:00,026] [INFO] [metrics] timestamp:2025-10-23T09:57:00.026872+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 12:46:56,112] [INFO] Watching for file changes with StatReloader
+[2025-10-23 12:46:58,039] [INFO] [metrics] timestamp:2025-10-23T10:46:58.039190+00:00 method:GET path:/api/schema/ user:Anonymous status:200 duration_ms:174
+[2025-10-23 12:47:08,951] [INFO] [metrics] timestamp:2025-10-23T10:47:08.951233+00:00 method:GET path:/api/docs/ user:Anonymous status:200 duration_ms:177
+[2025-10-23 12:47:09,413] [INFO] [metrics] timestamp:2025-10-23T10:47:09.413745+00:00 method:GET path:/api/schema/ user:Anonymous status:200 duration_ms:22
+[2025-10-23 12:51:55,382] [INFO] Watching for file changes with StatReloader
+[2025-10-23 12:51:57,033] [INFO] [metrics] timestamp:2025-10-23T10:51:57.033630+00:00 method:GET path:/api/redoc/ user:Anonymous status:200 duration_ms:64
+[2025-10-23 12:51:57,508] [INFO] [metrics] timestamp:2025-10-23T10:51:57.508695+00:00 method:GET path:/api/schema/ user:Anonymous status:200 duration_ms:158
+[2025-10-23 14:07:34,012] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:07:37,577] [INFO] [metrics] timestamp:2025-10-23T12:07:37.577574+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:167
+[2025-10-23 14:07:39,560] [INFO] [metrics] timestamp:2025-10-23T12:07:39.560410+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:107
+[2025-10-23 14:07:39,631] [INFO] [metrics] timestamp:2025-10-23T12:07:39.631142+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:15
+[2025-10-23 14:07:58,221] [INFO] [metrics] timestamp:2025-10-23T12:07:58.221342+00:00 method:GET path:/admin/tasks/task/13/change/ user:Anonymous status:200 duration_ms:69
+[2025-10-23 14:07:58,315] [INFO] [metrics] timestamp:2025-10-23T12:07:58.315115+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:08:03,526] [INFO] [metrics] timestamp:2025-10-23T12:08:03.526767+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 14:08:03,573] [INFO] [metrics] timestamp:2025-10-23T12:08:03.573340+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:08:29,190] [INFO] [metrics] timestamp:2025-10-23T12:08:29.190896+00:00 method:GET path:/admin/tasks/task/1/change/ user:Anonymous status:200 duration_ms:17
+[2025-10-23 14:08:29,254] [INFO] [metrics] timestamp:2025-10-23T12:08:29.254292+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:08:32,439] [INFO] [metrics] timestamp:2025-10-23T12:08:32.439339+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:20
+[2025-10-23 14:08:34,521] [INFO] [metrics] timestamp:2025-10-23T12:08:34.521063+00:00 method:GET path:/admin/tasks/task/13/change/ user:Anonymous status:200 duration_ms:35
+[2025-10-23 14:08:35,559] [INFO] [metrics] timestamp:2025-10-23T12:08:35.559920+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:23
+[2025-10-23 14:08:36,058] [INFO] [metrics] timestamp:2025-10-23T12:08:36.058015+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:10
+[2025-10-23 14:08:37,967] [INFO] [metrics] timestamp:2025-10-23T12:08:37.967414+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 14:08:38,013] [INFO] [metrics] timestamp:2025-10-23T12:08:38.013015+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:08:41,548] [INFO] [metrics] timestamp:2025-10-23T12:08:41.547990+00:00 method:GET path:/admin/tasks/task/?o=4 user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:08:41,602] [INFO] [metrics] timestamp:2025-10-23T12:08:41.602233+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:08:43,172] [INFO] [metrics] timestamp:2025-10-23T12:08:43.172850+00:00 method:GET path:/admin/tasks/task/?o=-4 user:Anonymous status:200 duration_ms:26
+[2025-10-23 14:08:43,231] [INFO] [metrics] timestamp:2025-10-23T12:08:43.231773+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:13
+[2025-10-23 14:08:45,051] [INFO] [metrics] timestamp:2025-10-23T12:08:45.051873+00:00 method:GET path:/admin/tasks/task/?o= user:Anonymous status:200 duration_ms:27
+[2025-10-23 14:08:45,102] [INFO] [metrics] timestamp:2025-10-23T12:08:45.102536+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:08:46,134] [INFO] [metrics] timestamp:2025-10-23T12:08:46.134045+00:00 method:GET path:/admin/tasks/task/?o=4 user:Anonymous status:200 duration_ms:27
+[2025-10-23 14:08:46,178] [INFO] [metrics] timestamp:2025-10-23T12:08:46.178124+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:08:46,792] [INFO] [metrics] timestamp:2025-10-23T12:08:46.792595+00:00 method:GET path:/admin/tasks/task/?o=-4 user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:08:46,852] [INFO] [metrics] timestamp:2025-10-23T12:08:46.852393+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:09:34,539] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:09:35,976] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:10:37,888] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\models.py changed, reloading.
+[2025-10-23 14:10:39,144] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:10:44,673] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-10-23 14:10:46,326] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:10:56,676] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\views.py changed, reloading.
+[2025-10-23 14:10:58,248] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:11:03,914] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:11:05,722] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:11:12,757] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:11:14,381] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:11:49,679] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:11:58,139] [INFO] [metrics] timestamp:2025-10-23T12:11:58.139936+00:00 method:GET path:/admin/tasks/task/?o=-4 user:Anonymous status:200 duration_ms:128
+[2025-10-23 14:11:58,199] [INFO] [metrics] timestamp:2025-10-23T12:11:58.199397+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 14:11:58,233] [ERROR] Impossible de mettre à jour api_metrics.json
+Traceback (most recent call last):
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\middleware.py", line 141, in __call__
+    os.replace(tmp, str(self.metrics_file))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé: 'C:\\Cours Ynov\\B3\\Dev API\\Dev\\taskflow-api\\logs\\api_metrics.json.tmp' -> 'C:\\Cours Ynov\\B3\\Dev API\\Dev\\taskflow-api\\logs\\api_metrics.json'
+[2025-10-23 14:12:00,334] [INFO] [metrics] timestamp:2025-10-23T12:12:00.334627+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:17
+[2025-10-23 14:12:02,256] [INFO] [metrics] timestamp:2025-10-23T12:12:02.256800+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:15
+[2025-10-23 14:12:02,312] [INFO] [metrics] timestamp:2025-10-23T12:12:02.312301+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:12:05,166] [INFO] [metrics] timestamp:2025-10-23T12:12:05.166760+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 14:12:15,304] [INFO] [metrics] timestamp:2025-10-23T12:12:15.304047+00:00 method:POST path:/api/needs/ user:Anonymous status:404 duration_ms:5
+[2025-10-23 14:12:15,310] [WARNING] Not Found: /api/needs/
+[2025-10-23 14:12:42,047] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\views.py changed, reloading.
+[2025-10-23 14:12:43,472] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:13:28,204] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\urls.py changed, reloading.
+[2025-10-23 14:13:30,391] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:14:28,708] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:14:34,919] [INFO] [metrics] timestamp:2025-10-23T12:14:34.919799+00:00 method:POST path:/api/needs/ user:Anonymous status:400 duration_ms:3
+[2025-10-23 14:14:34,924] [WARNING] Bad Request: /api/needs/
+[2025-10-23 14:14:46,798] [INFO] [metrics] timestamp:2025-10-23T12:14:46.797985+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:146
+[2025-10-23 14:14:46,865] [INFO] [metrics] timestamp:2025-10-23T12:14:46.865455+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:15:12,967] [INFO] [metrics] timestamp:2025-10-23T12:15:12.967126+00:00 method:POST path:/admin/tasks/need/add/ user:Anonymous status:302 duration_ms:74
+[2025-10-23 14:15:13,035] [INFO] [metrics] timestamp:2025-10-23T12:15:13.035570+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:58
+[2025-10-23 14:15:13,116] [INFO] [metrics] timestamp:2025-10-23T12:15:13.116667+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:15:20,662] [INFO] [metrics] timestamp:2025-10-23T12:15:20.662229+00:00 method:GET path:/api/needs/ user:Anonymous status:200 duration_ms:2
+[2025-10-23 14:15:33,550] [INFO] [metrics] timestamp:2025-10-23T12:15:33.550209+00:00 method:POST path:/api/needs/1/convert/ user:Anonymous status:201 duration_ms:25
+[2025-10-23 14:15:38,427] [INFO] [metrics] timestamp:2025-10-23T12:15:38.427312+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:32
+[2025-10-23 14:15:38,460] [INFO] [metrics] timestamp:2025-10-23T12:15:38.460492+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:15:40,292] [INFO] [metrics] timestamp:2025-10-23T12:15:40.292413+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:20
+[2025-10-23 14:15:40,330] [INFO] [metrics] timestamp:2025-10-23T12:15:40.330421+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:15:41,454] [INFO] [metrics] timestamp:2025-10-23T12:15:41.454270+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:15:41,499] [INFO] [metrics] timestamp:2025-10-23T12:15:41.499017+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:16:04,014] [INFO] [metrics] timestamp:2025-10-23T12:16:04.014377+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:16
+[2025-10-23 14:16:04,058] [INFO] [metrics] timestamp:2025-10-23T12:16:04.058452+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:16:07,366] [INFO] [metrics] timestamp:2025-10-23T12:16:07.366204+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:22
+[2025-10-23 14:16:07,413] [INFO] [metrics] timestamp:2025-10-23T12:16:07.413737+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:16:22,525] [INFO] [metrics] timestamp:2025-10-23T12:16:22.525346+00:00 method:POST path:/admin/tasks/need/add/ user:Anonymous status:302 duration_ms:20
+[2025-10-23 14:16:22,552] [INFO] [metrics] timestamp:2025-10-23T12:16:22.552251+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 14:16:22,649] [INFO] [metrics] timestamp:2025-10-23T12:16:22.649442+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:16:31,019] [INFO] [metrics] timestamp:2025-10-23T12:16:31.019664+00:00 method:GET path:/admin/tasks/need/2/change/ user:Anonymous status:200 duration_ms:23
+[2025-10-23 14:16:31,066] [INFO] [metrics] timestamp:2025-10-23T12:16:31.065976+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:16:36,594] [INFO] [metrics] timestamp:2025-10-23T12:16:36.594808+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 14:16:51,012] [INFO] [metrics] timestamp:2025-10-23T12:16:51.012948+00:00 method:POST path:/api/needs/2/convert/ user:Anonymous status:201 duration_ms:26
+[2025-10-23 14:16:53,537] [INFO] [metrics] timestamp:2025-10-23T12:16:53.537125+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 14:16:53,570] [INFO] [metrics] timestamp:2025-10-23T12:16:53.570245+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:16:55,528] [INFO] [metrics] timestamp:2025-10-23T12:16:55.528954+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:26
+[2025-10-23 14:16:55,582] [INFO] [metrics] timestamp:2025-10-23T12:16:55.582547+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:17:04,414] [INFO] [metrics] timestamp:2025-10-23T12:17:04.414511+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 14:17:04,452] [INFO] [metrics] timestamp:2025-10-23T12:17:04.452608+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:17:07,375] [INFO] [metrics] timestamp:2025-10-23T12:17:07.375045+00:00 method:GET path:/admin/tasks/need/?o=4 user:Anonymous status:200 duration_ms:15
+[2025-10-23 14:17:07,422] [INFO] [metrics] timestamp:2025-10-23T12:17:07.422921+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:17:08,466] [INFO] [metrics] timestamp:2025-10-23T12:17:08.466323+00:00 method:GET path:/admin/tasks/need/?o=-4 user:Anonymous status:200 duration_ms:15
+[2025-10-23 14:17:08,511] [INFO] [metrics] timestamp:2025-10-23T12:17:08.510784+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:17:09,132] [INFO] [metrics] timestamp:2025-10-23T12:17:09.132130+00:00 method:GET path:/admin/tasks/need/?o=1.-4 user:Anonymous status:200 duration_ms:14
+[2025-10-23 14:17:09,194] [INFO] [metrics] timestamp:2025-10-23T12:17:09.193961+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:10
+[2025-10-23 14:17:10,074] [INFO] [metrics] timestamp:2025-10-23T12:17:10.074126+00:00 method:GET path:/admin/tasks/need/?o=-1.-4 user:Anonymous status:200 duration_ms:12
+[2025-10-23 14:17:10,123] [INFO] [metrics] timestamp:2025-10-23T12:17:10.123763+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:17:16,781] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\urls.py changed, reloading.
+[2025-10-23 14:17:18,006] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:18:24,385] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:18:25,849] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:18:51,519] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:18:55,352] [INFO] [metrics] timestamp:2025-10-23T12:18:55.352139+00:00 method:GET path:/admin/tasks/need/?o=-1.-4 user:Anonymous status:200 duration_ms:115
+[2025-10-23 14:18:55,400] [INFO] [metrics] timestamp:2025-10-23T12:18:55.400019+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:19:00,230] [INFO] [metrics] timestamp:2025-10-23T12:19:00.230435+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:31
+[2025-10-23 14:19:00,278] [INFO] [metrics] timestamp:2025-10-23T12:19:00.278190+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:19:07,771] [INFO] [metrics] timestamp:2025-10-23T12:19:07.771863+00:00 method:POST path:/admin/tasks/need/add/ user:Anonymous status:302 duration_ms:24
+[2025-10-23 14:19:07,802] [INFO] [metrics] timestamp:2025-10-23T12:19:07.802070+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:21
+[2025-10-23 14:19:07,904] [INFO] [metrics] timestamp:2025-10-23T12:19:07.904393+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 14:19:09,011] [INFO] [metrics] timestamp:2025-10-23T12:19:09.011895+00:00 method:GET path:/admin/tasks/need/convert/3/ user:Anonymous status:302 duration_ms:24
+[2025-10-23 14:19:09,044] [INFO] [metrics] timestamp:2025-10-23T12:19:09.044526+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:23
+[2025-10-23 14:19:09,140] [INFO] [metrics] timestamp:2025-10-23T12:19:09.140673+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:19:11,354] [INFO] [metrics] timestamp:2025-10-23T12:19:11.354174+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:19:11,400] [INFO] [metrics] timestamp:2025-10-23T12:19:11.400430+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:20:07,208] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:20:08,652] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:20:39,684] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:20:41,710] [INFO] [metrics] timestamp:2025-10-23T12:20:41.710700+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:93
+[2025-10-23 14:20:41,753] [INFO] [metrics] timestamp:2025-10-23T12:20:41.753583+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:20:43,296] [INFO] [metrics] timestamp:2025-10-23T12:20:43.296341+00:00 method:GET path:/admin/tasks/task/16/change/ user:Anonymous status:200 duration_ms:36
+[2025-10-23 14:20:43,348] [INFO] [metrics] timestamp:2025-10-23T12:20:43.348856+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:20:47,148] [INFO] [metrics] timestamp:2025-10-23T12:20:47.147975+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:30
+[2025-10-23 14:20:47,197] [INFO] [metrics] timestamp:2025-10-23T12:20:47.197454+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:20:57,394] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:20:58,529] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:21:20,683] [INFO] [metrics] timestamp:2025-10-23T12:21:20.683645+00:00 method:GET path:/admin/tasks/task/16/change/ user:Anonymous status:200 duration_ms:64
+[2025-10-23 14:21:20,730] [INFO] [metrics] timestamp:2025-10-23T12:21:20.730927+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:21:48,621] [INFO] [metrics] timestamp:2025-10-23T12:21:48.621808+00:00 method:POST path:/admin/tasks/task/16/change/ user:Anonymous status:302 duration_ms:21
+[2025-10-23 14:21:48,705] [INFO] [metrics] timestamp:2025-10-23T12:21:48.705001+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:72
+[2025-10-23 14:21:48,768] [INFO] [metrics] timestamp:2025-10-23T12:21:48.768481+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:25:07,998] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:25:09,430] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:25:48,769] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:25:54,529] [INFO] [metrics] timestamp:2025-10-23T12:25:54.529106+00:00 method:GET path:/admin/tasks/task/16/change/ user:Anonymous status:200 duration_ms:107
+[2025-10-23 14:25:54,601] [INFO] [metrics] timestamp:2025-10-23T12:25:54.601623+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:12
+[2025-10-23 14:26:04,598] [INFO] [admin-change] user=Admin2025 task_id=16 changes={'status': ['En cours', 'A faire']}
+[2025-10-23 14:26:04,611] [INFO] [metrics] timestamp:2025-10-23T12:26:04.610974+00:00 method:POST path:/admin/tasks/task/16/change/ user:Anonymous status:302 duration_ms:20
+[2025-10-23 14:26:04,675] [INFO] [metrics] timestamp:2025-10-23T12:26:04.675606+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:55
+[2025-10-23 14:26:04,747] [INFO] [metrics] timestamp:2025-10-23T12:26:04.747373+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:26:33,224] [INFO] [metrics] timestamp:2025-10-23T12:26:33.224363+00:00 method:GET path:/admin/tasks/task/15/change/ user:Anonymous status:200 duration_ms:16
+[2025-10-23 14:26:33,274] [INFO] [metrics] timestamp:2025-10-23T12:26:33.274108+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:26:41,732] [INFO] [admin-change] user=Admin2025 task_id=15 changes={'title': ['Besoin B', 'Besoin EIUFBIZS'], 'status': ['A faire', 'En cours']}
+[2025-10-23 14:26:41,742] [INFO] [metrics] timestamp:2025-10-23T12:26:41.742643+00:00 method:POST path:/admin/tasks/task/15/change/ user:Anonymous status:302 duration_ms:20
+[2025-10-23 14:26:41,808] [INFO] [metrics] timestamp:2025-10-23T12:26:41.808415+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:56
+[2025-10-23 14:26:41,884] [INFO] [metrics] timestamp:2025-10-23T12:26:41.884675+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:27:25,945] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:27:27,273] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:34:13,438] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:34:14,992] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:34:57,753] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:34:59,896] [INFO] [metrics] timestamp:2025-10-23T12:34:59.896899+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:149
+[2025-10-23 14:34:59,955] [INFO] [metrics] timestamp:2025-10-23T12:34:59.955335+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:12
+[2025-10-23 14:35:06,963] [INFO] [metrics] timestamp:2025-10-23T12:35:06.963934+00:00 method:GET path:/admin/tasks/task/commit user:Anonymous status:301 duration_ms:4
+[2025-10-23 14:35:06,979] [INFO] [metrics] timestamp:2025-10-23T12:35:06.979126+00:00 method:GET path:/admin/tasks/task/commit/ user:Anonymous status:302 duration_ms:5
+[2025-10-23 14:35:07,011] [INFO] [metrics] timestamp:2025-10-23T12:35:07.011714+00:00 method:GET path:/admin/tasks/task/commit/change/ user:Anonymous status:302 duration_ms:6
+[2025-10-23 14:35:07,073] [INFO] [metrics] timestamp:2025-10-23T12:35:07.073046+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:22
+[2025-10-23 14:35:14,209] [INFO] [metrics] timestamp:2025-10-23T12:35:14.209309+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:35
+[2025-10-23 14:35:16,838] [INFO] [metrics] timestamp:2025-10-23T12:35:16.838096+00:00 method:GET path:/admin/tasks/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 14:35:19,222] [INFO] [metrics] timestamp:2025-10-23T12:35:19.222619+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:11
+[2025-10-23 14:35:52,384] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:35:53,660] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:36:27,740] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:36:29,267] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:38:53,267] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:38:55,282] [INFO] [metrics] timestamp:2025-10-23T12:38:55.282822+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:59
+[2025-10-23 14:38:56,469] [INFO] [metrics] timestamp:2025-10-23T12:38:56.469698+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 14:38:57,941] [INFO] [metrics] timestamp:2025-10-23T12:38:57.941268+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:21
+[2025-10-23 14:38:59,203] [INFO] [metrics] timestamp:2025-10-23T12:38:59.203122+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:67
+[2025-10-23 14:38:59,251] [INFO] [metrics] timestamp:2025-10-23T12:38:59.251584+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:39:05,912] [INFO] [metrics] timestamp:2025-10-23T12:39:05.912209+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:10
+[2025-10-23 14:39:08,134] [INFO] [metrics] timestamp:2025-10-23T12:39:08.134420+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:27
+[2025-10-23 14:39:08,183] [INFO] [metrics] timestamp:2025-10-23T12:39:08.183301+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:39:10,605] [INFO] [metrics] timestamp:2025-10-23T12:39:10.605429+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:39:22,539] [INFO] [metrics] timestamp:2025-10-23T12:39:22.539538+00:00 method:POST path:/admin/tasks/task/commits/ user:Anonymous status:302 duration_ms:11
+[2025-10-23 14:39:22,571] [INFO] [metrics] timestamp:2025-10-23T12:39:22.571777+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 14:39:34,561] [INFO] [metrics] timestamp:2025-10-23T12:39:34.561260+00:00 method:GET path:/admin/tasks/task/commits/download/commit_20251023T123922Z_22e74db0_Commit%201.json/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 14:40:12,883] [INFO] [metrics] timestamp:2025-10-23T12:40:12.883480+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:40:13,852] [INFO] [metrics] timestamp:2025-10-23T12:40:13.852406+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:40:16,270] [INFO] [metrics] timestamp:2025-10-23T12:40:16.270650+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:38
+[2025-10-23 14:40:16,322] [INFO] [metrics] timestamp:2025-10-23T12:40:16.322316+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:40:21,302] [INFO] [admin-create] user=Admin2025 task_id=17 title=Post commit
+[2025-10-23 14:40:21,315] [INFO] [metrics] timestamp:2025-10-23T12:40:21.315285+00:00 method:POST path:/admin/tasks/task/add/ user:Anonymous status:302 duration_ms:22
+[2025-10-23 14:40:21,379] [INFO] [metrics] timestamp:2025-10-23T12:40:21.379538+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:55
+[2025-10-23 14:40:21,468] [INFO] [metrics] timestamp:2025-10-23T12:40:21.468609+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:40:22,554] [INFO] [metrics] timestamp:2025-10-23T12:40:22.554895+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 14:40:22,599] [INFO] [metrics] timestamp:2025-10-23T12:40:22.599400+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:40:29,941] [INFO] [metrics] timestamp:2025-10-23T12:40:29.941830+00:00 method:POST path:/admin/tasks/need/add/ user:Anonymous status:302 duration_ms:18
+[2025-10-23 14:40:29,999] [INFO] [metrics] timestamp:2025-10-23T12:40:29.999755+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:42
+[2025-10-23 14:40:30,098] [INFO] [metrics] timestamp:2025-10-23T12:40:30.098173+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:40:39,736] [INFO] [metrics] timestamp:2025-10-23T12:40:39.736497+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:26
+[2025-10-23 14:40:39,776] [INFO] [metrics] timestamp:2025-10-23T12:40:39.776893+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:40:41,204] [INFO] [metrics] timestamp:2025-10-23T12:40:41.204669+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 14:40:45,513] [INFO] [metrics] timestamp:2025-10-23T12:40:45.513568+00:00 method:POST path:/admin/tasks/task/commits/ user:Anonymous status:302 duration_ms:12
+[2025-10-23 14:40:45,546] [INFO] [metrics] timestamp:2025-10-23T12:40:45.546446+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:21
+[2025-10-23 14:40:50,977] [INFO] [metrics] timestamp:2025-10-23T12:40:50.977049+00:00 method:GET path:/admin/tasks/task/commits/download/commit_20251023T124045Z_34ac63f4_v2.json/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 14:41:43,446] [INFO] [metrics] timestamp:2025-10-23T12:41:43.446685+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:41:43,886] [INFO] [metrics] timestamp:2025-10-23T12:41:43.886764+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:41:44,802] [INFO] [metrics] timestamp:2025-10-23T12:41:44.802052+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 14:41:45,531] [INFO] [metrics] timestamp:2025-10-23T12:41:45.531860+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 14:41:46,783] [INFO] [metrics] timestamp:2025-10-23T12:41:46.783390+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:33
+[2025-10-23 14:41:46,836] [INFO] [metrics] timestamp:2025-10-23T12:41:46.836184+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:41:54,039] [INFO] [metrics] timestamp:2025-10-23T12:41:54.039207+00:00 method:GET path:/admin/commit user:Anonymous status:404 duration_ms:9
+[2025-10-23 14:41:54,048] [WARNING] Not Found: /admin/commit
+[2025-10-23 14:41:56,084] [INFO] [metrics] timestamp:2025-10-23T12:41:56.084464+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:42:00,465] [INFO] [metrics] timestamp:2025-10-23T12:42:00.465146+00:00 method:GET path:/commit user:Anonymous status:404 duration_ms:3
+[2025-10-23 14:42:00,471] [WARNING] Not Found: /commit
+[2025-10-23 14:42:01,786] [INFO] [metrics] timestamp:2025-10-23T12:42:01.785992+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:27
+[2025-10-23 14:42:10,553] [INFO] [metrics] timestamp:2025-10-23T12:42:10.553802+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:42:12,740] [INFO] [metrics] timestamp:2025-10-23T12:42:12.740372+00:00 method:GET path:/api/schema/ user:Anonymous status:200 duration_ms:128
+[2025-10-23 14:42:15,518] [INFO] [metrics] timestamp:2025-10-23T12:42:15.518130+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:20
+[2025-10-23 14:42:17,838] [INFO] [metrics] timestamp:2025-10-23T12:42:17.838104+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:28
+[2025-10-23 14:42:17,889] [INFO] [metrics] timestamp:2025-10-23T12:42:17.889786+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:42:19,116] [INFO] [metrics] timestamp:2025-10-23T12:42:19.116555+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:42:21,675] [WARNING] Forbidden (CSRF token missing.): /admin/tasks/task/commits/activate/
+[2025-10-23 14:42:21,675] [INFO] [metrics] timestamp:2025-10-23T12:42:21.675569+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:403 duration_ms:5
+[2025-10-23 14:42:38,789] [WARNING] Forbidden (CSRF token missing.): /admin/tasks/task/commits/activate/
+[2025-10-23 14:42:38,790] [INFO] [metrics] timestamp:2025-10-23T12:42:38.790464+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:403 duration_ms:1
+[2025-10-23 14:42:41,747] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:42:43,313] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:44:00,278] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:44:01,727] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:44:36,092] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:44:37,284] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:44:59,819] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:45:03,157] [INFO] [metrics] timestamp:2025-10-23T12:45:03.157693+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:47
+[2025-10-23 14:45:10,836] [INFO] [metrics] timestamp:2025-10-23T12:45:10.836353+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:6
+[2025-10-23 14:45:10,874] [INFO] [metrics] timestamp:2025-10-23T12:45:10.874312+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:22
+[2025-10-23 14:45:18,794] [INFO] [metrics] timestamp:2025-10-23T12:45:18.794495+00:00 method:GET path:/admin/tasks/ user:Anonymous status:200 duration_ms:17
+[2025-10-23 14:45:20,164] [INFO] [metrics] timestamp:2025-10-23T12:45:20.164882+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:51
+[2025-10-23 14:45:20,218] [INFO] [metrics] timestamp:2025-10-23T12:45:20.218828+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:45:26,136] [INFO] [metrics] timestamp:2025-10-23T12:45:26.136632+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:45:29,627] [INFO] [metrics] timestamp:2025-10-23T12:45:29.627323+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:6
+[2025-10-23 14:45:29,668] [INFO] [metrics] timestamp:2025-10-23T12:45:29.668303+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:45:31,833] [INFO] [metrics] timestamp:2025-10-23T12:45:31.833664+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:6
+[2025-10-23 14:45:31,853] [INFO] [metrics] timestamp:2025-10-23T12:45:31.853370+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 14:45:43,157] [INFO] [metrics] timestamp:2025-10-23T12:45:43.157863+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:5
+[2025-10-23 14:45:43,176] [INFO] [metrics] timestamp:2025-10-23T12:45:43.176769+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:45:44,224] [INFO] [metrics] timestamp:2025-10-23T12:45:44.224127+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:45:46,616] [INFO] [metrics] timestamp:2025-10-23T12:45:46.616183+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:13
+[2025-10-23 14:45:47,662] [INFO] [metrics] timestamp:2025-10-23T12:45:47.662622+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:28
+[2025-10-23 14:45:47,709] [INFO] [metrics] timestamp:2025-10-23T12:45:47.709136+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:45:52,571] [INFO] [metrics] timestamp:2025-10-23T12:45:52.571900+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:45:54,156] [INFO] [metrics] timestamp:2025-10-23T12:45:54.156171+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:4
+[2025-10-23 14:45:54,176] [INFO] [metrics] timestamp:2025-10-23T12:45:54.176481+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 14:45:55,600] [INFO] [metrics] timestamp:2025-10-23T12:45:55.600469+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:13
+[2025-10-23 14:45:56,668] [INFO] [metrics] timestamp:2025-10-23T12:45:56.668905+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:26
+[2025-10-23 14:45:56,712] [INFO] [metrics] timestamp:2025-10-23T12:45:56.712289+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:46:23,082] [INFO] [metrics] timestamp:2025-10-23T12:46:23.082867+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:46:27,857] [INFO] [metrics] timestamp:2025-10-23T12:46:27.857011+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:5
+[2025-10-23 14:46:27,878] [INFO] [metrics] timestamp:2025-10-23T12:46:27.878904+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:10
+[2025-10-23 14:48:11,909] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:48:13,368] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:48:50,355] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:48:52,645] [INFO] [metrics] timestamp:2025-10-23T12:48:52.645667+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:43
+[2025-10-23 14:48:54,117] [INFO] [metrics] timestamp:2025-10-23T12:48:54.117827+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 14:48:55,261] [INFO] [metrics] timestamp:2025-10-23T12:48:55.261325+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:68
+[2025-10-23 14:48:55,314] [INFO] [metrics] timestamp:2025-10-23T12:48:55.314529+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:48:59,283] [INFO] [metrics] timestamp:2025-10-23T12:48:59.282953+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 14:49:01,779] [INFO] [metrics] timestamp:2025-10-23T12:49:01.779171+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:42
+[2025-10-23 14:49:01,803] [INFO] [metrics] timestamp:2025-10-23T12:49:01.803448+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:10
+[2025-10-23 14:49:05,708] [INFO] [metrics] timestamp:2025-10-23T12:49:05.708008+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:12
+[2025-10-23 14:49:06,585] [INFO] [metrics] timestamp:2025-10-23T12:49:06.585466+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 14:49:06,633] [INFO] [metrics] timestamp:2025-10-23T12:49:06.633154+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:49:09,270] [INFO] [metrics] timestamp:2025-10-23T12:49:09.269981+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:49:11,365] [INFO] [metrics] timestamp:2025-10-23T12:49:11.365710+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:54
+[2025-10-23 14:49:11,393] [INFO] [metrics] timestamp:2025-10-23T12:49:11.393324+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 14:49:13,252] [INFO] [metrics] timestamp:2025-10-23T12:49:13.252664+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:13
+[2025-10-23 14:49:14,050] [INFO] [metrics] timestamp:2025-10-23T12:49:14.050891+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:49:14,098] [INFO] [metrics] timestamp:2025-10-23T12:49:14.098468+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:49:36,134] [INFO] [metrics] timestamp:2025-10-23T12:49:36.134892+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:36
+[2025-10-23 14:49:36,208] [INFO] [metrics] timestamp:2025-10-23T12:49:36.208711+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:49:41,391] [INFO] [admin-create] user=Admin2025 task_id=18 title=Post commit v2
+[2025-10-23 14:49:41,402] [INFO] [metrics] timestamp:2025-10-23T12:49:41.402253+00:00 method:POST path:/admin/tasks/task/add/ user:Anonymous status:302 duration_ms:19
+[2025-10-23 14:49:41,440] [INFO] [metrics] timestamp:2025-10-23T12:49:41.440078+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:28
+[2025-10-23 14:49:41,525] [INFO] [metrics] timestamp:2025-10-23T12:49:41.525540+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:49:42,722] [INFO] [metrics] timestamp:2025-10-23T12:49:42.722926+00:00 method:GET path:/admin/tasks/need/add/ user:Anonymous status:200 duration_ms:23
+[2025-10-23 14:49:42,772] [INFO] [metrics] timestamp:2025-10-23T12:49:42.772847+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:49:50,459] [INFO] [metrics] timestamp:2025-10-23T12:49:50.459028+00:00 method:POST path:/admin/tasks/need/add/ user:Anonymous status:302 duration_ms:22
+[2025-10-23 14:49:50,509] [INFO] [metrics] timestamp:2025-10-23T12:49:50.509076+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:40
+[2025-10-23 14:49:50,602] [INFO] [metrics] timestamp:2025-10-23T12:49:50.602732+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:49:54,391] [INFO] [metrics] timestamp:2025-10-23T12:49:54.391888+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:28
+[2025-10-23 14:49:54,440] [INFO] [metrics] timestamp:2025-10-23T12:49:54.440829+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:49:56,019] [INFO] [metrics] timestamp:2025-10-23T12:49:56.019593+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:50:00,440] [INFO] [metrics] timestamp:2025-10-23T12:50:00.440749+00:00 method:POST path:/admin/tasks/task/commits/ user:Anonymous status:302 duration_ms:14
+[2025-10-23 14:50:00,483] [INFO] [metrics] timestamp:2025-10-23T12:50:00.483782+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:31
+[2025-10-23 14:50:12,919] [INFO] [metrics] timestamp:2025-10-23T12:50:12.919109+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:13
+[2025-10-23 14:50:13,753] [INFO] [metrics] timestamp:2025-10-23T12:50:13.753332+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:25
+[2025-10-23 14:50:13,800] [INFO] [metrics] timestamp:2025-10-23T12:50:13.800721+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:50:15,829] [INFO] [metrics] timestamp:2025-10-23T12:50:15.829807+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:50:23,776] [INFO] [metrics] timestamp:2025-10-23T12:50:23.776157+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:72
+[2025-10-23 14:50:23,801] [INFO] [metrics] timestamp:2025-10-23T12:50:23.801394+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:12
+[2025-10-23 14:50:25,717] [INFO] [metrics] timestamp:2025-10-23T12:50:25.717938+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:11
+[2025-10-23 14:50:26,667] [INFO] [metrics] timestamp:2025-10-23T12:50:26.667591+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:28
+[2025-10-23 14:50:26,715] [INFO] [metrics] timestamp:2025-10-23T12:50:26.715108+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 14:50:34,050] [INFO] [metrics] timestamp:2025-10-23T12:50:34.050126+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 14:50:36,272] [INFO] [metrics] timestamp:2025-10-23T12:50:36.272189+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:47
+[2025-10-23 14:50:36,301] [INFO] [metrics] timestamp:2025-10-23T12:50:36.301408+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 14:50:37,214] [INFO] [metrics] timestamp:2025-10-23T12:50:37.214002+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:16
+[2025-10-23 14:50:38,154] [INFO] [metrics] timestamp:2025-10-23T12:50:38.154267+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:27
+[2025-10-23 14:50:38,205] [INFO] [metrics] timestamp:2025-10-23T12:50:38.205059+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 14:51:00,523] [INFO] [metrics] timestamp:2025-10-23T12:51:00.523363+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:15
+[2025-10-23 14:51:00,574] [INFO] [metrics] timestamp:2025-10-23T12:51:00.574012+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 14:52:03,103] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:52:04,237] [INFO] Watching for file changes with StatReloader

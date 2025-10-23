@@ -1,0 +1,28 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Commits</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <label>Nom du commit: <input name="commit_name"/></label>
+    <button type="submit" name="create_commit">Créer Commit</button>
+  </form>
+
+  <h2>Versions existantes</h2>
+  <form method="post" action="{% url 'admin:tasks_commits_activate' %}">
+    {% csrf_token %}
+    <select name="activate_fname">
+      {% for r in rows %}
+        <option value="{{ r.fname }}" {% if r.fname == active %}selected{% endif %}>{{ r.name }} — {{ r.fname }} — {{ r.mtime }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Activer cette version</button>
+  </form>
+
+  <h3>Télécharger</h3>
+  {% for r in rows %}
+    <div>{{ r.name }} — <a href="{% url 'admin:tasks_commits_download' r.fname %}">{{ r.fname }}</a> — {{ r.mtime }}</div>
+  {% endfor %}
+
+{% endblock %}

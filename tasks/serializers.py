@@ -7,6 +7,7 @@ instances du modèle Task vers/depuis des représentations JSON.
 
 from rest_framework import serializers
 from .models import Task
+from .models import Need
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -28,3 +29,16 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = "__all__"
+
+
+class NeedSerializer(serializers.ModelSerializer):
+    """Sérialiseur pour le modèle Need.
+
+    Le champ `owner` est en lecture seule et affiche le nom d'utilisateur.
+    """
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Need
+        fields = ('id', 'title', 'description', 'created_at', 'owner', 'converted', 'converted_at', 'converted_by')
+        read_only_fields = ('converted', 'converted_at', 'converted_by')

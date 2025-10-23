@@ -11,6 +11,7 @@ Les valeurs de statut autorisées sont : "A faire", "En cours", "Fait".
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 def validate_status(value):
@@ -59,3 +60,28 @@ class Task(models.Model):
         le propriétaire est absent.
         """
         return f"{self.title} - {self.owner.username if self.owner else 'No Owner'}"
+
+
+class Need(models.Model):
+    """Modèle représentant un besoin déposé par un utilisateur.
+
+    Une `Need` peut être transformée en `Task` via l'API. Tout le monde peut
+    créer un besoin. Seul le staff/admin peut supprimer un besoin.
+    """
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='needs')
+    converted = models.BooleanField(default=False)
+    converted_at = models.DateTimeField(null=True, blank=True)
+    converted_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='converted_needs')
+
+    def __str__(self):
+        return f"{self.title} - {self.owner.username if self.owner else 'No Owner'}"
+
+    def mark_converted(self, user=None):
+        self.converted = True
+        self.converted_at = timezone.now()
+        self.converted_by = user
+        self.save()

@@ -13,6 +13,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Task
 from .serializers import TaskSerializer
 from .exceptions import TaskInProgressDeletionError
+from .models import Need
+from .serializers import NeedSerializer
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAdminUser, AllowAny
 
 
 class TaskViewSet(ModelViewSet):
@@ -61,3 +67,46 @@ class TaskViewSet(ModelViewSet):
         if task.status == "En cours":
             raise TaskInProgressDeletionError()
         return super().destroy(request, *args, **kwargs)
+
+
+class NeedViewSet(ModelViewSet):
+    """ViewSet pour gérer les besoins (Need).
+
+    - Tout le monde peut créer un Need.
+    - Seuls les administrateurs peuvent supprimer un Need.
+    - Fournit une action `convert` qui transforme le besoin en Task.
+    """
+    queryset = Need.objects.all().order_by('-id')
+    serializer_class = NeedSerializer
+
+    def get_permissions(self):
+        # Creation et lecture ouverts à tous, suppression réservée aux admins
+        if self.action == 'destroy':
+            return [IsAdminUser()]
+        return [AllowAny()]
+
+    def perform_create(self, serializer):
+        user = self.request.user if self.request.user.is_authenticated else None
+        serializer.save(owner=user)
+
+    @action(detail=True, methods=['post'])
+    def convert(self, request, pk=None):
+        """Convertit un Need en Task et renvoie la Task créée.
+
+        Le champ `owner` de la Task sera le même que le Need si présent.
+        Seule la création de la Task est automatique ; le Need est marqué
+        comme converti et reste dans la base pour traçabilité.
+        """
+        need = self.get_object()
+        if need.converted:
+            return Response({'detail': 'Already converted'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Créer la Task correspondante
+        task = Task.objects.create(
+            title=need.title,
+            status='A faire',
+            owner=need.owner
+        )
+        need.mark_converted(user=request.user if request.user.is_authenticated else None)
+        from .serializers import TaskSerializer
+        return Response(TaskSerializer(task).data, status=status.HTTP_201_CREATED)

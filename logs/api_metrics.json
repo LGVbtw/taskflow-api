@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-23T09:56:02.278112+00:00",
+  "generated_at": "2025-10-23T12:51:00.598262+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -10,7 +10,215 @@
   },
   "endpoints": {
     "/api/tasks/": {
-      "count": 150,
+      "count": 160,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/": {
+      "count": 23,
+      "avg_ms": 16.0,
+      "p90_ms": 16,
+      "p95_ms": 16,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/schema/": {
+      "count": 4,
+      "avg_ms": 128.0,
+      "p90_ms": 128,
+      "p95_ms": 128,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/docs/": {
+      "count": 1,
+      "avg_ms": 177.0,
+      "p90_ms": 177,
+      "p95_ms": 177,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/redoc/": {
+      "count": 1,
+      "avg_ms": 64.0,
+      "p90_ms": 64,
+      "p95_ms": 64,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/": {
+      "count": 37,
+      "avg_ms": 27.0,
+      "p90_ms": 27,
+      "p95_ms": 27,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/jsi18n/": {
+      "count": 66,
+      "avg_ms": 6.0,
+      "p90_ms": 6,
+      "p95_ms": 6,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/13/change/": {
+      "count": 2,
+      "avg_ms": 35.0,
+      "p90_ms": 35,
+      "p95_ms": 35,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/1/change/": {
+      "count": 1,
+      "avg_ms": 17.0,
+      "p90_ms": 17,
+      "p95_ms": 17,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/?o=4": {
+      "count": 2,
+      "avg_ms": 27.0,
+      "p90_ms": 27,
+      "p95_ms": 27,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/?o=-4": {
+      "count": 3,
+      "avg_ms": 128.0,
+      "p90_ms": 128,
+      "p95_ms": 128,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/?o=": {
+      "count": 1,
+      "avg_ms": 27.0,
+      "p90_ms": 27,
+      "p95_ms": 27,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/": {
+      "count": 14,
+      "avg_ms": 40.0,
+      "p90_ms": 40,
+      "p95_ms": 40,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/needs/": {
+      "count": 3,
       "avg_ms": 2.0,
       "p90_ms": 2,
       "p95_ms": 2,
@@ -25,11 +233,347 @@
         "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
       }
     },
-    "/admin/": {
-      "count": 3,
-      "avg_ms": 11.0,
-      "p90_ms": 11,
-      "p95_ms": 11,
+    "/admin/tasks/need/add/": {
+      "count": 12,
+      "avg_ms": 22.0,
+      "p90_ms": 22,
+      "p95_ms": 22,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/needs/1/convert/": {
+      "count": 1,
+      "avg_ms": 25.0,
+      "p90_ms": 25,
+      "p95_ms": 25,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/2/change/": {
+      "count": 1,
+      "avg_ms": 23.0,
+      "p90_ms": 23,
+      "p95_ms": 23,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/needs/2/convert/": {
+      "count": 1,
+      "avg_ms": 26.0,
+      "p90_ms": 26,
+      "p95_ms": 26,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/?o=4": {
+      "count": 1,
+      "avg_ms": 15.0,
+      "p90_ms": 15,
+      "p95_ms": 15,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/?o=-4": {
+      "count": 1,
+      "avg_ms": 15.0,
+      "p90_ms": 15,
+      "p95_ms": 15,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/?o=1.-4": {
+      "count": 1,
+      "avg_ms": 14.0,
+      "p90_ms": 14,
+      "p95_ms": 14,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/?o=-1.-4": {
+      "count": 2,
+      "avg_ms": 115.0,
+      "p90_ms": 115,
+      "p95_ms": 115,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/need/convert/3/": {
+      "count": 1,
+      "avg_ms": 24.0,
+      "p90_ms": 24,
+      "p95_ms": 24,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/16/change/": {
+      "count": 5,
+      "avg_ms": 20.0,
+      "p90_ms": 20,
+      "p95_ms": 20,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/15/change/": {
+      "count": 2,
+      "avg_ms": 20.0,
+      "p90_ms": 20,
+      "p95_ms": 20,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commit": {
+      "count": 1,
+      "avg_ms": 4.0,
+      "p90_ms": 4,
+      "p95_ms": 4,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commit/": {
+      "count": 1,
+      "avg_ms": 5.0,
+      "p90_ms": 5,
+      "p95_ms": 5,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commit/change/": {
+      "count": 1,
+      "avg_ms": 6.0,
+      "p90_ms": 6,
+      "p95_ms": 6,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/": {
+      "count": 2,
+      "avg_ms": 17.0,
+      "p90_ms": 17,
+      "p95_ms": 17,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commits/": {
+      "count": 32,
+      "avg_ms": 18.0,
+      "p90_ms": 18,
+      "p95_ms": 18,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commits/download/commit_20251023T123922Z_22e74db0_Commit%201.json/": {
+      "count": 1,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/add/": {
+      "count": 5,
+      "avg_ms": 15.0,
+      "p90_ms": 15,
+      "p95_ms": 15,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commits/download/commit_20251023T124045Z_34ac63f4_v2.json/": {
+      "count": 1,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/commit": {
+      "count": 1,
+      "avg_ms": 9.0,
+      "p90_ms": 9,
+      "p95_ms": 9,
+      "error_rate_percent": 100.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/commit": {
+      "count": 1,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 100.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin/tasks/task/commits/activate/": {
+      "count": 12,
+      "avg_ms": 47.0,
+      "p90_ms": 47,
+      "p95_ms": 47,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {

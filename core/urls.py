@@ -17,12 +17,19 @@ Including another URLconf
 from django.contrib import admin 
 from django.urls import path, include 
 from rest_framework.routers import DefaultRouter 
-from tasks.views import TaskViewSet
+from tasks.views import TaskViewSet, NeedViewSet
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 router = DefaultRouter()
 router.register(r'tasks', TaskViewSet, basename='task')
+router.register(r'needs', NeedViewSet, basename='need')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),  # → /api/tasks/
+    # OpenAPI schema et UI Swagger (drf-spectacular)
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # ReDoc UI (alternative lisible de la doc OpenAPI)
+    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
