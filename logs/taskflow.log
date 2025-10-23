@@ -1,0 +1,12 @@
+2025-10-23 09:53:07,812 [INFO] Watching for file changes with StatReloader
+2025-10-23 09:53:58,129 [INFO] Watching for file changes with StatReloader
+2025-10-23 09:54:00,092 [INFO] GET /admin/ user=Anonymous status=200 duration=0.092s
+[2025-10-23 09:55:43,548] [INFO] Watching for file changes with StatReloader
+[2025-10-23 09:55:46,927] [INFO] GET /admin/ user=Anonymous status=200 duration=0.063s
+[2025-10-23 09:57:11,695] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\middleware.py changed, reloading.
+[2025-10-23 09:57:13,213] [INFO] Watching for file changes with StatReloader
+[2025-10-23 09:58:15,820] [INFO] Watching for file changes with StatReloader
+[2025-10-23 09:58:16,837] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.084s] GET /admin/
+[2025-10-23 09:58:18,945] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.011s] GET /admin/
+[2025-10-23 09:58:30,573] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\middleware.py changed, reloading.
+[2025-10-23 09:58:31,819] [INFO] Watching for file changes with StatReloader
