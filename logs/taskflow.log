@@ -736,3 +736,5 @@ django.core.exceptions.FieldError: Unknown field(s) (initial_message) specified 
 [2025-10-23 15:15:01,704] [INFO] [metrics] timestamp:2025-10-23T13:15:01.704640+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:500 duration_ms:364
 [2025-10-23 15:15:30,605] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
 [2025-10-23 15:15:31,600] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:15:34,385] [INFO] [metrics] timestamp:2025-10-23T13:15:34.385216+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:109
+[2025-10-23 15:15:34,432] [INFO] [metrics] timestamp:2025-10-23T13:15:34.432340+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
