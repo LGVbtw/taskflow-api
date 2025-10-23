@@ -1,4 +1,7 @@
 import logging
+import json
+import os
+from pathlib import Path
 from django.utils.timezone import now
 from django.conf import settings
 
@@ -19,6 +22,9 @@ class RequestLoggingMiddleware:
 
     def __init__(self, get_response):
         self.get_response = get_response
+        # fichier de métriques JSON maintenu en temps réel
+        self.metrics_file = Path(settings.LOGS_DIR) / 'api_metrics.json'
+        self.max_samples = 500  # garder les derniers N échantillons par endpoint
 
     def __call__(self, request):
         start = now()
@@ -50,6 +56,91 @@ class RequestLoggingMiddleware:
             )
         except Exception:
             logger.exception('Impossible d ecrire la métrique dans le log')
+
+        # Mettre à jour le fichier JSON de métriques (atomique)
+        try:
+            # Charger l'existant si présent
+            if self.metrics_file.exists():
+                with open(self.metrics_file, 'r', encoding='utf-8') as f:
+                    doc = json.load(f)
+            else:
+                doc = {
+                    'generated_at': None,
+                    'descriptions': {
+                        'count': "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+                        'avg_ms': "Durée moyenne des requêtes en millisecondes.",
+                        'p90_ms': "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+                        'p95_ms': "95ème percentile des durées (ms).",
+                        'error_rate_percent': "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+                        'error_rate_5xx_percent': "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500).",
+                    },
+                    'endpoints': {}
+                }
+
+            ep = doc.setdefault('endpoints', {}).setdefault(path, {})
+            # internal fields to maintain state
+            dlist = ep.get('_durations', [])
+            errors = ep.get('_errors', 0)
+            errors5 = ep.get('_errors_5xx', 0)
+
+            # append and trim
+            dlist.append(duration_ms)
+            if len(dlist) > self.max_samples:
+                dlist = dlist[-self.max_samples:]
+
+            if isinstance(status, int):
+                if status >= 400:
+                    errors += 1
+                if status >= 500:
+                    errors5 += 1
+            else:
+                # unknown status, ignore for error counts
+                pass
+
+            # recompute aggregated values
+            count = ep.get('count', 0) + 1
+            avg = float(sum(dlist)) / len(dlist) if dlist else 0.0
+            sd = sorted(dlist)
+            p90 = int(sd[max(0, int(0.9 * len(sd)) - 1)]) if sd else 0
+            p95 = int(sd[max(0, int(0.95 * len(sd)) - 1)]) if sd else 0
+            err_rate = (errors / count) * 100.0 if count else 0.0
+            err5_rate = (errors5 / count) * 100.0 if count else 0.0
+
+            # write back fields
+            ep['_durations'] = dlist
+            ep['_errors'] = errors
+            ep['_errors_5xx'] = errors5
+            ep['count'] = count
+            ep['avg_ms'] = round(avg, 3)
+            ep['p90_ms'] = p90
+            ep['p95_ms'] = p95
+            ep['error_rate_percent'] = round(err_rate, 3)
+            ep['error_rate_5xx_percent'] = round(err5_rate, 3)
+            # include descriptions for consumer clarity
+            ep['descriptions'] = doc.get('descriptions')
+
+            doc['generated_at'] = now().isoformat()
+
+            # write atomically but expose a "clean" version (sans champs internes commençant par '_')
+            public = {
+                'generated_at': doc['generated_at'],
+                'descriptions': doc.get('descriptions', {}),
+                'endpoints': {}
+            }
+            for p, info in doc.get('endpoints', {}).items():
+                public_info = {}
+                for k, v in info.items():
+                    if str(k).startswith('_'):
+                        continue
+                    public_info[k] = v
+                public['endpoints'][p] = public_info
+
+            tmp = str(self.metrics_file) + '.tmp'
+            with open(tmp, 'w', encoding='utf-8') as f:
+                json.dump(public, f, ensure_ascii=False, indent=2)
+            os.replace(tmp, str(self.metrics_file))
+        except Exception:
+            logger.exception('Impossible de mettre à jour api_metrics.json')
 
         # Log lisible(s) supplémentaires si besoin
         logger.debug(f'[user:{user}] [method:{method}] [path:{path}] [status:{status}] [duration:{duration_ms}ms]')
