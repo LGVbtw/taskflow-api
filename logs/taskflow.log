@@ -44,3 +44,126 @@
 [2025-10-23 10:58:17,518] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
 [2025-10-23 10:59:04,684] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
 [2025-10-23 11:02:06,550] [INFO] Watching for file changes with StatReloader
+[2025-10-23 11:02:15,349] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:55ms]
+[2025-10-23 11:02:15,449] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:10ms]
+[2025-10-23 11:02:15,498] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:02:15,524] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:02:15,547] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:02:15,574] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:02:15,600] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:02:15,623] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:02:15,645] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:3ms]
+[2025-10-23 11:02:15,669] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,496] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:8ms]
+[2025-10-23 11:05:13,572] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:3ms]
+[2025-10-23 11:05:13,598] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,620] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,643] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,665] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,708] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 11:05:13,737] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:8ms]
+[2025-10-23 11:05:13,762] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:13,785] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,808] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,844] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,869] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,894] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,917] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:13,940] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:13,963] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,002] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:8ms]
+[2025-10-23 11:05:14,029] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:8ms]
+[2025-10-23 11:05:14,059] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:9ms]
+[2025-10-23 11:05:14,088] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 11:05:14,116] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:14,142] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,168] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,195] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:8ms]
+[2025-10-23 11:05:14,221] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,244] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,270] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,298] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:9ms]
+[2025-10-23 11:05:14,324] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,349] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 11:05:14,372] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:14,395] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:14,419] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,443] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,469] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,492] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,531] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,557] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,585] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:9ms]
+[2025-10-23 11:05:14,610] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,637] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,662] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,685] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 11:05:14,711] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:05:14,738] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 11:05:14,768] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:10ms]
+[2025-10-23 11:05:14,799] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:9ms]
+[2025-10-23 11:05:14,839] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 11:05:14,869] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:9ms]
+[2025-10-23 11:10:45,745] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\middleware.py changed, reloading.
+[2025-10-23 11:10:47,942] [INFO] Watching for file changes with StatReloader
+[2025-10-23 11:14:57,215] [INFO] [metrics] timestamp:2025-10-23T09:14:57.215480+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:61
+[2025-10-23 11:14:57,325] [INFO] [metrics] timestamp:2025-10-23T09:14:57.325067+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,348] [INFO] [metrics] timestamp:2025-10-23T09:14:57.348073+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,370] [INFO] [metrics] timestamp:2025-10-23T09:14:57.370292+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,394] [INFO] [metrics] timestamp:2025-10-23T09:14:57.394131+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,417] [INFO] [metrics] timestamp:2025-10-23T09:14:57.417808+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,442] [INFO] [metrics] timestamp:2025-10-23T09:14:57.442057+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,465] [INFO] [metrics] timestamp:2025-10-23T09:14:57.465373+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,488] [INFO] [metrics] timestamp:2025-10-23T09:14:57.488139+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,510] [INFO] [metrics] timestamp:2025-10-23T09:14:57.510139+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,536] [INFO] [metrics] timestamp:2025-10-23T09:14:57.536418+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 11:14:57,559] [INFO] [metrics] timestamp:2025-10-23T09:14:57.559846+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,580] [INFO] [metrics] timestamp:2025-10-23T09:14:57.580425+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:14:57,603] [INFO] [metrics] timestamp:2025-10-23T09:14:57.603330+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,625] [INFO] [metrics] timestamp:2025-10-23T09:14:57.625533+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,647] [INFO] [metrics] timestamp:2025-10-23T09:14:57.647930+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,670] [INFO] [metrics] timestamp:2025-10-23T09:14:57.670259+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:14:57,690] [INFO] [metrics] timestamp:2025-10-23T09:14:57.690959+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,712] [INFO] [metrics] timestamp:2025-10-23T09:14:57.712311+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,734] [INFO] [metrics] timestamp:2025-10-23T09:14:57.734461+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,756] [INFO] [metrics] timestamp:2025-10-23T09:14:57.756084+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:14:57,779] [INFO] [metrics] timestamp:2025-10-23T09:14:57.779946+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,817] [INFO] [metrics] timestamp:2025-10-23T09:14:57.817191+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,841] [INFO] [metrics] timestamp:2025-10-23T09:14:57.841368+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:57,862] [INFO] [metrics] timestamp:2025-10-23T09:14:57.862673+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,886] [INFO] [metrics] timestamp:2025-10-23T09:14:57.886485+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,909] [INFO] [metrics] timestamp:2025-10-23T09:14:57.909813+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:57,934] [INFO] [metrics] timestamp:2025-10-23T09:14:57.934386+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,958] [INFO] [metrics] timestamp:2025-10-23T09:14:57.958276+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:57,979] [INFO] [metrics] timestamp:2025-10-23T09:14:57.979660+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,001] [INFO] [metrics] timestamp:2025-10-23T09:14:58.001836+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,027] [INFO] [metrics] timestamp:2025-10-23T09:14:58.027104+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 11:14:58,051] [INFO] [metrics] timestamp:2025-10-23T09:14:58.051767+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:58,079] [INFO] [metrics] timestamp:2025-10-23T09:14:58.079746+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 11:14:58,106] [INFO] [metrics] timestamp:2025-10-23T09:14:58.106678+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 11:14:58,132] [INFO] [metrics] timestamp:2025-10-23T09:14:58.132430+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 11:14:58,156] [INFO] [metrics] timestamp:2025-10-23T09:14:58.156538+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,178] [INFO] [metrics] timestamp:2025-10-23T09:14:58.178852+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,204] [INFO] [metrics] timestamp:2025-10-23T09:14:58.204159+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 11:14:58,229] [INFO] [metrics] timestamp:2025-10-23T09:14:58.229181+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:58,253] [INFO] [metrics] timestamp:2025-10-23T09:14:58.253058+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,276] [INFO] [metrics] timestamp:2025-10-23T09:14:58.276952+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:58,302] [INFO] [metrics] timestamp:2025-10-23T09:14:58.302215+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:58,326] [INFO] [metrics] timestamp:2025-10-23T09:14:58.326361+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:58,347] [INFO] [metrics] timestamp:2025-10-23T09:14:58.347919+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:14:58,376] [INFO] [metrics] timestamp:2025-10-23T09:14:58.376529+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 11:14:58,404] [INFO] [metrics] timestamp:2025-10-23T09:14:58.404675+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 11:14:58,430] [INFO] [metrics] timestamp:2025-10-23T09:14:58.430102+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:14:58,471] [INFO] [metrics] timestamp:2025-10-23T09:14:58.471941+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:14:58,517] [INFO] [metrics] timestamp:2025-10-23T09:14:58.517271+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:15:04,093] [INFO] Watching for file changes with StatReloader
+[2025-10-23 11:15:06,364] [INFO] [metrics] timestamp:2025-10-23T09:15:06.364259+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:36
+[2025-10-23 11:15:06,446] [INFO] [metrics] timestamp:2025-10-23T09:15:06.446051+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 11:15:06,488] [INFO] [metrics] timestamp:2025-10-23T09:15:06.488531+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:15:06,514] [INFO] [metrics] timestamp:2025-10-23T09:15:06.513979+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:15:06,550] [INFO] [metrics] timestamp:2025-10-23T09:15:06.550858+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 11:15:06,578] [INFO] [metrics] timestamp:2025-10-23T09:15:06.578647+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 11:15:06,625] [INFO] [metrics] timestamp:2025-10-23T09:15:06.625744+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:3
+[2025-10-23 11:15:06,649] [INFO] [metrics] timestamp:2025-10-23T09:15:06.649545+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 11:15:06,672] [INFO] [metrics] timestamp:2025-10-23T09:15:06.672916+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 11:15:06,695] [INFO] [metrics] timestamp:2025-10-23T09:15:06.694997+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4

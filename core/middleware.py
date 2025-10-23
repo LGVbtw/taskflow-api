@@ -1,6 +1,4 @@
-import csv
 import logging
-import os
 from django.utils.timezone import now
 from django.conf import settings
 
@@ -8,31 +6,19 @@ logger = logging.getLogger(__name__)
 
 
 class RequestLoggingMiddleware:
-    """Middleware qui mesure la durée d'une requête et stocke des métriques.
+    """Middleware minimal de mesure de durée.
 
-    - Mesure le temps entre le début et la fin de la requête.
-    - Ajoute deux headers de réponse :
-        - `X-Request-Duration-ms` : durée en millisecondes (entier)
-        - `X-Process-Time` : durée en secondes (float, 6 décimales)
-    - Ajoute une ligne CSV dans `logs/request_metrics.csv` avec :
-        timestamp, method, path, user, status, duration_ms
+    - Mesure le temps d'une requête, ajoute les headers `X-Request-Duration-ms` et
+      `X-Process-Time` à la réponse.
+    - Écrit une ligne de log structurée dans le logger (ex. `logs/taskflow.log`) au niveau INFO
+      au format :
+        [metrics] timestamp:<iso> method:<METHOD> path:<PATH> user:<USER> status:<STATUS> duration_ms:<MS>
 
-    Le middleware tolère les erreurs d'écriture pour ne pas casser la requête.
+    L'objectif : n'utiliser qu'un seul fichier de log (`taskflow.log`) pour les métriques.
     """
-
-    CSV_FILENAME = settings.LOGS_DIR / 'request_metrics.csv'
-    CSV_HEADER = ['timestamp', 'method', 'path', 'user', 'status', 'duration_ms']
 
     def __init__(self, get_response):
         self.get_response = get_response
-        # S'assurer que le fichier CSV existe et a un en-tête
-        try:
-            if not os.path.exists(self.CSV_FILENAME):
-                with open(self.CSV_FILENAME, 'w', newline='', encoding='utf-8') as f:
-                    writer = csv.writer(f)
-                    writer.writerow(self.CSV_HEADER)
-        except Exception:
-            logger.exception('Impossible de préparer le fichier de métriques')
 
     def __call__(self, request):
         start = now()
@@ -55,18 +41,17 @@ class RequestLoggingMiddleware:
             response['X-Request-Duration-ms'] = str(duration_ms)
             response['X-Process-Time'] = f"{duration_seconds:.6f}"
         except Exception:
-            # ne pas casser la requête si on ne peut pas modifier la réponse
             logger.debug('Impossible d ajouter le header X-Request-Duration-ms')
 
-        # Ecrire la métrique en CSV (append), tolérer les erreurs
+        # Log formaté pour récupération par scripts
         try:
-            with open(self.CSV_FILENAME, 'a', newline='', encoding='utf-8') as f:
-                writer = csv.writer(f)
-                writer.writerow([now().isoformat(), method, path, user, status, duration_ms])
+            logger.info(
+                f"[metrics] timestamp:{now().isoformat()} method:{method} path:{path} user:{user} status:{status} duration_ms:{duration_ms}"
+            )
         except Exception:
-            logger.exception('Impossible d ecrire la métrique de requête')
+            logger.exception('Impossible d ecrire la métrique dans le log')
 
-        # Log lisible en parallèle
-        logger.info(f'[user:{user}] [method:{method}] [path:{path}] [status:{status}] [duration:{duration_ms}ms]')
+        # Log lisible(s) supplémentaires si besoin
+        logger.debug(f'[user:{user}] [method:{method}] [path:{path}] [status:{status}] [duration:{duration_ms}ms]')
 
         return response
