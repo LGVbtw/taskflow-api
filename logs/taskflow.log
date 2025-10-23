@@ -10,3 +10,37 @@
 [2025-10-23 09:58:18,945] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.011s] GET /admin/
 [2025-10-23 09:58:30,573] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\middleware.py changed, reloading.
 [2025-10-23 09:58:31,819] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:10:40,291] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:10:52,201] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\settings.py changed, reloading.
+[2025-10-23 10:10:53,505] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:11:01,607] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:11:02,867] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.071s] GET /admin/
+[2025-10-23 10:11:03,080] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.013s] GET /admin/
+[2025-10-23 10:11:03,257] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.014s] GET /admin/
+[2025-10-23 10:11:03,380] [INFO] [user:Anonymous] [method:GET] [path:/admin/] [status:200] [duration:0.016s] GET /admin/
+[2025-10-23 10:24:08,182] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:24:10,445] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:53ms]
+[2025-10-23 10:26:16,703] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:26:24,329] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:44ms]
+[2025-10-23 10:35:48,129] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:35:59,744] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:48ms]
+[2025-10-23 10:36:08,444] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 10:43:04,344] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:13ms]
+[2025-10-23 10:43:05,916] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 10:48:20,678] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 10:48:26,204] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 10:48:27,421] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 10:48:32,461] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 10:49:21,021] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:49:24,287] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:32ms]
+[2025-10-23 10:49:25,355] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:6ms]
+[2025-10-23 10:49:26,926] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:4ms]
+[2025-10-23 10:50:12,188] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 10:56:13,715] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:56:18,851] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:41ms]
+[2025-10-23 10:56:20,372] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 10:58:11,942] [INFO] Watching for file changes with StatReloader
+[2025-10-23 10:58:15,583] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:31ms]
+[2025-10-23 10:58:17,518] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:7ms]
+[2025-10-23 10:59:04,684] [INFO] [user:Anonymous] [method:GET] [path:/api/tasks/] [status:200] [duration:5ms]
+[2025-10-23 11:02:06,550] [INFO] Watching for file changes with StatReloader
