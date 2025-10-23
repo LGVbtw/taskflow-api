@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Task, Need
+from .models import Message
 from django.urls import path
 from django.utils.html import format_html
 from django.shortcuts import redirect, render
@@ -400,9 +401,6 @@ class NeedAdmin(admin.ModelAdmin):
 
         convert_action.short_description = 'Action'
 
-        # Insérer la colonne d'action juste après le titre
-        list_display = ('id', 'title', 'convert_action', 'owner', 'converted', 'created_at')
-
         def convert_selected(self, request, queryset):
             """Action admin qui convertit les besoins sélectionnés en tâches."""
             if not request.user.is_staff:
@@ -419,3 +417,15 @@ class NeedAdmin(admin.ModelAdmin):
             self.message_user(request, f"{converted_count} besoin(s) converti(s) en tâche.")
 
         convert_selected.short_description = 'Convertir les besoins sélectionnés en tâches'
+
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    """Affiche et administre les messages/commentaires liés aux tasks/needs."""
+    list_display = ('id', 'short_content', 'author', 'task', 'need', 'created_at')
+    search_fields = ('content', 'author__username')
+    readonly_fields = ('created_at',)
+
+    def short_content(self, obj):
+        return (obj.content[:75] + '...') if len(obj.content) > 75 else obj.content
+    short_content.short_description = 'content'

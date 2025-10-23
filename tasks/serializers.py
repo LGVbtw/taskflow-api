@@ -39,6 +39,30 @@ class NeedSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
+        model = Task
+        fields = ('id', 'title', 'status', 'created_at', 'owner', 'description')
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    """Sérialiseur pour afficher les messages liés à une Task ou Need."""
+    author = serializers.ReadOnlyField(source='author.username')
+
+    class Meta:
+        model = __import__('tasks.models', fromlist=['Message']).Message
+        fields = ('id', 'content', 'created_at', 'author', 'parent')
+
+
+class MessageCreateSerializer(serializers.ModelSerializer):
+    """Sérialiseur pour créer un message. Permet d'indiquer task ou need via context."""
+    class Meta:
+        model = __import__('tasks.models', fromlist=['Message']).Message
+        fields = ('id', 'content', 'parent')
+
+    class Meta:
+        model = Need
+        fields = ('id', 'title', 'description', 'created_at', 'owner', 'converted', 'converted_at', 'converted_by')
+
+    class Meta:
         model = Need
         fields = ('id', 'title', 'description', 'created_at', 'owner', 'converted', 'converted_at', 'converted_by')
         read_only_fields = ('converted', 'converted_at', 'converted_by')

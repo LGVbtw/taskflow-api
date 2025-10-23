@@ -85,3 +85,21 @@ class Need(models.Model):
         self.converted_at = timezone.now()
         self.converted_by = user
         self.save()
+
+
+class Message(models.Model):
+    """Message/commentaire lié à une Task ou à un Need.
+
+    Un message peut être une réponse (parent) et est attribué à un auteur (optionnel).
+    """
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='messages')
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True, related_name='messages')
+    need = models.ForeignKey(Need, on_delete=models.CASCADE, null=True, blank=True, related_name='messages')
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='replies')
+
+    def __str__(self):
+        who = self.author.username if self.author else 'anonymous'
+        target = f'Task:{self.task_id}' if self.task_id else (f'Need:{self.need_id}' if self.need_id else 'None')
+        return f"Msg {self.pk} by {who} on {target}"

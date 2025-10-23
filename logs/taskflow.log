@@ -592,3 +592,147 @@ PermissionError: [WinError 5] Accès refusé: 'C:\\Cours Ynov\\B3\\Dev API\\Dev\
 [2025-10-23 14:51:00,574] [INFO] [metrics] timestamp:2025-10-23T12:51:00.574012+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
 [2025-10-23 14:52:03,103] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
 [2025-10-23 14:52:04,237] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:55:22,508] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\models.py changed, reloading.
+[2025-10-23 14:55:23,892] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:57:17,739] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-10-23 14:57:19,195] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:58:14,927] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\views.py changed, reloading.
+[2025-10-23 14:58:16,323] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:58:26,426] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:58:27,905] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:58:59,311] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:59:00,836] [INFO] Watching for file changes with StatReloader
+[2025-10-23 14:59:15,451] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 14:59:16,863] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:01:13,591] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:01:17,325] [INFO] [metrics] timestamp:2025-10-23T13:01:17.324956+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:109
+[2025-10-23 15:01:17,374] [INFO] [metrics] timestamp:2025-10-23T13:01:17.374453+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 15:01:19,051] [INFO] [metrics] timestamp:2025-10-23T13:01:19.051842+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:46
+[2025-10-23 15:01:19,130] [INFO] [metrics] timestamp:2025-10-23T13:01:19.130654+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:01:21,810] [INFO] [metrics] timestamp:2025-10-23T13:01:21.810004+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 15:01:21,858] [INFO] [metrics] timestamp:2025-10-23T13:01:21.858759+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:01:23,405] [INFO] [metrics] timestamp:2025-10-23T13:01:23.405824+00:00 method:GET path:/admin/tasks/message/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 15:01:23,458] [INFO] [metrics] timestamp:2025-10-23T13:01:23.458276+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:01:26,305] [INFO] [metrics] timestamp:2025-10-23T13:01:26.305853+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:36
+[2025-10-23 15:01:26,351] [INFO] [metrics] timestamp:2025-10-23T13:01:26.350988+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:01:27,843] [INFO] [metrics] timestamp:2025-10-23T13:01:27.843611+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:15
+[2025-10-23 15:01:27,897] [INFO] [metrics] timestamp:2025-10-23T13:01:27.897403+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 15:01:29,129] [INFO] [metrics] timestamp:2025-10-23T13:01:29.129263+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:27
+[2025-10-23 15:01:29,174] [INFO] [metrics] timestamp:2025-10-23T13:01:29.174104+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:01:29,960] [INFO] [metrics] timestamp:2025-10-23T13:01:29.960180+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 15:01:33,020] [INFO] [metrics] timestamp:2025-10-23T13:01:33.020730+00:00 method:POST path:/admin/tasks/task/commits/activate/ user:Anonymous status:302 duration_ms:58
+[2025-10-23 15:01:33,066] [INFO] [metrics] timestamp:2025-10-23T13:01:33.066039+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:30
+[2025-10-23 15:01:33,948] [INFO] [metrics] timestamp:2025-10-23T13:01:33.948895+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 15:01:35,548] [INFO] [metrics] timestamp:2025-10-23T13:01:35.548910+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:27
+[2025-10-23 15:01:35,593] [INFO] [metrics] timestamp:2025-10-23T13:01:35.593303+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:01:37,101] [INFO] [metrics] timestamp:2025-10-23T13:01:37.101222+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:15
+[2025-10-23 15:01:37,153] [INFO] [metrics] timestamp:2025-10-23T13:01:37.153800+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:04:39,292] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\models.py changed, reloading.
+[2025-10-23 15:04:40,781] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:07:22,882] [INFO] [metrics] timestamp:2025-10-23T13:07:22.882575+00:00 method:POST path:/api/users/ user:Anonymous status:404 duration_ms:7
+[2025-10-23 15:07:22,888] [WARNING] Not Found: /api/users/
+[2025-10-23 15:07:22,917] [INFO] [metrics] timestamp:2025-10-23T13:07:22.917920+00:00 method:POST path:/api/users/ user:Anonymous status:404 duration_ms:2
+[2025-10-23 15:07:22,943] [WARNING] Not Found: /api/users/
+[2025-10-23 15:07:22,974] [INFO] [metrics] timestamp:2025-10-23T13:07:22.974700+00:00 method:POST path:/api/users/ user:Anonymous status:404 duration_ms:3
+[2025-10-23 15:07:22,990] [WARNING] Not Found: /api/users/
+[2025-10-23 15:07:23,022] [INFO] [metrics] timestamp:2025-10-23T13:07:23.022507+00:00 method:POST path:/api/users/ user:Anonymous status:404 duration_ms:2
+[2025-10-23 15:07:23,037] [WARNING] Not Found: /api/users/
+[2025-10-23 15:07:23,067] [INFO] [metrics] timestamp:2025-10-23T13:07:23.067669+00:00 method:POST path:/api/users/ user:Anonymous status:404 duration_ms:3
+[2025-10-23 15:07:23,084] [WARNING] Not Found: /api/users/
+[2025-10-23 15:08:34,675] [INFO] [metrics] timestamp:2025-10-23T13:08:34.675603+00:00 method:GET path:/admin/auth/user/ user:Anonymous status:200 duration_ms:71
+[2025-10-23 15:08:34,736] [INFO] [metrics] timestamp:2025-10-23T13:08:34.736830+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 15:08:36,668] [INFO] [metrics] timestamp:2025-10-23T13:08:36.668243+00:00 method:GET path:/admin/auth/user/add/ user:Anonymous status:200 duration_ms:104
+[2025-10-23 15:08:36,724] [INFO] [metrics] timestamp:2025-10-23T13:08:36.724834+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:08:41,947] [INFO] [metrics] timestamp:2025-10-23T13:08:41.947119+00:00 method:POST path:/admin/auth/user/add/ user:Anonymous status:302 duration_ms:16
+[2025-10-23 15:08:42,057] [INFO] [metrics] timestamp:2025-10-23T13:08:42.057811+00:00 method:GET path:/admin/auth/user/3/change/ user:Anonymous status:200 duration_ms:102
+[2025-10-23 15:08:42,122] [INFO] [metrics] timestamp:2025-10-23T13:08:42.122037+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 15:08:44,605] [INFO] [metrics] timestamp:2025-10-23T13:08:44.605539+00:00 method:GET path:/admin/auth/user/add/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 15:08:44,686] [INFO] [metrics] timestamp:2025-10-23T13:08:44.686948+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:08:48,109] [INFO] [metrics] timestamp:2025-10-23T13:08:48.109375+00:00 method:POST path:/admin/auth/user/add/ user:Anonymous status:302 duration_ms:20
+[2025-10-23 15:08:48,168] [INFO] [metrics] timestamp:2025-10-23T13:08:48.168141+00:00 method:GET path:/admin/auth/user/4/change/ user:Anonymous status:200 duration_ms:49
+[2025-10-23 15:08:48,253] [INFO] [metrics] timestamp:2025-10-23T13:08:48.253240+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:08:49,222] [INFO] [metrics] timestamp:2025-10-23T13:08:49.222926+00:00 method:GET path:/admin/auth/user/add/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 15:08:49,275] [INFO] [metrics] timestamp:2025-10-23T13:08:49.275655+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:08:52,656] [INFO] [metrics] timestamp:2025-10-23T13:08:52.656655+00:00 method:POST path:/admin/auth/user/add/ user:Anonymous status:302 duration_ms:20
+[2025-10-23 15:08:52,711] [INFO] [metrics] timestamp:2025-10-23T13:08:52.711834+00:00 method:GET path:/admin/auth/user/5/change/ user:Anonymous status:200 duration_ms:45
+[2025-10-23 15:08:52,799] [INFO] [metrics] timestamp:2025-10-23T13:08:52.799162+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:08:53,879] [INFO] [metrics] timestamp:2025-10-23T13:08:53.879533+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 15:08:53,931] [INFO] [metrics] timestamp:2025-10-23T13:08:53.931567+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:09:02,125] [INFO] [metrics] timestamp:2025-10-23T13:09:02.125843+00:00 method:GET path:/admin/auth/user/4/change/?_to_field=id user:Anonymous status:200 duration_ms:40
+[2025-10-23 15:09:02,171] [INFO] [metrics] timestamp:2025-10-23T13:09:02.171461+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:09:04,186] [INFO] [metrics] timestamp:2025-10-23T13:09:04.186016+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:16
+[2025-10-23 15:09:11,918] [INFO] [admin-create] user=Admin2025 task_id=19 title=Test  message
+[2025-10-23 15:09:11,927] [INFO] [metrics] timestamp:2025-10-23T13:09:11.927681+00:00 method:POST path:/admin/tasks/task/add/ user:Anonymous status:302 duration_ms:19
+[2025-10-23 15:09:11,973] [INFO] [metrics] timestamp:2025-10-23T13:09:11.973134+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:37
+[2025-10-23 15:09:12,109] [INFO] [metrics] timestamp:2025-10-23T13:09:12.109677+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 15:09:13,657] [INFO] [metrics] timestamp:2025-10-23T13:09:13.657236+00:00 method:GET path:/admin/tasks/message/ user:Anonymous status:200 duration_ms:14
+[2025-10-23 15:09:13,703] [INFO] [metrics] timestamp:2025-10-23T13:09:13.703856+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:09:15,384] [INFO] [metrics] timestamp:2025-10-23T13:09:15.384624+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 15:09:15,436] [INFO] [metrics] timestamp:2025-10-23T13:09:15.436144+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 15:09:16,747] [INFO] [metrics] timestamp:2025-10-23T13:09:16.747513+00:00 method:GET path:/admin/tasks/task/19/change/ user:Anonymous status:200 duration_ms:19
+[2025-10-23 15:09:16,794] [INFO] [metrics] timestamp:2025-10-23T13:09:16.794727+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:09:19,573] [INFO] [metrics] timestamp:2025-10-23T13:09:19.573799+00:00 method:GET path:/admin/tasks/task/19/history/ user:Anonymous status:200 duration_ms:24
+[2025-10-23 15:09:22,127] [INFO] [metrics] timestamp:2025-10-23T13:09:22.127571+00:00 method:GET path:/admin/tasks/task/19/change/ user:Anonymous status:200 duration_ms:18
+[2025-10-23 15:10:32,261] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 15:10:33,479] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:10:41,494] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 15:10:42,915] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:14:54,824] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:14:58,560] [INFO] [metrics] timestamp:2025-10-23T13:14:58.560107+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:47
+[2025-10-23 15:14:59,718] [INFO] [metrics] timestamp:2025-10-23T13:14:59.718426+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:78
+[2025-10-23 15:14:59,768] [INFO] [metrics] timestamp:2025-10-23T13:14:59.768305+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 15:15:01,698] [ERROR] Internal Server Error: /admin/tasks/task/add/
+Traceback (most recent call last):
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 840, in get_form
+    return modelform_factory(self.model, **defaults)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\forms\models.py", line 654, in modelform_factory
+    return type(form)(class_name, (form,), form_class_attrs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\forms\models.py", line 334, in __new__
+    raise FieldError(message)
+django.core.exceptions.FieldError: Unknown field(s) (initial_message) specified for Task
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 719, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\sites.py", line 246, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 1984, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 1840, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 1878, in _changeform_view
+    ModelForm = self.get_form(
+        request, obj, change=not add, fields=flatten_fieldsets(fieldsets)
+    )
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py", line 121, in get_form
+    form = super().get_form(request, obj, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\contrib\admin\options.py", line 842, in get_form
+    raise FieldError(
+    ...<2 lines>...
+    )
+django.core.exceptions.FieldError: Unknown field(s) (initial_message) specified for Task. Check fields/fieldsets/exclude attributes of class TaskAdmin.
+[2025-10-23 15:15:01,704] [INFO] [metrics] timestamp:2025-10-23T13:15:01.704640+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:500 duration_ms:364
+[2025-10-23 15:15:30,605] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\admin.py changed, reloading.
+[2025-10-23 15:15:31,600] [INFO] Watching for file changes with StatReloader

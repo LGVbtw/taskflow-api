@@ -12,6 +12,8 @@ from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Task
 from .serializers import TaskSerializer
+from .models import Message
+from .serializers import MessageSerializer, MessageCreateSerializer
 from .exceptions import TaskInProgressDeletionError
 from .models import Need
 from .serializers import NeedSerializer
@@ -55,7 +57,11 @@ class TaskViewSet(ModelViewSet):
         Si la requête n'est pas authentifiée, `owner` est enregistré comme None.
         """
         user = self.request.user if self.request.user.is_authenticated else None
-        serializer.save(owner=user)
+        task = serializer.save(owner=user)
+        # Si un message initial est fourni dans le POST payload, créer le message
+        msg = self.request.data.get('initial_message')
+        if msg:
+            Message.objects.create(content=msg, author=user if user and user.is_authenticated else None, task=task)
 
     def destroy(self, request, *args, **kwargs):
         """Empêche la suppression des tâches marquées "En cours".
@@ -87,7 +93,11 @@ class NeedViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
-        serializer.save(owner=user)
+        need = serializer.save(owner=user)
+        # message initial optionnel
+        msg = self.request.data.get('initial_message')
+        if msg:
+            Message.objects.create(content=msg, author=user if user and user.is_authenticated else None, need=need)
 
     @action(detail=True, methods=['post'])
     def convert(self, request, pk=None):
@@ -107,6 +117,71 @@ class NeedViewSet(ModelViewSet):
             status='A faire',
             owner=need.owner
         )
+        # Si le Need avait des messages, on peut copier le premier message dans la Task en tant qu'historique
+        msgs = need.messages.all().order_by('created_at')
+        if msgs.exists():
+            for m in msgs:
+                Message.objects.create(content=m.content, author=m.author, task=task, parent=None)
         need.mark_converted(user=request.user if request.user.is_authenticated else None)
         from .serializers import TaskSerializer
         return Response(TaskSerializer(task).data, status=status.HTTP_201_CREATED)
+
+
+from rest_framework import viewsets, permissions
+
+
+class MessageViewSet(viewsets.ModelViewSet):
+    """Endpoints pour créer/lister/répondre aux messages.
+
+    - list : GET /messages/?task={id} ou /messages/?need={id}
+    - create : POST /messages/ avec payload {'content','task'|'need', 'parent' (opt)}
+    - reply : POST /messages/{pk}/reply/ -> crée une réponse dont l'auteur est l'utilisateur authentifié
+    """
+    queryset = Message.objects.all().order_by('-created_at')
+    serializer_class = MessageSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        task_id = self.request.query_params.get('task')
+        need_id = self.request.query_params.get('need')
+        if task_id:
+            qs = qs.filter(task_id=task_id)
+        if need_id:
+            qs = qs.filter(need_id=need_id)
+        return qs
+
+    def create(self, request, *args, **kwargs):
+        # support simple creation: specify task or need in body
+        data = request.data.copy()
+        user = request.user if request.user.is_authenticated else None
+        serializer = MessageCreateSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        obj = serializer.save()
+        # attach author and target if provided
+        if user:
+            obj.author = user
+        task_id = data.get('task')
+        need_id = data.get('need')
+        if task_id:
+            try:
+                obj.task_id = int(task_id)
+            except Exception:
+                pass
+        if need_id:
+            try:
+                obj.need_id = int(need_id)
+            except Exception:
+                pass
+        obj.save()
+        return Response(MessageSerializer(obj).data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['post'])
+    def reply(self, request, pk=None):
+        parent = self.get_object()
+        user = request.user if request.user.is_authenticated else None
+        content = request.data.get('content')
+        if not content:
+            return Response({'detail': 'content required'}, status=status.HTTP_400_BAD_REQUEST)
+        msg = Message.objects.create(content=content, author=user if user else None, task=parent.task, need=parent.need, parent=parent)
+        return Response(MessageSerializer(msg).data, status=status.HTTP_201_CREATED)
