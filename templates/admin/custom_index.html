@@ -1,0 +1,51 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="dashboard-module" style="margin-bottom:24px;">
+    <h2 style="margin-top:0;">🚀 Accès rapide Taskflow</h2>
+    <ol style="padding-left:20px;">
+        <li>
+            <strong>Types de tâches avancés</strong><br>
+            Gérez Epic/User Story/Feature/Tâche/Sous-tâche depuis
+            <a href="{% url 'admin:tasks_tasktype_changelist' %}">l’admin Task Types</a> pour structurer votre backlog.
+        </li>
+        <li>
+            <strong>Hiérarchie infinie</strong><br>
+            Consultez ou éditez les parents/enfants dans
+            <a href="{% url 'admin:tasks_task_changelist' %}">l’admin Tasks</a> et utilisez l’action API <code>/api/tasks/&lt;id&gt;/children/</code>.
+        </li>
+        <li>
+            <strong>Relations entre tâches</strong><br>
+            Créez des liens « blocks / depends / relates » via
+            <a href="{% url 'admin:tasks_taskrelation_changelist' %}">l’admin Task Relations</a> ou l’endpoint <code>/api/task-relations/</code>.
+        </li>
+        <li>
+            <strong>Métadonnées enrichies</strong><br>
+            Les priorités, versions, modules, owners/reporters et dates se gèrent dans
+            <a href="{% url 'admin:tasks_task_changelist' %}">Tasks</a> et l’API <code>/api/tasks/</code> (filters &amp; ordering).
+        </li>
+        <li>
+            <strong>Gestion multi-projets</strong><br>
+            Configurez vos projets depuis
+            <a href="{% url 'admin:tasks_project_changelist' %}">Projects</a> et filtrez les tâches avec <code>?project=&lt;id&gt;</code>.
+        </li>
+        <li>
+            <strong>Vues Kanban &amp; Gantt</strong><br>
+            Visualisez l’état global via
+            <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+                <a class="button" style="background:#1f8feb;color:white;padding:6px 14px;border-radius:4px;text-decoration:none;"
+                   href="/api/tasks/kanban/" target="_blank" rel="noopener">Ouvrir Kanban</a>
+                <a class="button" style="background:#14b8a6;color:white;padding:6px 14px;border-radius:4px;text-decoration:none;"
+                   href="/api/tasks/gantt/" target="_blank" rel="noopener">Ouvrir Gantt</a>
+            </div>
+        </li>
+        <li>
+            <strong>Uploads &amp; pièces jointes</strong><br>
+            Consultez les fichiers dans
+            <a href="{% url 'admin:tasks_attachment_changelist' %}">Attachments</a> et ajoutez-en via <code>/api/tasks/&lt;id&gt;/upload/</code>.
+        </li>
+    </ol>
+</div>
+{{ block.super }}
+{% endblock %}

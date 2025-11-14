@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task, Need, Project, Attachment
+from .models import Task, Need, Project, Attachment, TaskType, TaskRelation
 from .models import Message
 from django.urls import path
 from django.utils.html import format_html
@@ -270,3 +270,17 @@ class AttachmentAdmin(admin.ModelAdmin):
     list_display = ("id", "task", "uploaded_at", "file")
     readonly_fields = ("uploaded_at",)
     search_fields = ("task__title", "file")
+
+
+@admin.register(TaskType)
+class TaskTypeAdmin(admin.ModelAdmin):
+    list_display = ("code", "label", "order")
+    search_fields = ("code", "label")
+    ordering = ("order", "code")
+
+
+@admin.register(TaskRelation)
+class TaskRelationAdmin(admin.ModelAdmin):
+    list_display = ("src_task", "link_type", "dst_task", "created_at")
+    search_fields = ("src_task__title", "dst_task__title", "link_type")
+    list_filter = ("link_type",)
