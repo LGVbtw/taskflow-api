@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-23T13:29:08.492526+00:00",
+  "generated_at": "2025-11-14T08:16:02.503994+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -10,10 +10,10 @@
   },
   "endpoints": {
     "/api/tasks/": {
-      "count": 164,
-      "avg_ms": 1.0,
-      "p90_ms": 1,
-      "p95_ms": 1,
+      "count": 181,
+      "avg_ms": 538.0,
+      "p90_ms": 538,
+      "p95_ms": 538,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -26,10 +26,10 @@
       }
     },
     "/admin/": {
-      "count": 28,
-      "avg_ms": 24.0,
-      "p90_ms": 24,
-      "p95_ms": 24,
+      "count": 31,
+      "avg_ms": 54.0,
+      "p90_ms": 54,
+      "p95_ms": 54,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -90,10 +90,10 @@
       }
     },
     "/admin/tasks/task/": {
-      "count": 53,
-      "avg_ms": 31.0,
-      "p90_ms": 31,
-      "p95_ms": 31,
+      "count": 61,
+      "avg_ms": 30.0,
+      "p90_ms": 30,
+      "p95_ms": 30,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -106,10 +106,10 @@
       }
     },
     "/admin/jsi18n/": {
-      "count": 115,
-      "avg_ms": 5.0,
-      "p90_ms": 5,
-      "p95_ms": 5,
+      "count": 124,
+      "avg_ms": 6.0,
+      "p90_ms": 6,
+      "p95_ms": 6,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -202,10 +202,10 @@
       }
     },
     "/admin/tasks/need/": {
-      "count": 16,
-      "avg_ms": 42.0,
-      "p90_ms": 42,
-      "p95_ms": 42,
+      "count": 17,
+      "avg_ms": 23.0,
+      "p90_ms": 23,
+      "p95_ms": 23,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -474,10 +474,10 @@
       }
     },
     "/admin/tasks/task/commits/": {
-      "count": 34,
-      "avg_ms": 30.0,
-      "p90_ms": 30,
-      "p95_ms": 30,
+      "count": 35,
+      "avg_ms": 12.0,
+      "p90_ms": 12,
+      "p95_ms": 12,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -506,10 +506,10 @@
       }
     },
     "/admin/tasks/task/add/": {
-      "count": 16,
-      "avg_ms": 22.0,
-      "p90_ms": 22,
-      "p95_ms": 22,
+      "count": 17,
+      "avg_ms": 42.0,
+      "p90_ms": 42,
+      "p95_ms": 42,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -586,10 +586,10 @@
       }
     },
     "/admin/tasks/message/": {
-      "count": 7,
-      "avg_ms": 20.0,
-      "p90_ms": 20,
-      "p95_ms": 20,
+      "count": 8,
+      "avg_ms": 22.0,
+      "p90_ms": 22,
+      "p95_ms": 22,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -778,10 +778,10 @@
       }
     },
     "/admin/login/?next=/admin/": {
-      "count": 6,
-      "avg_ms": 829.0,
-      "p90_ms": 829,
-      "p95_ms": 829,
+      "count": 8,
+      "avg_ms": 771.0,
+      "p90_ms": 771,
+      "p95_ms": 771,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -927,6 +927,54 @@
       "p90_ms": 22,
       "p95_ms": 22,
       "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/": {
+      "count": 1,
+      "avg_ms": 46.0,
+      "p90_ms": 46,
+      "p95_ms": 46,
+      "error_rate_percent": 100.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/favicon.ico": {
+      "count": 1,
+      "avg_ms": 5.0,
+      "p90_ms": 5,
+      "p95_ms": 5,
+      "error_rate_percent": 100.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/admin": {
+      "count": 1,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 100.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",

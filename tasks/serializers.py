@@ -66,3 +66,43 @@ class MessageCreateSerializer(serializers.ModelSerializer):
         model = Need
         fields = ('id', 'title', 'description', 'created_at', 'owner', 'converted', 'converted_at', 'converted_by')
         read_only_fields = ('converted', 'converted_at', 'converted_by')
+
+
+# ===== MERGED FROM tasks/api/serializers.py =====
+# The following classes were appended from tasks/api/serializers.py
+# during an automatic consolidation. Any conflicting class names were
+# renamed with a `_api` suffix. See `.backups/tasks_api_serializers.py` for
+# the original file.
+
+from tasks.models import Task as _Task_api, Need as _Need_api, Message as _Message_api
+from rest_framework import serializers as _serializers_api
+
+
+class TaskSerializer_api(_serializers_api.ModelSerializer):
+    owner = _serializers_api.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = _Task_api
+        fields = ('id', 'title', 'status', 'created_at', 'owner')
+
+
+class NeedSerializer_api(_serializers_api.ModelSerializer):
+    owner = _serializers_api.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = _Need_api
+        fields = ('id', 'title', 'description', 'created_at', 'owner', 'converted', 'converted_at', 'converted_by')
+
+
+class MessageSerializer_api(_serializers_api.ModelSerializer):
+    author = _serializers_api.ReadOnlyField(source='author.username')
+
+    class Meta:
+        model = _Message_api
+        fields = ('id', 'content', 'created_at', 'author', 'parent', 'task', 'need')
+
+
+class MessageCreateSerializer_api(_serializers_api.ModelSerializer):
+    class Meta:
+        model = _Message_api
+        fields = ('id', 'content', 'parent', 'task', 'need')

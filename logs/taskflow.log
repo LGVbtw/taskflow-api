@@ -826,3 +826,171 @@ django.core.exceptions.FieldError: Unknown field(s) (initial_message) specified 
 [2025-10-23 15:29:01,950] [INFO] [metrics] timestamp:2025-10-23T13:29:01.950105+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
 [2025-10-23 15:29:08,415] [INFO] [metrics] timestamp:2025-10-23T13:29:08.415134+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:31
 [2025-10-23 15:29:08,474] [INFO] [metrics] timestamp:2025-10-23T13:29:08.474357+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:32:10,812] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\core\urls.py changed, reloading.
+[2025-10-23 15:32:12,566] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:33:09,307] [INFO] [metrics] timestamp:2025-10-23T13:33:09.307114+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 15:33:09,342] [ERROR] Internal Server Error: /api/tasks/
+Traceback (most recent call last):
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\mixins.py", line 18, in create
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 444, in run_validation
+    value = self.to_internal_value(data)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 497, in to_internal_value
+    for field in fields:
+                 ^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 380, in _writable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 374, in fields
+    for key, value in self.get_fields().items():
+                      ~~~~~~~~~~~~~~~^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1105, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ~~~~~~~~~~~~~~~~^
+        source, info, model, depth
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1251, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1369, in build_unknown_field
+    raise ImproperlyConfigured(
+    ...<2 lines>...
+    )
+django.core.exceptions.ImproperlyConfigured: Field name `description` is not valid for model `Task` in `tasks.api.serializers.TaskSerializer`.
+[2025-10-23 15:33:09,384] [INFO] [metrics] timestamp:2025-10-23T13:33:09.384555+00:00 method:POST path:/api/tasks/ user:Anonymous status:500 duration_ms:68
+[2025-10-23 15:33:10,330] [ERROR] Internal Server Error: /api/tasks/
+Traceback (most recent call last):
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\mixins.py", line 18, in create
+    serializer.is_valid(raise_exception=True)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 444, in run_validation
+    value = self.to_internal_value(data)
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 497, in to_internal_value
+    for field in fields:
+                 ^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 380, in _writable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ~~~~~~~~~^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 374, in fields
+    for key, value in self.get_fields().items():
+                      ~~~~~~~~~~~~~~~^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1105, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ~~~~~~~~~~~~~~~~^
+        source, info, model, depth
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1251, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\venv\Lib\site-packages\rest_framework\serializers.py", line 1369, in build_unknown_field
+    raise ImproperlyConfigured(
+    ...<2 lines>...
+    )
+django.core.exceptions.ImproperlyConfigured: Field name `description` is not valid for model `Task` in `tasks.api.serializers.TaskSerializer`.
+[2025-10-23 15:33:10,333] [INFO] [metrics] timestamp:2025-10-23T13:33:10.333204+00:00 method:POST path:/api/tasks/ user:Anonymous status:500 duration_ms:3
+[2025-10-23 15:34:37,929] [INFO] [metrics] timestamp:2025-10-23T13:34:37.929183+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:10
+[2025-10-23 15:34:57,169] [INFO] [metrics] timestamp:2025-10-23T13:34:57.169577+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:34:57,192] [INFO] [metrics] timestamp:2025-10-23T13:34:57.192507+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:5
+[2025-10-23 15:34:57,659] [INFO] [metrics] timestamp:2025-10-23T13:34:57.659027+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:1
+[2025-10-23 15:35:51,840] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:35:54,905] [INFO] [metrics] timestamp:2025-10-23T13:35:54.905821+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:122
+[2025-10-23 15:35:54,977] [INFO] [metrics] timestamp:2025-10-23T13:35:54.977037+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 15:35:56,625] [INFO] [metrics] timestamp:2025-10-23T13:35:56.625231+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:57
+[2025-10-23 15:35:56,674] [INFO] [metrics] timestamp:2025-10-23T13:35:56.674854+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 15:39:29,628] [INFO] [metrics] timestamp:2025-10-23T13:39:29.628777+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 15:39:29,642] [INFO] [metrics] timestamp:2025-10-23T13:39:29.642239+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:6
+[2025-10-23 15:39:30,206] [INFO] [metrics] timestamp:2025-10-23T13:39:30.206494+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:1
+[2025-10-23 15:45:04,567] [INFO] [metrics] timestamp:2025-10-23T13:45:04.567807+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 15:45:04,583] [INFO] [metrics] timestamp:2025-10-23T13:45:04.583078+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:4
+[2025-10-23 15:45:05,129] [INFO] [metrics] timestamp:2025-10-23T13:45:05.129827+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:1
+[2025-10-23 15:49:23,269] [INFO] [metrics] timestamp:2025-10-23T13:49:23.269484+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:50
+[2025-10-23 15:49:23,299] [INFO] [metrics] timestamp:2025-10-23T13:49:23.299043+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:20
+[2025-10-23 15:49:24,002] [INFO] [metrics] timestamp:2025-10-23T13:49:24.002016+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:1
+[2025-10-23 15:50:47,449] [INFO] Watching for file changes with StatReloader
+[2025-10-23 15:50:52,091] [INFO] [metrics] timestamp:2025-10-23T13:50:52.091065+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:205
+[2025-10-23 15:50:53,989] [INFO] [metrics] timestamp:2025-10-23T13:50:53.989797+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:45
+[2025-10-23 15:50:54,051] [INFO] [metrics] timestamp:2025-10-23T13:50:54.051173+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:9
+[2025-10-23 15:50:56,283] [INFO] [metrics] timestamp:2025-10-23T13:50:56.283234+00:00 method:GET path:/admin/tasks/task/commits/ user:Anonymous status:200 duration_ms:12
+[2025-10-23 15:50:58,077] [INFO] [metrics] timestamp:2025-10-23T13:50:58.077798+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:29
+[2025-10-23 15:50:59,318] [INFO] [metrics] timestamp:2025-10-23T13:50:59.317988+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:42
+[2025-10-23 15:50:59,371] [INFO] [metrics] timestamp:2025-10-23T13:50:59.371729+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:7
+[2025-10-23 15:51:00,794] [INFO] [metrics] timestamp:2025-10-23T13:51:00.794657+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:26
+[2025-10-23 16:02:37,579] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\api\views.py changed, reloading.
+[2025-10-23 16:02:39,039] [INFO] Watching for file changes with StatReloader
+[2025-10-23 16:03:01,090] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\api\views.py changed, reloading.
+[2025-10-23 16:03:02,579] [INFO] Watching for file changes with StatReloader
+[2025-10-23 16:03:30,576] [INFO] Watching for file changes with StatReloader
+[2025-10-23 16:03:33,613] [INFO] [metrics] timestamp:2025-10-23T14:03:33.613350+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:139
+[2025-10-23 16:03:33,673] [INFO] [metrics] timestamp:2025-10-23T14:03:33.673517+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:8
+[2025-10-23 16:03:34,829] [INFO] [metrics] timestamp:2025-10-23T14:03:34.829101+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:35
+[2025-10-23 16:03:34,899] [INFO] [metrics] timestamp:2025-10-23T14:03:34.898965+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-10-23 16:03:41,368] [INFO] [metrics] timestamp:2025-10-23T14:03:41.368158+00:00 method:GET path:/admin/tasks/message/ user:Anonymous status:200 duration_ms:22
+[2025-10-23 16:03:41,428] [INFO] [metrics] timestamp:2025-10-23T14:03:41.428296+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-10-23 16:03:42,758] [INFO] [metrics] timestamp:2025-10-23T14:03:42.758611+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:23
+[2025-10-23 16:03:42,833] [INFO] [metrics] timestamp:2025-10-23T14:03:42.833658+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-10-23 16:03:43,806] [INFO] [metrics] timestamp:2025-10-23T14:03:43.806756+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:30
+[2025-10-23 16:03:43,874] [INFO] [metrics] timestamp:2025-10-23T14:03:43.874100+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-11-14 09:15:40,181] [INFO] Watching for file changes with StatReloader
+[2025-11-14 09:15:44,525] [INFO] [metrics] timestamp:2025-11-14T08:15:44.525146+00:00 method:GET path:/ user:Anonymous status:404 duration_ms:46
+[2025-11-14 09:15:44,553] [WARNING] Not Found: /
+[2025-11-14 09:15:44,776] [INFO] [metrics] timestamp:2025-11-14T08:15:44.776390+00:00 method:GET path:/favicon.ico user:Anonymous status:404 duration_ms:5
+[2025-11-14 09:15:44,800] [WARNING] Not Found: /favicon.ico
+[2025-11-14 09:15:50,616] [INFO] [metrics] timestamp:2025-11-14T08:15:50.616258+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:538
+[2025-11-14 09:15:56,074] [INFO] [metrics] timestamp:2025-11-14T08:15:56.074261+00:00 method:GET path:/admin user:Anonymous status:404 duration_ms:3
+[2025-11-14 09:15:56,117] [INFO] [metrics] timestamp:2025-11-14T08:15:56.117684+00:00 method:GET path:/admin/ user:Anonymous status:302 duration_ms:11
+[2025-11-14 09:15:56,277] [INFO] [metrics] timestamp:2025-11-14T08:15:56.277445+00:00 method:GET path:/admin/login/?next=/admin/ user:Anonymous status:200 duration_ms:103
+[2025-11-14 09:16:02,390] [INFO] [metrics] timestamp:2025-11-14T08:16:02.390332+00:00 method:POST path:/admin/login/?next=/admin/ user:Anonymous status:302 duration_ms:771
+[2025-11-14 09:16:02,489] [INFO] [metrics] timestamp:2025-11-14T08:16:02.489292+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:54

@@ -8,13 +8,13 @@ from django.contrib import messages
 from django.urls import reverse
 from django import forms
 import logging
-import os
 import json
-import uuid
 from datetime import datetime
 from django.conf import settings
 from pathlib import Path
 from django.http import HttpResponse, Http404
+from .services.commits import commits_dir, create_commit, list_commits, load_snapshot, activate_commit
+from .services.needs import convert_need, convert_needs
 
 
 @admin.register(Task)
@@ -120,84 +120,20 @@ class TaskAdmin(admin.ModelAdmin):
         ]
         return custom_urls + urls
 
-    def _commits_dir(self):
-        base = Path(settings.BASE_DIR)
-        commits_dir = base / 'backups' / 'commits'
-        commits_dir.mkdir(parents=True, exist_ok=True)
-        return commits_dir
-
-    def _commit_filename(self, name):
-        safe = ''.join(c for c in name if c.isalnum() or c in (' ', '_', '-')).rstrip()
-        stamp = datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')
-        uid = uuid.uuid4().hex[:8]
-        fname = f"commit_{stamp}_{uid}_{safe}.json"
-        return fname
-
-    def _snapshot_data(self, request_user):
-        """Collecte les données exportables pour tasks, needs et users."""
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        tasks = []
-        for t in Task.objects.all():
-            tasks.append({
-                'id': t.id,
-                'title': t.title,
-                'status': t.status,
-                'created_at': t.created_at.isoformat() if t.created_at else None,
-                'owner': t.owner.username if t.owner else None,
-            })
-
-        needs = []
-        for n in Need.objects.all():
-            needs.append({
-                'id': n.id,
-                'title': n.title,
-                'description': n.description,
-                'created_at': n.created_at.isoformat() if n.created_at else None,
-                'owner': n.owner.username if n.owner else None,
-                'converted': n.converted,
-                'converted_at': n.converted_at.isoformat() if n.converted_at else None,
-                'converted_by': n.converted_by.username if n.converted_by else None,
-            })
-
-        users = []
-        for u in User.objects.all():
-            users.append({
-                'id': u.id,
-                'username': u.username,
-                'email': u.email,
-                'is_staff': u.is_staff,
-                'is_active': u.is_active,
-                'date_joined': u.date_joined.isoformat() if getattr(u, 'date_joined', None) else None,
-            })
-
-        meta = {
-            'created_by': request_user.username if request_user and request_user.is_authenticated else 'anonymous',
-            'created_at': datetime.utcnow().isoformat() + 'Z',
-        }
-
-        return {'meta': meta, 'tasks': tasks, 'needs': needs, 'users': users}
-
     def commits_view(self, request):
-        """Affiche la page de gestion des commits (create/list/select)."""
-        commits_dir = self._commits_dir()
-        files = sorted(commits_dir.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True)
+        """Affiche la page de gestion des commits (create/list/select) en délégant au service."""
+        d = commits_dir()
+        files = sorted(d.iterdir(), key=lambda p: p.stat().st_mtime, reverse=True)
 
         if request.method == 'POST' and 'create_commit' in request.POST:
             name = request.POST.get('commit_name') or 'unnamed'
-            fname = self._commit_filename(name)
-            data = self._snapshot_data(request.user)
-            data['meta']['name'] = name
-            path = commits_dir / fname
-            with open(path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
+            fname = create_commit(name, request.user)
             messages.success(request, f"Commit créé: {fname}")
             return redirect(reverse('admin:tasks_commits'))
 
         # Read active commit pointer if exists
         active = None
-        active_file = commits_dir.parent / 'active_commit.txt'
+        active_file = d.parent / 'active_commit.txt'
         if active_file.exists():
             try:
                 active = active_file.read_text(encoding='utf-8').strip()
@@ -222,8 +158,8 @@ class TaskAdmin(admin.ModelAdmin):
         return render(request, 'admin/tasks/commits.html', context)
 
     def commits_download(self, request, fname):
-        commits_dir = self._commits_dir()
-        path = commits_dir / fname
+        d = commits_dir()
+        path = d / fname
         if not path.exists():
             raise Http404('Commit not found')
         with open(path, 'rb') as f:
@@ -233,140 +169,21 @@ class TaskAdmin(admin.ModelAdmin):
         return resp
 
     def commits_activate(self, request):
-        commits_dir = self._commits_dir()
+        d = commits_dir()
         fname = request.POST.get('activate_fname')
-        path = commits_dir / fname
+        path = d / fname
         if not path.exists():
             messages.error(request, 'Version introuvable')
             return redirect(reverse('admin:tasks_commits'))
-        # Charger et appliquer le snapshot
         try:
-            with open(path, 'r', encoding='utf-8') as f:
-                snapshot = json.load(f)
+            summary = activate_commit(path, request.user)
         except Exception as e:
-            messages.error(request, f'Erreur lecture du commit: {e}')
+            messages.error(request, f'Erreur activation du commit: {e}')
             return redirect(reverse('admin:tasks_commits'))
 
-        from django.db import transaction
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-        # helper parse ISO (supporte 'Z')
-        def parse_iso(s):
-            if not s:
-                return None
-            try:
-                if s.endswith('Z'):
-                    s2 = s[:-1]
-                    dt = datetime.fromisoformat(s2)
-                    return dt.replace(tzinfo=None)
-                return datetime.fromisoformat(s)
-            except Exception:
-                return None
-
-        users_data = snapshot.get('users', [])
-        tasks_data = snapshot.get('tasks', [])
-        needs_data = snapshot.get('needs', [])
-
-        created_users = updated_users = 0
-        created_tasks = updated_tasks = deleted_tasks = 0
-        created_needs = updated_needs = deleted_needs = 0
-
-        with transaction.atomic():
-            # Upsert users by username
-            usernames = [u.get('username') for u in users_data if u.get('username')]
-            for u in users_data:
-                uname = u.get('username')
-                if not uname:
-                    continue
-                defaults = {
-                    'email': u.get('email', ''),
-                    'is_staff': u.get('is_staff', False),
-                    'is_active': u.get('is_active', True),
-                }
-                obj, created = User.objects.update_or_create(username=uname, defaults=defaults)
-                if u.get('date_joined'):
-                    dt = parse_iso(u.get('date_joined'))
-                    if dt:
-                        try:
-                            obj.date_joined = dt
-                            obj.save(update_fields=['date_joined'])
-                        except Exception:
-                            pass
-                if created:
-                    created_users += 1
-                else:
-                    updated_users += 1
-
-            # Build username->user map
-            user_map = {u.username: u for u in User.objects.filter(username__in=usernames)}
-
-            # Upsert tasks (use provided PKs)
-            task_ids = []
-            for t in tasks_data:
-                pk = t.get('id')
-                owner_name = t.get('owner')
-                owner = user_map.get(owner_name) if owner_name else None
-                defaults = {
-                    'title': t.get('title'),
-                    'status': t.get('status'),
-                    'owner': owner,
-                }
-                obj, created = Task.objects.update_or_create(pk=pk, defaults=defaults)
-                # set created_at if provided
-                if t.get('created_at'):
-                    dt = parse_iso(t.get('created_at'))
-                    if dt:
-                        Task.objects.filter(pk=obj.pk).update(created_at=dt)
-                if created:
-                    created_tasks += 1
-                else:
-                    updated_tasks += 1
-                task_ids.append(obj.pk)
-
-            # Upsert needs
-            need_ids = []
-            for n in needs_data:
-                pk = n.get('id')
-                owner_name = n.get('owner')
-                owner = user_map.get(owner_name) if owner_name else None
-                converted_by_name = n.get('converted_by')
-                converted_by = user_map.get(converted_by_name) if converted_by_name else None
-                defaults = {
-                    'title': n.get('title'),
-                    'description': n.get('description'),
-                    'owner': owner,
-                    'converted': n.get('converted', False),
-                }
-                obj, created = Need.objects.update_or_create(pk=pk, defaults=defaults)
-                if n.get('created_at'):
-                    dt = parse_iso(n.get('created_at'))
-                    if dt:
-                        Need.objects.filter(pk=obj.pk).update(created_at=dt)
-                if n.get('converted_at'):
-                    dt2 = parse_iso(n.get('converted_at'))
-                    if dt2:
-                        Need.objects.filter(pk=obj.pk).update(converted_at=dt2)
-                if converted_by:
-                    Need.objects.filter(pk=obj.pk).update(converted_by=converted_by)
-                if created:
-                    created_needs += 1
-                else:
-                    updated_needs += 1
-                need_ids.append(obj.pk)
-
-            # Delete tasks/needs not present in snapshot to mirror snapshot state
-            deleted_tasks = Task.objects.exclude(pk__in=task_ids).count()
-            Task.objects.exclude(pk__in=task_ids).delete()
-            deleted_needs = Need.objects.exclude(pk__in=need_ids).count()
-            Need.objects.exclude(pk__in=need_ids).delete()
-
-        # Write active pointer
-        active_file = commits_dir.parent / 'active_commit.txt'
-        active_file.write_text(fname, encoding='utf-8')
-
-        messages.success(request, (f'Version activée: {fname} — Users: +{created_users}/~{updated_users}, '
-                                    f'Tasks: +{created_tasks}/~{updated_tasks} (deleted {deleted_tasks}), '
-                                    f'Needs: +{created_needs}/~{updated_needs} (deleted {deleted_needs})'))
+        messages.success(request, (f"Version activée: {summary.get('fname')} — Users: +{summary.get('created_users')}/~{summary.get('updated_users')}, "
+                                    f"Tasks: +{summary.get('created_tasks')}/~{summary.get('updated_tasks')} (deleted {summary.get('deleted_tasks')}), "
+                                    f"Needs: +{summary.get('created_needs')}/~{summary.get('updated_needs')} (deleted {summary.get('deleted_needs')})"))
         return redirect(reverse('admin:tasks_commits'))
     search_fields = ('id', 'title', 'status')
     list_filter = ('status',)
@@ -411,9 +228,8 @@ class NeedAdmin(admin.ModelAdmin):
                 messages.info(request, "Ce besoin a déjà été converti.")
                 return redirect(reverse('admin:tasks_need_changelist'))
 
-            # Crée la Task correspondante
-            task = Task.objects.create(title=need.title, status='A faire', owner=need.owner)
-            need.mark_converted(user=request.user)
+            # Déléguer la conversion au service
+            task = convert_need(need, request.user)
             messages.success(request, f"Besoin '{need.title}' converti en tâche (id={task.id}).")
             return redirect(reverse('admin:tasks_need_changelist'))
 
@@ -432,13 +248,8 @@ class NeedAdmin(admin.ModelAdmin):
                 self.message_user(request, "Permission refusée: seuls les administrateurs peuvent convertir des besoins.", level=messages.ERROR)
                 return
 
-            converted_count = 0
-            for need in queryset:
-                if not need.converted:
-                    Task.objects.create(title=need.title, status='A faire', owner=need.owner)
-                    need.mark_converted(user=request.user)
-                    converted_count += 1
-
+            # utiliser le service qui gère l'atomicité
+            converted_count = convert_needs(queryset, request.user)
             self.message_user(request, f"{converted_count} besoin(s) converti(s) en tâche.")
 
         convert_selected.short_description = 'Convertir les besoins sélectionnés en tâches'
