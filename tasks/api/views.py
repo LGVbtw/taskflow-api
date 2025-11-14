@@ -1,8 +1,9 @@
 from rest_framework import viewsets, filters, permissions, status
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from tasks.models import Task, Need, Message, TaskRelation
+from tasks.models import Task, Need, Message, TaskRelation, Project
 from tasks.serializers import (
     TaskSerializer as TaskSerializer_api_import,
     NeedSerializer as NeedSerializer_api_import,
@@ -129,3 +130,71 @@ class TaskRelationViewSet(viewsets.ModelViewSet):
     search_fields = ['link_type', 'src_task__title', 'dst_task__title']
     ordering_fields = ['created_at']
     filterset_fields = ['link_type', 'src_task', 'dst_task']
+
+
+class KanbanView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        columns = {"A faire": [], "En cours": [], "Fait": []}
+        queryset = Task.objects.all().order_by('created_at')
+        serializer_context = {"request": request}
+        for status in columns.keys():
+            tasks = queryset.filter(status=status)
+            columns[status] = TaskSerializer(tasks, many=True, context=serializer_context).data
+
+        other_statuses = queryset.exclude(status__in=columns.keys())
+        if other_statuses.exists():
+            columns["Autres"] = TaskSerializer(other_statuses, many=True, context=serializer_context).data
+
+        return Response(columns)
+
+
+class GanttView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        project_id = request.query_params.get('project')
+        projects = Project.objects.prefetch_related('tasks').all()
+        if project_id:
+            projects = projects.filter(id=project_id)
+
+        data = []
+        for project in projects:
+            tasks_payload = []
+            for task in project.tasks.all().order_by('start_date', 'due_date'):
+                tasks_payload.append({
+                    "id": task.id,
+                    "title": task.title,
+                    "start_date": task.start_date.isoformat() if task.start_date else None,
+                    "due_date": task.due_date.isoformat() if task.due_date else None,
+                    "progress": task.progress,
+                })
+
+            data.append({
+                "id": project.id,
+                "title": project.name,
+                "description": project.description,
+                "tasks": tasks_payload,
+            })
+
+        # Inclure les tâches sans projet pour faciliter l'intégration front
+        unassigned_tasks = Task.objects.filter(project__isnull=True)
+        if unassigned_tasks.exists():
+            data.append({
+                "id": None,
+                "title": "Sans projet",
+                "description": "Tâches non affectées",
+                "tasks": [
+                    {
+                        "id": task.id,
+                        "title": task.title,
+                        "start_date": task.start_date.isoformat() if task.start_date else None,
+                        "due_date": task.due_date.isoformat() if task.due_date else None,
+                        "progress": task.progress,
+                    }
+                    for task in unassigned_tasks
+                ],
+            })
+
+        return Response({"projects": data})

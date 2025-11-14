@@ -2,6 +2,7 @@ import pytest
 from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
+from datetime import date
 
 from tasks.models import Task, TaskType, TaskRelation, Project
 
@@ -280,3 +281,46 @@ def test_create_task_rejects_progress_over_100():
 	assert response.status_code == 400
 	assert "progress" in response.json()
 	assert Task.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_kanban_endpoint_groups_tasks_by_status():
+	client = APIClient()
+	Task.objects.create(title="Todo", status="A faire")
+	Task.objects.create(title="Doing", status="En cours")
+	Task.objects.create(title="Done", status="Fait")
+
+	response = client.get(reverse("task-kanban"))
+
+	assert response.status_code == 200
+	data = response.json()
+	assert len(data["A faire"]) == 1
+	assert len(data["En cours"]) == 1
+	assert len(data["Fait"]) == 1
+
+
+@pytest.mark.django_db
+def test_gantt_endpoint_groups_by_project():
+	client = APIClient()
+	project = Project.objects.create(name="API", description="")
+	Task.objects.create(
+		title="Task 1",
+		status="A faire",
+		project=project,
+		start_date=date(2025, 11, 1),
+		due_date=date(2025, 11, 10),
+		progress=20,
+	)
+	Task.objects.create(title="Task 2", status="En cours", project=None)
+
+	response = client.get(reverse("task-gantt"))
+
+	assert response.status_code == 200
+	payload = response.json()
+	assert "projects" in payload
+	api_project = next((item for item in payload["projects"] if item["title"] == "API"), None)
+	assert api_project is not None
+	assert len(api_project["tasks"]) == 1
+	unassigned = next((item for item in payload["projects"] if item["id"] is None), None)
+	assert unassigned is not None
+	assert len(unassigned["tasks"]) == 1

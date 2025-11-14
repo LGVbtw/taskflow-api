@@ -8,10 +8,13 @@ db.sqlite3
 
 # Fichiers de log
 logs/
-logs/api_metrics.json
-logs/taskflow.log
+log/api_metrics.json
+log/taskflow.log
 
 # Fichiers générés
 api_metrics.json
 
 .backups
+
+# Fichiers cache Pytest
+*.pytestcache
