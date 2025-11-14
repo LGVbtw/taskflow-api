@@ -47,8 +47,10 @@ def test_create_task_authenticated_user_sets_owner():
 	assert response.status_code == 201
 	payload = response.json()
 	assert payload["owner"] == user.username
+	assert payload["reporter"] == user.username
 	created_task = Task.objects.get(id=payload["id"])
 	assert created_task.owner == user
+	assert created_task.reporter == user
 
 
 @pytest.mark.django_db
@@ -202,3 +204,48 @@ def test_task_payload_includes_relation_data():
 	assert len(data["relations_out"]) == 1
 	assert data["relations_out"][0]["dst_task"] == dst.id
 	assert data["relations_in"] == []
+
+
+@pytest.mark.django_db
+def test_create_task_with_metadata_fields():
+	client = APIClient()
+	body = {
+		"title": "Tâche complexe",
+		"status": "A faire",
+		"priority": "urgent",
+		"target_version": "v1.0.0",
+		"module": "API",
+		"start_date": "2025-11-01",
+		"due_date": "2025-11-30",
+		"progress": 45,
+	}
+
+	response = client.post(reverse("task-list"), body, format="json")
+
+	assert response.status_code == 201
+	data = response.json()
+	assert data["priority"] == "urgent"
+	assert data["target_version"] == "v1.0.0"
+	assert data["module"] == "API"
+	assert data["start_date"] == "2025-11-01"
+	assert data["due_date"] == "2025-11-30"
+	assert data["progress"] == 45
+	created = Task.objects.get(id=data["id"])
+	assert created.priority == Task.PRIORITY_URGENT
+	assert created.target_version == "v1.0.0"
+	assert created.module == "API"
+	assert str(created.start_date) == "2025-11-01"
+	assert str(created.due_date) == "2025-11-30"
+	assert created.progress == 45
+
+
+@pytest.mark.django_db
+def test_create_task_rejects_progress_over_100():
+	client = APIClient()
+	body = {"title": "Invalide", "status": "A faire", "progress": 150}
+
+	response = client.post(reverse("task-list"), body, format="json")
+
+	assert response.status_code == 400
+	assert "progress" in response.json()
+	assert Task.objects.count() == 0

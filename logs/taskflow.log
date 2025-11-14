@@ -37,3 +37,34 @@
 [2025-11-14 10:57:59,096] [INFO] [metrics] timestamp:2025-11-14T09:57:59.096508+00:00 method:GET path:/api/task-relations/ user:Anonymous status:200 duration_ms:250
 [2025-11-14 11:01:58,116] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\migrations\0012_taskrelation.py changed, reloading.
 [2025-11-14 11:01:59,548] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:06:56,170] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\models.py changed, reloading.
+[2025-11-14 11:06:57,513] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:10:11,611] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-11-14 11:10:12,798] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:10:55,972] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\api\views.py changed, reloading.
+[2025-11-14 11:10:57,673] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:11:06,787] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\services\needs.py changed, reloading.
+[2025-11-14 11:11:08,566] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:19:16,180] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\migrations\0013_task_metadata.py changed, reloading.
+[2025-11-14 11:19:17,609] [INFO] Watching for file changes with StatReloader
+[2025-11-14 11:24:40,554] [INFO] [metrics] timestamp:2025-11-14T10:24:40.554166+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:7
+[2025-11-14 11:24:40,583] [INFO] [metrics] timestamp:2025-11-14T10:24:40.583353+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:7
+[2025-11-14 11:24:41,040] [INFO] [metrics] timestamp:2025-11-14T10:24:41.040761+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 11:24:41,065] [INFO] [metrics] timestamp:2025-11-14T10:24:41.065824+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 11:24:41,092] [INFO] [metrics] timestamp:2025-11-14T10:24:41.092221+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 11:24:41,111] [INFO] [metrics] timestamp:2025-11-14T10:24:41.111480+00:00 method:POST path:/api/tasks/ user:Anonymous status:400 duration_ms:1
+[2025-11-14 11:24:41,127] [WARNING] Bad Request: /api/tasks/
+[2025-11-14 11:24:41,137] [INFO] [metrics] timestamp:2025-11-14T10:24:41.137721+00:00 method:PATCH path:/api/tasks/1/ user:Anonymous status:400 duration_ms:3
+[2025-11-14 11:24:41,150] [WARNING] Bad Request: /api/tasks/1/
+[2025-11-14 11:24:41,160] [INFO] [metrics] timestamp:2025-11-14T10:24:41.160447+00:00 method:PATCH path:/api/tasks/2/ user:Anonymous status:200 duration_ms:5
+[2025-11-14 11:24:41,183] [INFO] [metrics] timestamp:2025-11-14T10:24:41.183662+00:00 method:POST path:/api/task-relations/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 11:24:41,204] [INFO] [metrics] timestamp:2025-11-14T10:24:41.204276+00:00 method:POST path:/api/task-relations/ user:Anonymous status:400 duration_ms:1
+[2025-11-14 11:24:41,219] [WARNING] Bad Request: /api/task-relations/
+[2025-11-14 11:24:41,227] [INFO] [metrics] timestamp:2025-11-14T10:24:41.227175+00:00 method:POST path:/api/task-relations/ user:Anonymous status:400 duration_ms:1
+[2025-11-14 11:24:41,246] [WARNING] Bad Request: /api/task-relations/
+[2025-11-14 11:24:41,255] [INFO] [metrics] timestamp:2025-11-14T10:24:41.255059+00:00 method:GET path:/api/tasks/1/ user:Anonymous status:200 duration_ms:3
+[2025-11-14 11:24:41,281] [INFO] [metrics] timestamp:2025-11-14T10:24:41.281552+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:2
+[2025-11-14 11:24:41,297] [INFO] [metrics] timestamp:2025-11-14T10:24:41.297917+00:00 method:POST path:/api/tasks/ user:Anonymous status:400 duration_ms:0
+[2025-11-14 11:24:41,317] [WARNING] Bad Request: /api/tasks/
+[2025-11-14 11:25:03,604] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-11-14 11:25:04,841] [INFO] Watching for file changes with StatReloader

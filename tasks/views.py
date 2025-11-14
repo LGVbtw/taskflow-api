@@ -49,7 +49,7 @@ class TaskViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ["title", "status", "task_type__label", "task_type__code"]
     ordering_fields = ["created_at", "title", "task_type__order"]
-    filterset_fields = ["status", "task_type__code", "parent"]
+    filterset_fields = ["status", "task_type__code", "parent", "priority", "module", "target_version"]
 
     def perform_create(self, serializer):
         """Assigne le propriétaire authentifié lors de la création d'une Task.
@@ -57,7 +57,7 @@ class TaskViewSet(ModelViewSet):
         Si la requête n'est pas authentifiée, `owner` est enregistré comme None.
         """
         user = self.request.user if self.request.user.is_authenticated else None
-        task = serializer.save(owner=user)
+        task = serializer.save(owner=user, reporter=user)
         # Si un message initial est fourni dans le POST payload, créer le message
         msg = self.request.data.get('initial_message')
         if msg:
@@ -112,10 +112,12 @@ class NeedViewSet(ModelViewSet):
             return Response({'detail': 'Already converted'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Créer la Task correspondante
+        reporter = request.user if request.user.is_authenticated else None
         task = Task.objects.create(
             title=need.title,
             status='A faire',
-            owner=need.owner
+            owner=need.owner,
+            reporter=reporter,
         )
         # Si le Need avait des messages, on peut copier le premier message dans la Task en tant qu'historique
         msgs = need.messages.all().order_by('created_at')

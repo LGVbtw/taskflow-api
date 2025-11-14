@@ -27,11 +27,11 @@ class TaskViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ['title', 'status', 'task_type__label', 'task_type__code']
     ordering_fields = ['created_at', 'title', 'task_type__order']
-    filterset_fields = ['status', 'task_type__code', 'parent']
+    filterset_fields = ['status', 'task_type__code', 'parent', 'priority', 'module', 'target_version']
 
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
-        task = serializer.save(owner=user)
+        task = serializer.save(owner=user, reporter=user)
         msg = self.request.data.get('initial_message')
         if msg:
             Message.objects.create(content=msg, author=user if user and user.is_authenticated else None, task=task)

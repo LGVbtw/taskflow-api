@@ -69,6 +69,17 @@ class Task(models.Model):
         - La représentation en chaîne contient le titre et le nom d'utilisateur
           du propriétaire si présent, sinon 'No Owner'.
     """
+    PRIORITY_LOW = "low"
+    PRIORITY_MEDIUM = "medium"
+    PRIORITY_HIGH = "high"
+    PRIORITY_URGENT = "urgent"
+    PRIORITY_CHOICES = [
+        (PRIORITY_LOW, "Basse"),
+        (PRIORITY_MEDIUM, "Moyenne"),
+        (PRIORITY_HIGH, "Haute"),
+        (PRIORITY_URGENT, "Urgente"),
+    ]
+
     title = models.CharField(max_length=200)
     status = models.CharField(
         max_length=20,
@@ -77,6 +88,13 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
+    reporter = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='reported_tasks',
+    )
     task_type = models.ForeignKey(
         TaskType,
         on_delete=models.PROTECT,
@@ -91,6 +109,16 @@ class Task(models.Model):
         blank=True,
         related_name='children',
     )
+    priority = models.CharField(
+        max_length=12,
+        choices=PRIORITY_CHOICES,
+        default=PRIORITY_MEDIUM,
+    )
+    target_version = models.CharField(max_length=50, blank=True)
+    module = models.CharField(max_length=50, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    due_date = models.DateField(null=True, blank=True)
+    progress = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         """Retourne une représentation compacte lisible de la Task.
@@ -107,6 +135,10 @@ class Task(models.Model):
             raise ValidationError({"parent": "Une tâche ne peut pas être son propre parent."})
         if self.parent and self._would_create_cycle(self.parent):
             raise ValidationError({"parent": "Cycle détecté dans la hiérarchie."})
+        if self.progress < 0 or self.progress > 100:
+            raise ValidationError({"progress": "La progression doit être comprise entre 0 et 100."})
+        if self.start_date and self.due_date and self.start_date > self.due_date:
+            raise ValidationError({"due_date": "La date de fin doit être postérieure à la date de début."})
     
     def _would_create_cycle(self, candidate_parent):
         current = candidate_parent

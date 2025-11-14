@@ -17,8 +17,14 @@ def convert_need(need: Need, user):
     - Marque le Need comme converti via mark_converted(user).
     - Retourne la Task créée.
     """
+    reporter = user if user and getattr(user, 'is_authenticated', False) else None
     with transaction.atomic():
-        task = Task.objects.create(title=need.title, status='A faire', owner=need.owner)
+        task = Task.objects.create(
+            title=need.title,
+            status='A faire',
+            owner=need.owner,
+            reporter=reporter,
+        )
         # marque le need comme converti
         need.mark_converted(user=user)
     return task

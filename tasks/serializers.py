@@ -15,6 +15,7 @@ class TaskSerializer(serializers.ModelSerializer):
     """Expose les tâches en incluant leur type fonctionnel et le parent éventuel."""
 
     owner = serializers.ReadOnlyField(source="owner.username")
+    reporter = serializers.ReadOnlyField(source="reporter.username")
     task_type_code = serializers.SlugRelatedField(
         source="task_type",
         slug_field="code",
@@ -22,6 +23,12 @@ class TaskSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True,
     )
+    priority = serializers.ChoiceField(
+        choices=Task.PRIORITY_CHOICES,
+        required=False,
+        default=Task.PRIORITY_MEDIUM,
+    )
+    progress = serializers.IntegerField(min_value=0, max_value=100, required=False)
     relations_out = serializers.SerializerMethodField()
     relations_in = serializers.SerializerMethodField()
     task_type_label = serializers.CharField(source="task_type.label", read_only=True)
@@ -39,13 +46,20 @@ class TaskSerializer(serializers.ModelSerializer):
             "status",
             "created_at",
             "owner",
+            "reporter",
             "task_type_code",
             "task_type_label",
             "parent",
+            "priority",
+            "target_version",
+            "module",
+            "start_date",
+            "due_date",
+            "progress",
             "relations_out",
             "relations_in",
         )
-        read_only_fields = ("created_at", "owner", "task_type_label")
+        read_only_fields = ("created_at", "owner", "reporter", "task_type_label")
 
     def validate_parent(self, value):
         instance = getattr(self, "instance", None)

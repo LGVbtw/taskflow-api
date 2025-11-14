@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-11-14T09:57:59.110648+00:00",
+  "generated_at": "2025-11-14T10:24:41.314791+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -10,11 +10,11 @@
   },
   "endpoints": {
     "/api/tasks/": {
-      "count": 187,
-      "avg_ms": 1.0,
-      "p90_ms": 1,
-      "p95_ms": 1,
-      "error_rate_percent": 0.535,
+      "count": 195,
+      "avg_ms": 0.0,
+      "p90_ms": 0,
+      "p95_ms": 0,
+      "error_rate_percent": 0.513,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
@@ -1050,7 +1050,7 @@
       }
     },
     "/api/tasks/1/": {
-      "count": 2,
+      "count": 4,
       "avg_ms": 3.0,
       "p90_ms": 3,
       "p95_ms": 3,
@@ -1066,10 +1066,10 @@
       }
     },
     "/api/tasks/2/": {
-      "count": 1,
-      "avg_ms": 3.0,
-      "p90_ms": 3,
-      "p95_ms": 3,
+      "count": 2,
+      "avg_ms": 5.0,
+      "p90_ms": 5,
+      "p95_ms": 5,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -1082,11 +1082,11 @@
       }
     },
     "/api/task-relations/": {
-      "count": 5,
-      "avg_ms": 250.0,
-      "p90_ms": 250,
-      "p95_ms": 250,
-      "error_rate_percent": 0.0,
+      "count": 8,
+      "avg_ms": 1.0,
+      "p90_ms": 1,
+      "p95_ms": 1,
+      "error_rate_percent": 12.5,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
