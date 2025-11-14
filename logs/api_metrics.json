@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-11-14T09:26:55.635478+00:00",
+  "generated_at": "2025-11-14T09:31:54.453596+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -90,10 +90,10 @@
       }
     },
     "/admin/tasks/task/": {
-      "count": 72,
-      "avg_ms": 39.0,
-      "p90_ms": 39,
-      "p95_ms": 39,
+      "count": 73,
+      "avg_ms": 115.0,
+      "p90_ms": 115,
+      "p95_ms": 115,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -106,10 +106,10 @@
       }
     },
     "/admin/jsi18n/": {
-      "count": 143,
-      "avg_ms": 5.0,
-      "p90_ms": 5,
-      "p95_ms": 5,
+      "count": 144,
+      "avg_ms": 10.0,
+      "p90_ms": 10,
+      "p95_ms": 10,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {

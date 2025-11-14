@@ -7,7 +7,9 @@ __pycache__/
 db.sqlite3
 
 # Fichiers de log
-*.log
+logs/
+logs/api_metrics.json
+logs/taskflow.log
 
 # Fichiers générés
 api_metrics.json
