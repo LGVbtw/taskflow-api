@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Taskflow | Appels d'offres</title>
+    <style>
+        :root {
+            --primary:#2c7fb8;
+            --accent:#f50087;
+            --border:#e1e7ef;
+            --bg:#f5f7fb;
+            --card:#ffffff;
+            --text:#1f2d3d;
+        }
+        * { box-sizing:border-box; }
+        body {
+            margin:0;
+            font-family:'Segoe UI',Arial,sans-serif;
+            background:var(--bg);
+            color:var(--text);
+        }
+        header {
+            background:var(--card);
+            border-bottom:1px solid var(--border);
+            padding:16px 32px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        header .brand {
+            font-size:1.25rem;
+            font-weight:600;
+            color:var(--primary);
+        }
+        header nav a {
+            margin-right:16px;
+            text-decoration:none;
+            color:var(--text);
+            font-weight:500;
+        }
+        header .cta {
+            background:var(--accent);
+            border:none;
+            color:#fff;
+            padding:10px 18px;
+            border-radius:6px;
+            font-weight:600;
+            cursor:pointer;
+        }
+        main {
+            max-width:1200px;
+            margin:24px auto 48px;
+            padding:0 24px;
+            display:grid;
+            grid-template-columns:310px 1fr;
+            gap:24px;
+        }
+        .filters-card {
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+            padding:20px;
+            position:sticky;
+            top:16px;
+            height:max-content;
+        }
+        .filters-card h2 {
+            margin-top:0;
+            font-size:1rem;
+            text-transform:uppercase;
+            letter-spacing:0.05em;
+            color:#6b778b;
+        }
+        .filter-group {
+            margin-bottom:18px;
+        }
+        .filter-group label {
+            font-size:0.85rem;
+            font-weight:600;
+            display:block;
+            margin-bottom:6px;
+        }
+        .filter-group input,
+        .filter-group select {
+            width:100%;
+            padding:8px 10px;
+            border-radius:6px;
+            border:1px solid var(--border);
+            font-size:0.95rem;
+        }
+        .filters-actions {
+            display:flex;
+            gap:8px;
+        }
+        .filters-actions button {
+            flex:1;
+            border:none;
+            padding:10px 0;
+            border-radius:6px;
+            font-weight:600;
+            cursor:pointer;
+        }
+        .btn-primary { background:var(--primary); color:#fff; }
+        .btn-secondary { background:#e6edf7; color:#2c3e50; }
+        .results-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:16px;
+        }
+        .results-header .results-actions {
+            display:flex;
+            gap:12px;
+            align-items:flex-end;
+        }
+        .results-header h1 {
+            margin:0;
+            font-size:1.125rem;
+        }
+        .json-export {
+            border:1px solid var(--primary);
+            background:#fff;
+            color:var(--primary);
+            border-radius:6px;
+            padding:8px 12px;
+            font-weight:600;
+            cursor:pointer;
+            height:38px;
+        }
+        .json-export:hover {
+            background:#eef6ff;
+        }
+        .tender-card {
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+            margin-bottom:16px;
+            box-shadow:0 1px 2px rgba(12,38,59,0.08);
+        }
+        .tender-card .card-header {
+            background:#1c8dd6;
+            color:#fff;
+            padding:12px 16px;
+            border-radius:10px 10px 0 0;
+            font-weight:600;
+        }
+        .tender-card .card-body {
+            padding:16px;
+        }
+        .metadata-row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:16px;
+            font-size:0.9rem;
+            color:#4a5668;
+        }
+        .metadata-row span {
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+        .metadata-row .dot {
+            width:6px;
+            height:6px;
+            border-radius:50%;
+            background:#4a5668;
+        }
+        .deadline {
+            color:#d7263d;
+            font-weight:600;
+        }
+        .actions-row {
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:16px;
+        }
+        .actions-row a {
+            flex:1 1 120px;
+            border:1px solid var(--border);
+            border-radius:6px;
+            text-align:center;
+            padding:8px 0;
+            text-decoration:none;
+            color:var(--primary);
+            font-weight:600;
+            font-size:0.9rem;
+            transition:background .2s ease;
+        }
+        .actions-row a:hover {
+            background:#eef6ff;
+        }
+        .actions-row a.disabled {
+            opacity:0.4;
+            pointer-events:none;
+        }
+        .actions-row .empty-links {
+            color:#5f6b7c;
+            font-size:0.9rem;
+        }
+        .buyer-link {
+            margin-top:12px;
+            text-align:right;
+        }
+        .buyer-link a {
+            color:var(--accent);
+            font-weight:600;
+            text-decoration:none;
+        }
+        .buyer-link a.disabled {
+            opacity:0.4;
+            pointer-events:none;
+        }
+        .pagination {
+            display:flex;
+            justify-content:flex-end;
+            gap:10px;
+            margin-top:16px;
+        }
+        .pagination button {
+            border:1px solid var(--border);
+            background:#fff;
+            padding:6px 14px;
+            border-radius:6px;
+            cursor:pointer;
+            font-weight:600;
+        }
+        .empty-state {
+            background:var(--card);
+            border-radius:8px;
+            padding:24px;
+            border:1px dashed var(--border);
+            text-align:center;
+            color:#6b778b;
+        }
+        @media (max-width:992px) {
+            main { grid-template-columns:1fr; }
+            .filters-card { position:static; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">Taskflow Marchés publics</div>
+        <nav>
+            <a href="/admin/" target="_blank" rel="noopener">Admin</a>
+            <a href="/api/tasks/kanban/" target="_blank" rel="noopener">Kanban</a>
+            <a href="/api/tasks/gantt/" target="_blank" rel="noopener">Gantt</a>
+        </nav>
+        <button class="cta" onclick="window.open('/admin/', '_blank')">Connexion</button>
+    </header>
+    <main>
+        <section class="filters-card">
+            <h2>Votre recherche</h2>
+            <div class="filter-group">
+                <label for="keyword">Mots clés</label>
+                <input id="keyword" type="search" placeholder="Ex : Plomberie, parking..." />
+            </div>
+            <div class="filter-group">
+                <label for="categoryFilter">Type d'avis</label>
+                <select id="categoryFilter">
+                    <option value="">Appel d'offres (tous)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="procedureFilter">Procédures</label>
+                <select id="procedureFilter">
+                    <option value="">Toutes</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="regionFilter">Zone géographique</label>
+                <select id="regionFilter">
+                    <option value="">Toutes</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="departmentFilter">Départements</label>
+                <select id="departmentFilter">
+                    <option value="">Tous</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="deadline">Date limite de réponse (avant)</label>
+                <input id="deadline" type="date" />
+            </div>
+            <div class="filters-actions">
+                <button class="btn-secondary" id="resetFilters">Réinitialiser</button>
+                <button class="btn-primary" id="applyFilters">Appliquer</button>
+            </div>
+        </section>
+        <section>
+            <div class="results-header">
+                <div>
+                    <h1><span id="tenderCount">0</span> Appels d'offres</h1>
+                    <small id="activeFilters"></small>
+                </div>
+                <div class="results-actions">
+                    <div>
+                        <label for="ordering" style="font-size:0.85rem;font-weight:600;">Tri</label>
+                        <select id="ordering">
+                            <option value="-deadline_at">Date limite la plus proche</option>
+                            <option value="deadline_at">Date limite la plus lointaine</option>
+                            <option value="-scraped_at">Nouveaux avis</option>
+                            <option value="scraped_at">Plus anciens</option>
+                        </select>
+                    </div>
+                    <button type="button" id="jsonExport" class="json-export">Exporter JSON</button>
+                </div>
+            </div>
+            <div id="cards"></div>
+            <div class="pagination" id="pagination" hidden>
+                <button id="prevPage">&laquo; Précédent</button>
+                <button id="nextPage">Suivant &raquo;</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const state = {
+            page: 1,
+            search: '',
+            category: '',
+            procedure: '',
+            region: '',
+            department: '',
+            deadline: '',
+            ordering: '-deadline_at'
+        };
+
+        const els = {
+            keyword: document.getElementById('keyword'),
+            category: document.getElementById('categoryFilter'),
+            procedure: document.getElementById('procedureFilter'),
+            region: document.getElementById('regionFilter'),
+            department: document.getElementById('departmentFilter'),
+            deadline: document.getElementById('deadline'),
+            ordering: document.getElementById('ordering'),
+            count: document.getElementById('tenderCount'),
+            cards: document.getElementById('cards'),
+            pagination: document.getElementById('pagination'),
+            prevPage: document.getElementById('prevPage'),
+            nextPage: document.getElementById('nextPage'),
+            activeFilters: document.getElementById('activeFilters'),
+            jsonExport: document.getElementById('jsonExport')
+        };
+
+        const endpoints = {
+            filters: '/api/tenders/filters/',
+            list: '/api/tenders/'
+        };
+
+        function buildQuery() {
+            const params = new URLSearchParams();
+            params.set('page', state.page);
+            params.set('ordering', state.ordering);
+            if (state.search) params.set('search', state.search);
+            if (state.category) params.set('category', state.category);
+            if (state.procedure) params.set('procedure', state.procedure);
+            if (state.region) params.set('region', state.region);
+            if (state.department) params.set('department', state.department);
+            if (state.deadline) params.set('deadline_at__lte', state.deadline);
+            return params.toString();
+        }
+
+        function highlight(text, keyword) {
+            if (!keyword) return text;
+            try {
+                const safe = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`(${safe})`, 'ig');
+                return text.replace(regex, '<mark>$1</mark>');
+            } catch (err) {
+                return text;
+            }
+        }
+
+        function formatDate(value) {
+            if (!value) return 'Non définie';
+            try {
+                return new Date(value).toLocaleString('fr-FR', {
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit'
+                });
+            } catch (err) {
+                return value;
+            }
+        }
+
+        function renderCards(payload) {
+            if (!payload.results.length) {
+                els.cards.innerHTML = '<div class="empty-state">Aucun appel d\'offres ne correspond à vos filtres.</div>';
+                els.pagination.hidden = true;
+                return;
+            }
+            const keyword = state.search.trim();
+            els.cards.innerHTML = payload.results.map(tender => {
+                const title = highlight(tender.title || '', keyword);
+                const buyer = tender.buyer_name || 'Acheteur non renseigné';
+                const location = tender.buyer_location || 'Localisation non renseignée';
+                const category = tender.category || 'Type non communiqué';
+                const procedure = tender.procedure || 'Procédure inconnue';
+                const deadline = formatDate(tender.deadline_at);
+                const linkMap = tender.notice_links || {};
+                const actionButtons = Object.entries(linkMap).length
+                    ? Object.entries(linkMap).map(([label, href]) => {
+                        const safeHref = href || '#';
+                        const disabled = !href;
+                        return `<a ${disabled ? 'class="disabled"' : ''} href="${safeHref}" target="_blank" rel="noopener">${label}</a>`;
+                    }).join('')
+                    : '<span class="empty-links">Aucun document disponible</span>';
+                const buyerSite = tender.buyer_site_url || '';
+                const buyerLinkClass = buyerSite ? '' : 'class="disabled"';
+                const buyerHref = buyerSite || '#';
+                return `
+                    <article class="tender-card">
+                        <div class="card-header">${title}</div>
+                        <div class="card-body">
+                            <div class="metadata-row">
+                                <span><strong>${buyer}</strong></span>
+                                <span class="dot"></span>
+                                <span>${location}</span>
+                                <span class="dot"></span>
+                                <span>${category}</span>
+                                <span class="dot"></span>
+                                <span>${procedure}</span>
+                                <span class="dot"></span>
+                                <span class="deadline">Date limite : ${deadline}</span>
+                            </div>
+                            <div class="actions-row">${actionButtons}</div>
+                            <div class="buyer-link">
+                                <a ${buyerLinkClass} href="${buyerHref}" target="_blank" rel="noopener">Accéder au site acheteur</a>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+            els.pagination.hidden = payload.count <= payload.results.length;
+        }
+
+        async function loadTenders(page = 1) {
+            state.page = page;
+            const query = buildQuery();
+            els.cards.innerHTML = '<div class="tender-card"><div class="card-body">Chargement...</div></div>';
+            try {
+                const res = await fetch(`${endpoints.list}?${query}`);
+                if (!res.ok) throw new Error('Erreur API');
+                const data = await res.json();
+                els.count.textContent = data.count || 0;
+                renderCards(data);
+                els.prevPage.disabled = !data.previous;
+                els.nextPage.disabled = !data.next;
+                els.pagination.hidden = !(data.previous || data.next);
+                els.activeFilters.textContent = buildFilterSummary();
+            } catch (err) {
+                els.cards.innerHTML = `<div class="empty-state">Impossible de charger les appels d'offres (${err.message}).</div>`;
+                els.pagination.hidden = true;
+            }
+        }
+
+        function buildFilterSummary() {
+            const parts = [];
+            if (state.search) parts.push(`Mot-clé: "${state.search}"`);
+            if (state.category) parts.push(`Type: ${els.category.options[els.category.selectedIndex].text}`);
+            if (state.procedure) parts.push(`Procédure: ${els.procedure.options[els.procedure.selectedIndex].text}`);
+            if (state.region) parts.push(`Région: ${els.region.options[els.region.selectedIndex].text}`);
+            if (state.department) parts.push(`Département: ${els.department.options[els.department.selectedIndex].text}`);
+            if (state.deadline) parts.push(`Avant ${new Date(state.deadline).toLocaleDateString('fr-FR')}`);
+            return parts.length ? parts.join(' • ') : 'Aucun filtre appliqué';
+        }
+
+        async function loadFilters() {
+            try {
+                const res = await fetch(endpoints.filters);
+                if (!res.ok) throw new Error('Erreur lors du chargement des filtres');
+                const data = await res.json();
+                populateSelect(els.category, data.categories, { placeholder: "Type d'avis (tous)" });
+                populateSelect(els.procedure, data.procedures, { placeholder:'Toutes les procédures' });
+                populateRegions(data.regions);
+                populateDepartments(data.departments);
+                if (data.deadline_range && data.deadline_range.max) {
+                    els.deadline.max = data.deadline_range.max.split('T')[0];
+                }
+                if (data.deadline_range && data.deadline_range.min) {
+                    els.deadline.min = data.deadline_range.min.split('T')[0];
+                }
+                els.activeFilters.textContent = buildFilterSummary();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function populateSelect(select, values, { placeholder, valueKey, labelKey, formatLabel } = {}) {
+            const current = select.value;
+            select.innerHTML = '';
+            if (placeholder !== undefined) {
+                const opt = document.createElement('option');
+                opt.value = '';
+                opt.textContent = placeholder;
+                select.appendChild(opt);
+            }
+            (values || []).forEach(value => {
+                const opt = document.createElement('option');
+                if (typeof value === 'string') {
+                    opt.value = value;
+                    opt.textContent = formatLabel ? formatLabel(value) : value;
+                } else {
+                    opt.value = value[valueKey || 'value'] ?? value.code ?? value.id;
+                    const label = value[labelKey || 'label'] ?? value.name ?? value.code;
+                    opt.textContent = formatLabel ? formatLabel(value) : label;
+                }
+                select.appendChild(opt);
+            });
+            select.value = current;
+        }
+
+        function populateRegions(regions) {
+            populateSelect(els.region, regions, {
+                placeholder: 'Toutes les zones',
+                valueKey: 'label',
+                formatLabel: (item) => `${item.label} (${item.count})`
+            });
+        }
+
+        function populateDepartments(departments) {
+            populateSelect(els.department, departments, {
+                placeholder: 'Tous les départements',
+                valueKey: 'label',
+                formatLabel: (item) => `${item.label} (${item.count})`
+            });
+        }
+
+        function bindEvents() {
+            document.getElementById('applyFilters').addEventListener('click', () => {
+                state.search = els.keyword.value.trim();
+                state.category = els.category.value;
+                state.procedure = els.procedure.value;
+                state.region = els.region.value;
+                state.department = els.department.value;
+                state.deadline = els.deadline.value;
+                loadTenders(1);
+            });
+            document.getElementById('resetFilters').addEventListener('click', () => {
+                els.keyword.value = '';
+                els.category.value = '';
+                els.procedure.value = '';
+                els.region.value = '';
+                els.department.value = '';
+                els.deadline.value = '';
+                state.search = '';
+                state.category = '';
+                state.procedure = '';
+                state.region = '';
+                state.department = '';
+                state.deadline = '';
+                loadTenders(1);
+            });
+            els.ordering.addEventListener('change', () => {
+                state.ordering = els.ordering.value;
+                loadTenders(1);
+            });
+            if (els.jsonExport) {
+                els.jsonExport.addEventListener('click', () => {
+                    const query = buildQuery();
+                    window.open(`${endpoints.list}?${query}&format=json`, '_blank');
+                });
+            }
+            els.prevPage.addEventListener('click', () => {
+                if (state.page > 1) {
+                    loadTenders(state.page - 1);
+                }
+            });
+            els.nextPage.addEventListener('click', () => {
+                loadTenders(state.page + 1);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            bindEvents();
+            await loadFilters();
+            loadTenders();
+        });
+    </script>
+</body>
+</html>

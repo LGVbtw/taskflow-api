@@ -4,3 +4,5 @@ django-filter>=24.2
 pytest>=8.0
 pytest-django>=4.8
 django-extensions>=3.2
+beautifulsoup4>=4.12
+lxml>=4.9

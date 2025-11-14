@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_extensions',
     'tasks',
+    'tenders',
 ]
 
 MIDDLEWARE = [

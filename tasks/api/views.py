@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from tasks.models import Task, Need, Message, TaskRelation, Project, Attachment
+from tasks.models import Task, Need, Message, TaskRelation, Project, Attachment, TaskType
 from tasks.serializers import (
     TaskSerializer as TaskSerializer_api_import,
     NeedSerializer as NeedSerializer_api_import,
@@ -32,7 +32,16 @@ class TaskViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ['title', 'status', 'task_type__label', 'task_type__code']
     ordering_fields = ['created_at', 'title', 'task_type__order']
-    filterset_fields = ['status', 'task_type__code', 'parent', 'priority', 'module', 'target_version', 'project']
+    filterset_fields = {
+        'status': ['exact'],
+        'task_type__code': ['exact'],
+        'parent': ['exact'],
+        'priority': ['exact'],
+        'module': ['exact'],
+        'target_version': ['exact'],
+        'project': ['exact'],
+        'due_date': ['exact', 'gte', 'lte'],
+    }
 
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
@@ -68,6 +77,23 @@ class TaskViewSet(viewsets.ModelViewSet):
         attachment.save()
         serializer = AttachmentSerializer(attachment, context={'request': request})
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=['get'], url_path='children', url_name='children')
+    def children(self, request, pk=None):
+        task = self.get_object()
+        children_qs = task.children.all().order_by('created_at')
+        serializer = TaskSerializer(children_qs, many=True, context={'request': request})
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post'], url_path='link', url_name='link')
+    def link(self, request, pk=None):
+        task = self.get_object()
+        payload = request.data.copy()
+        payload['src_task'] = task.id
+        serializer = TaskRelationSerializer(data=payload)
+        serializer.is_valid(raise_exception=True)
+        relation = serializer.save()
+        return Response(TaskRelationSerializer(relation).data, status=status.HTTP_201_CREATED)
 
 
 class NeedViewSet(viewsets.ModelViewSet):
@@ -224,3 +250,42 @@ class GanttView(APIView):
             })
 
         return Response({"projects": data})
+
+
+class TaskFilterMetadataView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        task_types = [
+            {
+                "code": tt.code,
+                "label": tt.label,
+            }
+            for tt in TaskType.objects.order_by('order', 'label')
+        ]
+        modules = list(
+            Task.objects.exclude(module='')
+            .order_by('module')
+            .values_list('module', flat=True)
+            .distinct()
+        )
+        statuses = list(
+            Task.objects.order_by('status')
+            .values_list('status', flat=True)
+            .distinct()
+        )
+        priorities = [
+            {"value": choice[0], "label": choice[1]}
+            for choice in Task.PRIORITY_CHOICES
+        ]
+        projects = [
+            {"id": project.id, "name": project.name}
+            for project in Project.objects.order_by('name')
+        ]
+        return Response({
+            "task_types": task_types,
+            "modules": modules,
+            "statuses": statuses,
+            "priorities": priorities,
+            "projects": projects,
+        })
