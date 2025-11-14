@@ -100,6 +100,26 @@ class Task(models.Model):
         """
         task_type_code = self.task_type.code if self.task_type else "no-type"
         return f"{self.title} [{task_type_code}] - {self.owner.username if self.owner else 'No Owner'}"
+    
+    def clean(self):
+        super().clean()
+        if self.parent_id and self.parent_id == self.id:
+            raise ValidationError({"parent": "Une tâche ne peut pas être son propre parent."})
+        if self.parent and self._would_create_cycle(self.parent):
+            raise ValidationError({"parent": "Cycle détecté dans la hiérarchie."})
+    
+    def _would_create_cycle(self, candidate_parent):
+        current = candidate_parent
+        # remonte les parents jusqu'à la racine
+        while current:
+            if current.pk == self.pk:
+                return True
+            current = current.parent
+        return False
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        return super().save(*args, **kwargs)
 
 
 class Need(models.Model):

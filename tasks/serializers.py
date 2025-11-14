@@ -5,6 +5,7 @@ Ce module expose les sérialiseurs utilisés par l'API pour convertir les
 instances du modèle Task vers/depuis des représentations JSON.
 """
 
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from .models import Task, TaskType
 from .models import Need
@@ -44,8 +45,16 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def validate_parent(self, value):
         instance = getattr(self, "instance", None)
-        if value and instance and value.pk == instance.pk:
-            raise serializers.ValidationError("Une tâche ne peut pas être son propre parent.")
+        if not value:
+            return value
+
+        target = instance or Task()
+        # simuler l'assignation du parent pour réutiliser la validation modèle
+        target.parent = value
+        try:
+            target.clean()
+        except ValidationError as exc:  # type: ignore[name-defined]
+            raise serializers.ValidationError(exc.message_dict.get("parent", exc.messages))
         return value
 
     def _ensure_task_type(self, validated_data):

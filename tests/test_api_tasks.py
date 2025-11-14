@@ -105,3 +105,39 @@ def test_create_task_with_unknown_type_fails():
 
 	assert response.status_code == 400
 	assert "task_type_code" in response.json()
+
+
+@pytest.mark.django_db
+def test_update_parent_rejects_cycle():
+	client = APIClient()
+	type_task = TaskType.objects.get(code="task")
+	root = Task.objects.create(title="Root", status="A faire", task_type=type_task)
+	child = Task.objects.create(title="Child", status="A faire", task_type=type_task, parent=root)
+	grandchild = Task.objects.create(title="Grand", status="A faire", task_type=type_task, parent=child)
+
+	response = client.patch(
+		reverse("task-detail", args=[root.id]),
+		{"parent": grandchild.id},
+		format="json",
+	)
+
+	assert response.status_code == 400
+	assert "parent" in response.json()
+
+
+@pytest.mark.django_db
+def test_update_parent_allows_valid_move():
+	client = APIClient()
+	type_task = TaskType.objects.get(code="task")
+	root = Task.objects.create(title="Root", status="A faire", task_type=type_task)
+	child = Task.objects.create(title="Child", status="A faire", task_type=type_task)
+
+	response = client.patch(
+		reverse("task-detail", args=[child.id]),
+		{"parent": root.id},
+		format="json",
+	)
+
+	assert response.status_code == 200
+	child.refresh_from_db()
+	assert child.parent == root
