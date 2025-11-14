@@ -1,0 +1,17 @@
+# Fichiers Python compilés
+*.pyc
+__pycache__/
+
+# Base de données
+*.sqlite3
+db.sqlite3
+
+# Fichiers de log
+logs/
+logs/api_metrics.json
+logs/taskflow.log
+
+# Fichiers générés
+api_metrics.json
+
+.backups
