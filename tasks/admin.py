@@ -6,6 +6,7 @@ from django.utils.html import format_html
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.urls import reverse
+from django import forms
 import logging
 import os
 import json
@@ -30,6 +31,16 @@ class TaskAdmin(admin.ModelAdmin):
         """Affiche un bouton 'Modifier' qui redirige vers la page de modification admin."""
         url = reverse('admin:tasks_task_change', args=[obj.pk])
         return format_html('<a class="button" href="{}">Modifier</a>', url)
+
+    # Utiliser un ModelForm personnalisé pour exposer un champ non-model 'initial_message'
+    class TaskAdminForm(forms.ModelForm):
+        initial_message = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows':3}), help_text='Message initial associé à la tâche (optionnel)')
+
+        class Meta:
+            model = Task
+            fields = '__all__'
+
+    form = TaskAdminForm
 
     edit_action.short_description = 'Modifier'
 
@@ -81,9 +92,23 @@ class TaskAdmin(admin.ModelAdmin):
         else:
             # création
             super().save_model(request, obj, form, change)
-            user = request.user.username if request.user and request.user.is_authenticated else 'anonymous'
+            user_name = request.user.username if request.user and request.user.is_authenticated else 'anonymous'
+            user_obj = request.user if request.user and request.user.is_authenticated else None
             logger = logging.getLogger(__name__)
-            logger.info(f"[admin-create] user={user} task_id={obj.pk} title={obj.title}")
+            logger.info(f"[admin-create] user={user_name} task_id={obj.pk} title={obj.title}")
+            # Si un message initial a été fourni via le ModelForm, le créer proprement
+            try:
+                initial_msg = None
+                if hasattr(form, 'cleaned_data'):
+                    initial_msg = form.cleaned_data.get('initial_message')
+                # fallback to POST if necessary
+                if not initial_msg:
+                    initial_msg = request.POST.get('initial_message')
+                if initial_msg:
+                    from .models import Message
+                    Message.objects.create(content=initial_msg, author=user_obj, task=obj)
+            except Exception:
+                logger.exception('Erreur lors de la création du message initial en admin')
 
     # --- Commit management ---
     def get_urls(self):
