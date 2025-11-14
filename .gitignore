@@ -11,3 +11,5 @@ db.sqlite3
 
 # Fichiers générés
 api_metrics.json
+
+.backups

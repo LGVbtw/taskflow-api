@@ -994,3 +994,28 @@ django.core.exceptions.ImproperlyConfigured: Field name `description` is not val
 [2025-11-14 09:15:56,277] [INFO] [metrics] timestamp:2025-11-14T08:15:56.277445+00:00 method:GET path:/admin/login/?next=/admin/ user:Anonymous status:200 duration_ms:103
 [2025-11-14 09:16:02,390] [INFO] [metrics] timestamp:2025-11-14T08:16:02.390332+00:00 method:POST path:/admin/login/?next=/admin/ user:Anonymous status:302 duration_ms:771
 [2025-11-14 09:16:02,489] [INFO] [metrics] timestamp:2025-11-14T08:16:02.489292+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:54
+[2025-11-14 10:05:46,204] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:05:50,751] [INFO] [metrics] timestamp:2025-11-14T09:05:50.751166+00:00 method:GET path:/admin/ user:Anonymous status:200 duration_ms:73
+[2025-11-14 10:05:53,956] [INFO] [metrics] timestamp:2025-11-14T09:05:53.956124+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:232
+[2025-11-14 10:05:54,358] [INFO] [metrics] timestamp:2025-11-14T09:05:54.357983+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:40
+[2025-11-14 10:06:00,775] [INFO] [metrics] timestamp:2025-11-14T09:06:00.775457+00:00 method:GET path:/admin/tasks/task/add/ user:Anonymous status:200 duration_ms:171
+[2025-11-14 10:06:00,880] [INFO] [metrics] timestamp:2025-11-14T09:06:00.880133+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-11-14 10:08:24,130] [INFO] [metrics] timestamp:2025-11-14T09:08:24.130162+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:45
+[2025-11-14 10:08:24,226] [INFO] [metrics] timestamp:2025-11-14T09:08:24.226477+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-11-14 10:08:35,620] [INFO] [metrics] timestamp:2025-11-14T09:08:35.620607+00:00 method:GET path:/admin/tasks/task/?o=5 user:Anonymous status:200 duration_ms:38
+[2025-11-14 10:08:35,694] [INFO] [metrics] timestamp:2025-11-14T09:08:35.694877+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-11-14 10:08:37,070] [INFO] [metrics] timestamp:2025-11-14T09:08:37.070658+00:00 method:GET path:/admin/tasks/task/?o=-5 user:Anonymous status:200 duration_ms:65
+[2025-11-14 10:08:37,143] [INFO] [metrics] timestamp:2025-11-14T09:08:37.143355+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:5
+[2025-11-14 10:08:38,062] [INFO] [metrics] timestamp:2025-11-14T09:08:38.062902+00:00 method:GET path:/admin/tasks/task/?o=1.-5 user:Anonymous status:200 duration_ms:41
+[2025-11-14 10:08:38,137] [INFO] [metrics] timestamp:2025-11-14T09:08:38.137316+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:8
+[2025-11-14 10:08:42,774] [INFO] [metrics] timestamp:2025-11-14T09:08:42.774382+00:00 method:GET path:/admin/tasks/need/ user:Anonymous status:200 duration_ms:20
+[2025-11-14 10:08:42,847] [INFO] [metrics] timestamp:2025-11-14T09:08:42.847865+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-11-14 10:08:44,444] [INFO] [metrics] timestamp:2025-11-14T09:08:44.444804+00:00 method:GET path:/admin/tasks/message/ user:Anonymous status:200 duration_ms:20
+[2025-11-14 10:08:44,513] [INFO] [metrics] timestamp:2025-11-14T09:08:44.513404+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-11-14 10:08:46,124] [INFO] [metrics] timestamp:2025-11-14T09:08:46.124339+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:39
+[2025-11-14 10:08:46,229] [INFO] [metrics] timestamp:2025-11-14T09:08:46.229819+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:34
+[2025-11-14 10:08:51,159] [INFO] [metrics] timestamp:2025-11-14T09:08:51.159111+00:00 method:POST path:/admin/tasks/task/ user:Anonymous status:302 duration_ms:6
+[2025-11-14 10:08:51,249] [INFO] [metrics] timestamp:2025-11-14T09:08:51.249227+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:63
+[2025-11-14 10:08:51,310] [INFO] [metrics] timestamp:2025-11-14T09:08:51.310363+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:6
+[2025-11-14 10:13:11,557] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\migrations\0011_tasktype_hierarchy.py changed, reloading.
+[2025-11-14 10:13:12,744] [INFO] Watching for file changes with StatReloader

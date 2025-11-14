@@ -29,6 +29,29 @@ def validate_status(value):
         raise ValidationError(f'Statut invalide, veuillez choisir : "A faire", "En cours", "Fait"')
 
 
+class TaskType(models.Model):
+    """Type fonctionnel de tâche (Epic, User Story, etc.)."""
+
+    code = models.CharField(max_length=32, unique=True)
+    label = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return f"{self.label} ({self.code})"
+
+    @classmethod
+    def get_default(cls):
+        obj, _ = cls.objects.get_or_create(
+            code="task",
+            defaults={"label": "Tâche", "order": 40},
+        )
+        return obj
+
+
 class Task(models.Model):
     """Modèle Task simple.
 
@@ -36,8 +59,10 @@ class Task(models.Model):
         - title (str) : Titre de la tâche (max 200 caractères).
         - status (str) : Statut lisible par l'humain ; validé par `validate_status`.
         - created_at (datetime) : Horodatage automatique de création.
-        - owner (User|None) : FK optionnelle vers le modèle User de Django. Si
-          l'utilisateur est supprimé, le champ est mis à NULL (on_delete=SET_NULL).
+                - owner (User|None) : FK optionnelle vers le modèle User de Django. Si
+                    l'utilisateur est supprimé, le champ est mis à NULL (on_delete=SET_NULL).
+                - task_type : FK vers `TaskType` décrivant la nature du travail.
+                - parent : lien optionnel vers une autre Task (sous-tâches).
 
     Comportement :
         - Le statut par défaut est "A faire".
@@ -52,6 +77,20 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
+    task_type = models.ForeignKey(
+        TaskType,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="tasks",
+    )
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='children',
+    )
 
     def __str__(self):
         """Retourne une représentation compacte lisible de la Task.
@@ -59,7 +98,8 @@ class Task(models.Model):
         Exemple : "Acheter du lait - alice" ou "Acheter du lait - No Owner" si
         le propriétaire est absent.
         """
-        return f"{self.title} - {self.owner.username if self.owner else 'No Owner'}"
+        task_type_code = self.task_type.code if self.task_type else "no-type"
+        return f"{self.title} [{task_type_code}] - {self.owner.username if self.owner else 'No Owner'}"
 
 
 class Need(models.Model):

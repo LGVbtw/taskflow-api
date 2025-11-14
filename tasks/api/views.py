@@ -23,9 +23,9 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all().order_by('-id')
     serializer_class = TaskSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
-    search_fields = ['title', 'status']
-    ordering_fields = ['created_at', 'title']
-    filterset_fields = ['status']
+    search_fields = ['title', 'status', 'task_type__label', 'task_type__code']
+    ordering_fields = ['created_at', 'title', 'task_type__order']
+    filterset_fields = ['status', 'task_type__code', 'parent']
 
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None

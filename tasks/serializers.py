@@ -6,29 +6,60 @@ instances du modèle Task vers/depuis des représentations JSON.
 """
 
 from rest_framework import serializers
-from .models import Task
+from .models import Task, TaskType
 from .models import Need
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    """Sérialiseur pour le modèle Task.
+    """Expose les tâches en incluant leur type fonctionnel et le parent éventuel."""
 
-    Représentation (champs) :
-        - id : clé primaire entière (auto-générée par Django).
-        - title : titre de la tâche (chaîne).
-        - status : statut (une des valeurs "A faire", "En cours", "Fait").
-        - created_at : date/heure ISO de création.
-        - owner : nom d'utilisateur du propriétaire (read-only) ou null.
-
-    Remarques :
-        - Le champ `owner` est en lecture seule et provient de `owner.username`.
-        - La validation du champ `status` est effectuée par le modèle Task.
-    """
     owner = serializers.ReadOnlyField(source="owner.username")
+    task_type_code = serializers.SlugRelatedField(
+        source="task_type",
+        slug_field="code",
+        queryset=TaskType.objects.all(),
+        required=False,
+        allow_null=True,
+    )
+    task_type_label = serializers.CharField(source="task_type.label", read_only=True)
+    parent = serializers.PrimaryKeyRelatedField(
+        queryset=Task.objects.all(),
+        required=False,
+        allow_null=True,
+    )
 
     class Meta:
         model = Task
-        fields = "__all__"
+        fields = (
+            "id",
+            "title",
+            "status",
+            "created_at",
+            "owner",
+            "task_type_code",
+            "task_type_label",
+            "parent",
+        )
+        read_only_fields = ("created_at", "owner", "task_type_label")
+
+    def validate_parent(self, value):
+        instance = getattr(self, "instance", None)
+        if value and instance and value.pk == instance.pk:
+            raise serializers.ValidationError("Une tâche ne peut pas être son propre parent.")
+        return value
+
+    def _ensure_task_type(self, validated_data):
+        if validated_data.get("task_type") is None:
+            validated_data["task_type"] = TaskType.get_default()
+        return validated_data
+
+    def create(self, validated_data):
+        validated_data = self._ensure_task_type(validated_data)
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        validated_data = self._ensure_task_type(validated_data)
+        return super().update(instance, validated_data)
 
 
 class NeedSerializer(serializers.ModelSerializer):
@@ -78,12 +109,8 @@ from tasks.models import Task as _Task_api, Need as _Need_api, Message as _Messa
 from rest_framework import serializers as _serializers_api
 
 
-class TaskSerializer_api(_serializers_api.ModelSerializer):
-    owner = _serializers_api.ReadOnlyField(source='owner.username')
-
-    class Meta:
-        model = _Task_api
-        fields = ('id', 'title', 'status', 'created_at', 'owner')
+class TaskSerializer_api(TaskSerializer):
+    pass
 
 
 class NeedSerializer_api(_serializers_api.ModelSerializer):
