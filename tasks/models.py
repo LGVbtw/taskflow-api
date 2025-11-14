@@ -52,6 +52,20 @@ class TaskType(models.Model):
         return obj
 
 
+class Project(models.Model):
+    """Projet regroupant plusieurs tâches."""
+
+    name = models.CharField(max_length=150, unique=True)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["name", "id"]
+
+    def __str__(self):
+        return self.name
+
+
 class Task(models.Model):
     """Modèle Task simple.
 
@@ -108,6 +122,13 @@ class Task(models.Model):
         null=True,
         blank=True,
         related_name='children',
+    )
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='tasks',
     )
     priority = models.CharField(
         max_length=12,

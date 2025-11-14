@@ -49,7 +49,15 @@ class TaskViewSet(ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ["title", "status", "task_type__label", "task_type__code"]
     ordering_fields = ["created_at", "title", "task_type__order"]
-    filterset_fields = ["status", "task_type__code", "parent", "priority", "module", "target_version"]
+    filterset_fields = [
+        "status",
+        "task_type__code",
+        "parent",
+        "priority",
+        "module",
+        "target_version",
+        "project",
+    ]
 
     def perform_create(self, serializer):
         """Assigne le propriétaire authentifié lors de la création d'une Task.

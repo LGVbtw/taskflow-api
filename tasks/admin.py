@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task, Need
+from .models import Task, Need, Project
 from .models import Message
 from django.urls import path
 from django.utils.html import format_html
@@ -192,67 +192,65 @@ class TaskAdmin(admin.ModelAdmin):
 
 @admin.register(Need)
 class NeedAdmin(admin.ModelAdmin):
-        """Admin simple pour les besoins (Need).
+    """Admin simple pour les besoins (Need)."""
 
-        - Affiche id, title, owner, converted et created_at.
-        - La suppression dans l'admin reste possible mais la politique applicative
-            est que seuls les admins peuvent supprimer ; django admin affiche la
-            possibilité si l'utilisateur a les permissions.
-        """
-        list_display = ('id', 'title', 'owner', 'converted', 'created_at')
-        search_fields = ('id', 'title', 'owner__username')
-        list_filter = ('converted',)
+    list_display = ('id', 'title', 'owner', 'converted', 'created_at')
+    search_fields = ('id', 'title', 'owner__username')
+    list_filter = ('converted',)
+    actions = ['convert_selected']
 
-        actions = ['convert_selected']
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('convert/<int:need_id>/', self.admin_site.admin_view(self.convert_view), name='tasks_need_convert'),
+        ]
+        return custom_urls + urls
 
-        def get_urls(self):
-            urls = super().get_urls()
-            custom_urls = [
-                path('convert/<int:need_id>/', self.admin_site.admin_view(self.convert_view), name='tasks_need_convert'),
-            ]
-            return custom_urls + urls
-
-        def convert_view(self, request, need_id):
-            """Vue admin qui convertit un Need en Task et redirige vers la liste."""
-            if not request.user.is_staff:
-                messages.error(request, "Permission refusée: seuls les administrateurs peuvent convertir des besoins.")
-                return redirect(reverse('admin:tasks_need_changelist'))
-
-            try:
-                need = Need.objects.get(pk=need_id)
-            except Need.DoesNotExist:
-                messages.error(request, "Le besoin demandé n'existe pas.")
-                return redirect(reverse('admin:tasks_need_changelist'))
-
-            if need.converted:
-                messages.info(request, "Ce besoin a déjà été converti.")
-                return redirect(reverse('admin:tasks_need_changelist'))
-
-            # Déléguer la conversion au service
-            task = convert_need(need, request.user)
-            messages.success(request, f"Besoin '{need.title}' converti en tâche (id={task.id}).")
+    def convert_view(self, request, need_id):
+        """Vue admin qui convertit un Need en Task et redirige vers la liste."""
+        if not request.user.is_staff:
+            messages.error(request, "Permission refusée: seuls les administrateurs peuvent convertir des besoins.")
             return redirect(reverse('admin:tasks_need_changelist'))
 
-        def convert_action(self, obj):
-            """Affiche un bouton 'Convertir' dans la colonne de la liste."""
-            if obj.converted:
-                return format_html('<span style="color: #666;">Converti</span>')
-            url = reverse('admin:tasks_need_convert', args=[obj.pk])
-            return format_html('<a class="button" href="{}">Convertir</a>', url)
+        try:
+            need = Need.objects.get(pk=need_id)
+        except Need.DoesNotExist:
+            messages.error(request, "Le besoin demandé n'existe pas.")
+            return redirect(reverse('admin:tasks_need_changelist'))
 
-        convert_action.short_description = 'Action'
+        if need.converted:
+            messages.info(request, "Ce besoin a déjà été converti.")
+            return redirect(reverse('admin:tasks_need_changelist'))
 
-        def convert_selected(self, request, queryset):
-            """Action admin qui convertit les besoins sélectionnés en tâches."""
-            if not request.user.is_staff:
-                self.message_user(request, "Permission refusée: seuls les administrateurs peuvent convertir des besoins.", level=messages.ERROR)
-                return
+        task = convert_need(need, request.user)
+        messages.success(request, f"Besoin '{need.title}' converti en tâche (id={task.id}).")
+        return redirect(reverse('admin:tasks_need_changelist'))
 
-            # utiliser le service qui gère l'atomicité
-            converted_count = convert_needs(queryset, request.user)
-            self.message_user(request, f"{converted_count} besoin(s) converti(s) en tâche.")
+    def convert_action(self, obj):
+        """Affiche un bouton 'Convertir' dans la colonne de la liste."""
+        if obj.converted:
+            return format_html('<span style="color: #666;">Converti</span>')
+        url = reverse('admin:tasks_need_convert', args=[obj.pk])
+        return format_html('<a class="button" href="{}">Convertir</a>', url)
 
-        convert_selected.short_description = 'Convertir les besoins sélectionnés en tâches'
+    convert_action.short_description = 'Action'
+
+    def convert_selected(self, request, queryset):
+        """Action admin qui convertit les besoins sélectionnés en tâches."""
+        if not request.user.is_staff:
+            self.message_user(request, "Permission refusée: seuls les administrateurs peuvent convertir des besoins.", level=messages.ERROR)
+            return
+
+        converted_count = convert_needs(queryset, request.user)
+        self.message_user(request, f"{converted_count} besoin(s) converti(s) en tâche.")
+
+    convert_selected.short_description = 'Convertir les besoins sélectionnés en tâches'
+
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("name", "created_at")
+    search_fields = ("name",)
 
 
 @admin.register(Message)

@@ -7,7 +7,7 @@ instances du modèle Task vers/depuis des représentations JSON.
 
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from .models import Task, TaskType, TaskRelation
+from .models import Task, TaskType, TaskRelation, Project
 from .models import Need
 
 
@@ -37,6 +37,19 @@ class TaskSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True,
     )
+    project = serializers.SlugRelatedField(
+        slug_field="name",
+        queryset=Project.objects.all(),
+        required=False,
+        allow_null=True,
+    )
+    project_id = serializers.PrimaryKeyRelatedField(
+        source="project",
+        queryset=Project.objects.all(),
+        required=False,
+        allow_null=True,
+        write_only=True,
+    )
 
     class Meta:
         model = Task
@@ -50,6 +63,8 @@ class TaskSerializer(serializers.ModelSerializer):
             "task_type_code",
             "task_type_label",
             "parent",
+            "project",
+            "project_id",
             "priority",
             "target_version",
             "module",

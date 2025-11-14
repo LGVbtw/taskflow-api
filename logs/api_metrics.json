@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-11-14T10:24:41.314791+00:00",
+  "generated_at": "2025-11-14T10:31:56.648567+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -10,11 +10,11 @@
   },
   "endpoints": {
     "/api/tasks/": {
-      "count": 195,
-      "avg_ms": 0.0,
-      "p90_ms": 0,
-      "p95_ms": 0,
-      "error_rate_percent": 0.513,
+      "count": 204,
+      "avg_ms": 1.0,
+      "p90_ms": 1,
+      "p95_ms": 1,
+      "error_rate_percent": 0.49,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
@@ -1050,7 +1050,7 @@
       }
     },
     "/api/tasks/1/": {
-      "count": 4,
+      "count": 6,
       "avg_ms": 3.0,
       "p90_ms": 3,
       "p95_ms": 3,
@@ -1066,10 +1066,10 @@
       }
     },
     "/api/tasks/2/": {
-      "count": 2,
-      "avg_ms": 5.0,
-      "p90_ms": 5,
-      "p95_ms": 5,
+      "count": 3,
+      "avg_ms": 4.0,
+      "p90_ms": 4,
+      "p95_ms": 4,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -1082,11 +1082,27 @@
       }
     },
     "/api/task-relations/": {
-      "count": 8,
+      "count": 11,
       "avg_ms": 1.0,
       "p90_ms": 1,
       "p95_ms": 1,
-      "error_rate_percent": 12.5,
+      "error_rate_percent": 9.091,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/tasks/?project=1": {
+      "count": 1,
+      "avg_ms": 4.0,
+      "p90_ms": 4,
+      "p95_ms": 4,
+      "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",

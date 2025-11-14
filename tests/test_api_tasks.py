@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 
-from tasks.models import Task, TaskType, TaskRelation
+from tasks.models import Task, TaskType, TaskRelation, Project
 
 
 @pytest.mark.django_db
@@ -237,6 +237,37 @@ def test_create_task_with_metadata_fields():
 	assert str(created.start_date) == "2025-11-01"
 	assert str(created.due_date) == "2025-11-30"
 	assert created.progress == 45
+
+
+@pytest.mark.django_db
+def test_create_task_with_project_by_name():
+	client = APIClient()
+	project = Project.objects.create(name="API", description="API public")
+	body = {"title": "Déploiement", "status": "A faire", "project": project.name}
+
+	response = client.post(reverse("task-list"), body, format="json")
+
+	assert response.status_code == 201
+	data = response.json()
+	assert data["project"] == project.name
+	created = Task.objects.get(id=data["id"])
+	assert created.project == project
+
+
+@pytest.mark.django_db
+def test_filter_tasks_by_project():
+	client = APIClient()
+	p1 = Project.objects.create(name="Auth", description="")
+	p2 = Project.objects.create(name="Mobile", description="")
+	Task.objects.create(title="Login", status="A faire", project=p1)
+	Task.objects.create(title="Push", status="A faire", project=p2)
+
+	response = client.get(reverse("task-list"), {"project": p1.id})
+
+	assert response.status_code == 200
+	data = response.json()
+	assert data["count"] == 1
+	assert data["results"][0]["title"] == "Login"
 
 
 @pytest.mark.django_db

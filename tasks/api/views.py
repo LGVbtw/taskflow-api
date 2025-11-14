@@ -27,7 +27,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
     search_fields = ['title', 'status', 'task_type__label', 'task_type__code']
     ordering_fields = ['created_at', 'title', 'task_type__order']
-    filterset_fields = ['status', 'task_type__code', 'parent', 'priority', 'module', 'target_version']
+    filterset_fields = ['status', 'task_type__code', 'parent', 'priority', 'module', 'target_version', 'project']
 
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
