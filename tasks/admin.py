@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task, Need, Project
+from .models import Task, Need, Project, Attachment
 from .models import Message
 from django.urls import path
 from django.utils.html import format_html
@@ -263,3 +263,10 @@ class MessageAdmin(admin.ModelAdmin):
     def short_content(self, obj):
         return (obj.content[:75] + '...') if len(obj.content) > 75 else obj.content
     short_content.short_description = 'content'
+
+
+@admin.register(Attachment)
+class AttachmentAdmin(admin.ModelAdmin):
+    list_display = ("id", "task", "uploaded_at", "file")
+    readonly_fields = ("uploaded_at",)
+    search_fields = ("task__title", "file")

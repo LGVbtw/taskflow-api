@@ -1,15 +1,18 @@
-from rest_framework import viewsets, filters, permissions, status
+from rest_framework import viewsets, filters, permissions, status, parsers
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
+from django.template.response import TemplateResponse
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from tasks.models import Task, Need, Message, TaskRelation, Project
+from tasks.models import Task, Need, Message, TaskRelation, Project, Attachment
 from tasks.serializers import (
     TaskSerializer as TaskSerializer_api_import,
     NeedSerializer as NeedSerializer_api_import,
     MessageSerializer as MessageSerializer_api_import,
     MessageCreateSerializer as MessageCreateSerializer_api_import,
     TaskRelationSerializer as TaskRelationSerializer_api_import,
+    AttachmentSerializer as AttachmentSerializer_api_import,
 )
 
 # Rebind expected names to the imported serializers (keeps rest of the file unchanged)
@@ -18,6 +21,7 @@ NeedSerializer = NeedSerializer_api_import
 MessageSerializer = MessageSerializer_api_import
 MessageCreateSerializer = MessageCreateSerializer_api_import
 TaskRelationSerializer = TaskRelationSerializer_api_import
+AttachmentSerializer = AttachmentSerializer_api_import
 from tasks.exceptions import TaskInProgressDeletionError
 from tasks.services.needs import convert_need
 
@@ -42,6 +46,28 @@ class TaskViewSet(viewsets.ModelViewSet):
         if task.status == 'En cours':
             raise TaskInProgressDeletionError()
         return super().destroy(request, *args, **kwargs)
+
+    @action(
+        detail=True,
+        methods=['get', 'post'],
+        url_path='upload',
+        url_name='upload',
+        parser_classes=[parsers.MultiPartParser, parsers.FormParser],
+        renderer_classes=[JSONRenderer, BrowsableAPIRenderer],
+    )
+    def upload(self, request, pk=None):
+        task = self.get_object()
+        if request.method == 'GET':
+            return TemplateResponse(request, 'attachments/upload_form.html', {'task': task})
+        uploaded_file = request.FILES.get('file')
+        if not uploaded_file:
+            return Response({'detail': 'Aucun fichier fourni (champ "file").'}, status=status.HTTP_400_BAD_REQUEST)
+
+        attachment = Attachment(task=task, file=uploaded_file)
+        attachment.full_clean()
+        attachment.save()
+        serializer = AttachmentSerializer(attachment, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class NeedViewSet(viewsets.ModelViewSet):

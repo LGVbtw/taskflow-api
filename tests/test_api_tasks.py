@@ -3,8 +3,11 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from datetime import date
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import override_settings
 
 from tasks.models import Task, TaskType, TaskRelation, Project
+from tasks.models import Attachment
 
 
 @pytest.mark.django_db
@@ -324,3 +327,46 @@ def test_gantt_endpoint_groups_by_project():
 	unassigned = next((item for item in payload["projects"] if item["id"] is None), None)
 	assert unassigned is not None
 	assert len(unassigned["tasks"]) == 1
+
+
+@pytest.mark.django_db
+def test_task_upload_endpoint_stores_file(tmp_path):
+	client = APIClient()
+	task = Task.objects.create(title="Capture", status="A faire")
+	with override_settings(MEDIA_ROOT=str(tmp_path)):
+		payload = {
+			"file": SimpleUploadedFile("screenshot.png", b"fake-image-bytes", content_type="image/png"),
+		}
+		response = client.post(
+			reverse("task-upload", args=[task.id]),
+			payload,
+			format="multipart",
+		)
+
+	assert response.status_code == 201
+	resp = response.json()
+	assert resp["task"] == task.id
+	assert Attachment.objects.filter(task=task).count() == 1
+	attachment = Attachment.objects.get(task=task)
+	assert attachment.file.name.startswith("attachments/")
+	assert (tmp_path / attachment.file.name).exists()
+
+
+@pytest.mark.django_db
+def test_task_upload_endpoint_requires_file(tmp_path):
+	client = APIClient()
+	task = Task.objects.create(title="Sans fichier", status="A faire")
+	with override_settings(MEDIA_ROOT=str(tmp_path)):
+		response = client.post(reverse("task-upload", args=[task.id]), {}, format="multipart")
+
+	assert response.status_code == 400
+	assert Attachment.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_task_upload_get_renders_form():
+	client = APIClient()
+	task = Task.objects.create(title="Formulaire", status="A faire")
+	response = client.get(reverse("task-upload", args=[task.id]), HTTP_ACCEPT="text/html")
+	assert response.status_code == 200
+	assert "<form" in response.content.decode()

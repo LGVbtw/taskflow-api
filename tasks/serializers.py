@@ -7,7 +7,7 @@ instances du modèle Task vers/depuis des représentations JSON.
 
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from .models import Task, TaskType, TaskRelation, Project
+from .models import Task, TaskType, TaskRelation, Project, Attachment
 from .models import Need
 
 
@@ -204,3 +204,18 @@ class MessageCreateSerializer_api(_serializers_api.ModelSerializer):
     class Meta:
         model = _Message_api
         fields = ('id', 'content', 'parent', 'task', 'need')
+
+
+class AttachmentSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Attachment
+        fields = ("id", "task", "file", "uploaded_at", "url")
+        read_only_fields = ("id", "task", "uploaded_at", "url")
+
+    def get_url(self, obj):
+        request = self.context.get("request")
+        if request and obj.file:
+            return request.build_absolute_uri(obj.file.url)
+        return obj.file.url if obj.file else None

@@ -12,6 +12,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.utils import timezone
+import uuid
+import os
 
 
 def validate_status(value):
@@ -258,3 +260,23 @@ class Message(models.Model):
         who = self.author.username if self.author else 'anonymous'
         target = f'Task:{self.task_id}' if self.task_id else (f'Need:{self.need_id}' if self.need_id else 'None')
         return f"Msg {self.pk} by {who} on {target}"
+
+
+def attachment_upload_path(instance, filename):
+    base, ext = os.path.splitext(filename)
+    unique = uuid.uuid4().hex
+    return f"attachments/{unique}{ext}"
+
+
+class Attachment(models.Model):
+    """Fichier associé à une tâche (captures, documents, etc.)."""
+
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="attachments")
+    file = models.FileField(upload_to=attachment_upload_path, max_length=255)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-uploaded_at", "id"]
+
+    def __str__(self):
+        return f"Attachment {self.pk} for task {self.task_id}"
