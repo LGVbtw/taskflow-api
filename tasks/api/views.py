@@ -2,12 +2,13 @@ from rest_framework import viewsets, filters, permissions, status
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from tasks.models import Task, Need, Message
+from tasks.models import Task, Need, Message, TaskRelation
 from tasks.serializers import (
     TaskSerializer as TaskSerializer_api_import,
     NeedSerializer as NeedSerializer_api_import,
     MessageSerializer as MessageSerializer_api_import,
     MessageCreateSerializer as MessageCreateSerializer_api_import,
+    TaskRelationSerializer as TaskRelationSerializer_api_import,
 )
 
 # Rebind expected names to the imported serializers (keeps rest of the file unchanged)
@@ -15,6 +16,7 @@ TaskSerializer = TaskSerializer_api_import
 NeedSerializer = NeedSerializer_api_import
 MessageSerializer = MessageSerializer_api_import
 MessageCreateSerializer = MessageCreateSerializer_api_import
+TaskRelationSerializer = TaskRelationSerializer_api_import
 from tasks.exceptions import TaskInProgressDeletionError
 from tasks.services.needs import convert_need
 
@@ -118,3 +120,12 @@ class MessageViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'content required'}, status=status.HTTP_400_BAD_REQUEST)
         msg = Message.objects.create(content=content, author=user if user else None, task=parent.task, need=parent.need, parent=parent)
         return Response(MessageSerializer(msg).data, status=status.HTTP_201_CREATED)
+
+
+class TaskRelationViewSet(viewsets.ModelViewSet):
+    queryset = TaskRelation.objects.select_related('src_task', 'dst_task').all()
+    serializer_class = TaskRelationSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['link_type', 'src_task__title', 'dst_task__title']
+    ordering_fields = ['created_at']
+    filterset_fields = ['link_type', 'src_task', 'dst_task']

@@ -10,8 +10,8 @@ des tâches ayant le statut "En cours".
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Task
-from .serializers import TaskSerializer
+from .models import Task, TaskRelation
+from .serializers import TaskSerializer, TaskRelationSerializer
 from .models import Message
 from .serializers import MessageSerializer, MessageCreateSerializer
 from .exceptions import TaskInProgressDeletionError
@@ -185,3 +185,12 @@ class MessageViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'content required'}, status=status.HTTP_400_BAD_REQUEST)
         msg = Message.objects.create(content=content, author=user if user else None, task=parent.task, need=parent.need, parent=parent)
         return Response(MessageSerializer(msg).data, status=status.HTTP_201_CREATED)
+
+
+class TaskRelationViewSet(viewsets.ModelViewSet):
+    queryset = TaskRelation.objects.select_related('src_task', 'dst_task').all()
+    serializer_class = TaskRelationSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
+    search_fields = ['link_type', 'src_task__title', 'dst_task__title']
+    ordering_fields = ['created_at']
+    filterset_fields = ['link_type', 'src_task', 'dst_task']

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-11-14T09:31:54.453596+00:00",
+  "generated_at": "2025-11-14T09:57:59.110648+00:00",
   "descriptions": {
     "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
     "avg_ms": "Durée moyenne des requêtes en millisecondes.",
@@ -10,11 +10,11 @@
   },
   "endpoints": {
     "/api/tasks/": {
-      "count": 181,
-      "avg_ms": 538.0,
-      "p90_ms": 538,
-      "p95_ms": 538,
-      "error_rate_percent": 0.0,
+      "count": 187,
+      "avg_ms": 1.0,
+      "p90_ms": 1,
+      "p95_ms": 1,
+      "error_rate_percent": 0.535,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
         "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
@@ -90,10 +90,10 @@
       }
     },
     "/admin/tasks/task/": {
-      "count": 73,
-      "avg_ms": 115.0,
-      "p90_ms": 115,
-      "p95_ms": 115,
+      "count": 75,
+      "avg_ms": 54.0,
+      "p90_ms": 54,
+      "p95_ms": 54,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -106,10 +106,10 @@
       }
     },
     "/admin/jsi18n/": {
-      "count": 144,
-      "avg_ms": 10.0,
-      "p90_ms": 10,
-      "p95_ms": 10,
+      "count": 146,
+      "avg_ms": 4.0,
+      "p90_ms": 4,
+      "p95_ms": 4,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -890,10 +890,10 @@
       }
     },
     "/admin/tasks/task/20/change/": {
-      "count": 5,
-      "avg_ms": 38.0,
-      "p90_ms": 38,
-      "p95_ms": 38,
+      "count": 6,
+      "avg_ms": 128.0,
+      "p90_ms": 128,
+      "p95_ms": 128,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {
@@ -1038,6 +1038,54 @@
       "avg_ms": 38.0,
       "p90_ms": 38,
       "p95_ms": 38,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/tasks/1/": {
+      "count": 2,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/tasks/2/": {
+      "count": 1,
+      "avg_ms": 3.0,
+      "p90_ms": 3,
+      "p95_ms": 3,
+      "error_rate_percent": 0.0,
+      "error_rate_5xx_percent": 0.0,
+      "descriptions": {
+        "count": "Nombre total de requêtes observées pour l'endpoint dans le fichier de log.",
+        "avg_ms": "Durée moyenne des requêtes en millisecondes.",
+        "p90_ms": "90ème percentile des durées (ms) — 90% des requêtes sont plus rapides que cette valeur.",
+        "p95_ms": "95ème percentile des durées (ms).",
+        "error_rate_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur (status >= 400).",
+        "error_rate_5xx_percent": "Pourcentage de requêtes ayant renvoyé un code d'erreur serveur (status >= 500)."
+      }
+    },
+    "/api/task-relations/": {
+      "count": 5,
+      "avg_ms": 250.0,
+      "p90_ms": 250,
+      "p95_ms": 250,
       "error_rate_percent": 0.0,
       "error_rate_5xx_percent": 0.0,
       "descriptions": {

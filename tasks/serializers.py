@@ -7,7 +7,7 @@ instances du modèle Task vers/depuis des représentations JSON.
 
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from .models import Task, TaskType
+from .models import Task, TaskType, TaskRelation
 from .models import Need
 
 
@@ -22,6 +22,8 @@ class TaskSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True,
     )
+    relations_out = serializers.SerializerMethodField()
+    relations_in = serializers.SerializerMethodField()
     task_type_label = serializers.CharField(source="task_type.label", read_only=True)
     parent = serializers.PrimaryKeyRelatedField(
         queryset=Task.objects.all(),
@@ -40,6 +42,8 @@ class TaskSerializer(serializers.ModelSerializer):
             "task_type_code",
             "task_type_label",
             "parent",
+            "relations_out",
+            "relations_in",
         )
         read_only_fields = ("created_at", "owner", "task_type_label")
 
@@ -69,6 +73,35 @@ class TaskSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         validated_data = self._ensure_task_type(validated_data)
         return super().update(instance, validated_data)
+
+    def get_relations_out(self, obj):
+        return TaskRelationSerializer(obj.relations_out.all(), many=True).data
+
+    def get_relations_in(self, obj):
+        return TaskRelationSerializer(obj.relations_in.all(), many=True).data
+
+
+class TaskRelationSerializer(serializers.ModelSerializer):
+    def validate(self, attrs):
+        src = attrs.get("src_task") or getattr(self.instance, "src_task", None)
+        dst = attrs.get("dst_task") or getattr(self.instance, "dst_task", None)
+        link_type = attrs.get("link_type") or getattr(self.instance, "link_type", None)
+
+        if src and dst and src.pk == dst.pk:
+            raise serializers.ValidationError({"dst_task": "Impossible de créer un lien vers la même tâche."})
+
+        if src and dst and link_type:
+            qs = TaskRelation.objects.filter(src_task=src, dst_task=dst, link_type=link_type)
+            if self.instance:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                raise serializers.ValidationError({"non_field_errors": ["Cette relation existe déjà."]})
+        return attrs
+
+    class Meta:
+        model = TaskRelation
+        fields = ("id", "src_task", "dst_task", "link_type", "created_at")
+        read_only_fields = ("id", "created_at")
 
 
 class NeedSerializer(serializers.ModelSerializer):

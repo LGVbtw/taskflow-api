@@ -1,2 +1,39 @@
 [2025-11-14 10:31:54,372] [INFO] [metrics] timestamp:2025-11-14T09:31:54.372438+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:115
 [2025-11-14 10:31:54,431] [INFO] [metrics] timestamp:2025-11-14T09:31:54.431003+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:10
+[2025-11-14 10:41:45,800] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\models.py changed, reloading.
+[2025-11-14 10:41:47,883] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:42:14,286] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-11-14 10:42:15,715] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:45:55,839] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\api\views.py changed, reloading.
+[2025-11-14 10:45:57,319] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:46:01,862] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\api\urls.py changed, reloading.
+[2025-11-14 10:46:03,343] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:46:47,315] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\serializers.py changed, reloading.
+[2025-11-14 10:46:48,626] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:54:14,123] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:54:18,957] [INFO] [metrics] timestamp:2025-11-14T09:54:18.956996+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:184
+[2025-11-14 10:54:19,054] [INFO] [metrics] timestamp:2025-11-14T09:54:19.053956+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:22
+[2025-11-14 10:54:25,212] [INFO] [metrics] timestamp:2025-11-14T09:54:25.212153+00:00 method:GET path:/admin/tasks/task/20/change/ user:Anonymous status:200 duration_ms:128
+[2025-11-14 10:54:25,323] [INFO] [metrics] timestamp:2025-11-14T09:54:25.323512+00:00 method:GET path:/admin/jsi18n/ user:Anonymous status:200 duration_ms:4
+[2025-11-14 10:54:28,943] [INFO] [metrics] timestamp:2025-11-14T09:54:28.943674+00:00 method:GET path:/admin/tasks/task/ user:Anonymous status:200 duration_ms:54
+[2025-11-14 10:55:56,819] [INFO] [metrics] timestamp:2025-11-14T09:55:56.819500+00:00 method:GET path:/api/tasks/ user:Anonymous status:200 duration_ms:5
+[2025-11-14 10:55:56,850] [INFO] [metrics] timestamp:2025-11-14T09:55:56.850097+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:6
+[2025-11-14 10:55:57,331] [INFO] [metrics] timestamp:2025-11-14T09:55:57.331135+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 10:55:57,359] [INFO] [metrics] timestamp:2025-11-14T09:55:57.359305+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:2
+[2025-11-14 10:55:57,383] [INFO] [metrics] timestamp:2025-11-14T09:55:57.383266+00:00 method:POST path:/api/tasks/ user:Anonymous status:201 duration_ms:3
+[2025-11-14 10:55:57,408] [INFO] [metrics] timestamp:2025-11-14T09:55:57.408094+00:00 method:POST path:/api/tasks/ user:Anonymous status:400 duration_ms:1
+[2025-11-14 10:55:57,422] [WARNING] Bad Request: /api/tasks/
+[2025-11-14 10:55:57,430] [INFO] [metrics] timestamp:2025-11-14T09:55:57.430957+00:00 method:PATCH path:/api/tasks/1/ user:Anonymous status:400 duration_ms:2
+[2025-11-14 10:55:57,453] [WARNING] Bad Request: /api/tasks/1/
+[2025-11-14 10:55:57,462] [INFO] [metrics] timestamp:2025-11-14T09:55:57.462190+00:00 method:PATCH path:/api/tasks/2/ user:Anonymous status:200 duration_ms:3
+[2025-11-14 10:55:57,501] [INFO] [metrics] timestamp:2025-11-14T09:55:57.501146+00:00 method:POST path:/api/task-relations/ user:Anonymous status:201 duration_ms:4
+[2025-11-14 10:55:57,529] [INFO] [metrics] timestamp:2025-11-14T09:55:57.529753+00:00 method:POST path:/api/task-relations/ user:Anonymous status:400 duration_ms:2
+[2025-11-14 10:55:57,543] [WARNING] Bad Request: /api/task-relations/
+[2025-11-14 10:55:57,550] [INFO] [metrics] timestamp:2025-11-14T09:55:57.550601+00:00 method:POST path:/api/task-relations/ user:Anonymous status:400 duration_ms:1
+[2025-11-14 10:55:57,569] [WARNING] Bad Request: /api/task-relations/
+[2025-11-14 10:55:57,578] [INFO] [metrics] timestamp:2025-11-14T09:55:57.578738+00:00 method:GET path:/api/tasks/1/ user:Anonymous status:200 duration_ms:3
+[2025-11-14 10:57:42,178] [INFO] Watching for file changes with StatReloader
+[2025-11-14 10:57:50,446] [INFO] [metrics] timestamp:2025-11-14T09:57:50.446150+00:00 method:POST path:/api/task-relations/ user:Anonymous status:201 duration_ms:23
+[2025-11-14 10:57:59,096] [INFO] [metrics] timestamp:2025-11-14T09:57:59.096508+00:00 method:GET path:/api/task-relations/ user:Anonymous status:200 duration_ms:250
+[2025-11-14 11:01:58,116] [INFO] C:\Cours Ynov\B3\Dev API\Dev\taskflow-api\tasks\migrations\0012_taskrelation.py changed, reloading.
+[2025-11-14 11:01:59,548] [INFO] Watching for file changes with StatReloader

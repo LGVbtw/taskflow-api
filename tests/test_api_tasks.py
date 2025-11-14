@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 
-from tasks.models import Task, TaskType
+from tasks.models import Task, TaskType, TaskRelation
 
 
 @pytest.mark.django_db
@@ -141,3 +141,64 @@ def test_update_parent_allows_valid_move():
 	assert response.status_code == 200
 	child.refresh_from_db()
 	assert child.parent == root
+
+
+@pytest.mark.django_db
+def test_create_task_relation_between_two_tasks():
+	client = APIClient()
+	sketch = Task.objects.create(title="Source", status="A faire")
+	destination = Task.objects.create(title="Destination", status="A faire")
+	body = {"src_task": sketch.id, "dst_task": destination.id, "link_type": TaskRelation.BLOCKS}
+
+	response = client.post(reverse("task-relation-list"), body, format="json")
+
+	assert response.status_code == 201
+	data = response.json()
+	assert data["src_task"] == sketch.id
+	assert data["dst_task"] == destination.id
+	assert data["link_type"] == TaskRelation.BLOCKS
+	assert TaskRelation.objects.filter(src_task=sketch, dst_task=destination, link_type=TaskRelation.BLOCKS).exists()
+
+
+@pytest.mark.django_db
+def test_create_task_relation_rejects_self_link():
+	client = APIClient()
+	task = Task.objects.create(title="Solo", status="A faire")
+	body = {"src_task": task.id, "dst_task": task.id, "link_type": TaskRelation.RELATES}
+
+	response = client.post(reverse("task-relation-list"), body, format="json")
+
+	assert response.status_code == 400
+	assert "dst_task" in response.json()
+	assert TaskRelation.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_create_task_relation_rejects_duplicates():
+	client = APIClient()
+	src = Task.objects.create(title="Source", status="A faire")
+	dst = Task.objects.create(title="Dest", status="A faire")
+	TaskRelation.objects.create(src_task=src, dst_task=dst, link_type=TaskRelation.DEPENDS)
+	body = {"src_task": src.id, "dst_task": dst.id, "link_type": TaskRelation.DEPENDS}
+
+	response = client.post(reverse("task-relation-list"), body, format="json")
+
+	assert response.status_code == 400
+	assert "non_field_errors" in response.json()
+	assert TaskRelation.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_task_payload_includes_relation_data():
+	client = APIClient()
+	src = Task.objects.create(title="Source", status="A faire")
+	dst = Task.objects.create(title="Dest", status="A faire")
+	TaskRelation.objects.create(src_task=src, dst_task=dst, link_type=TaskRelation.BLOCKS)
+
+	response = client.get(reverse("task-detail", args=[src.id]))
+
+	assert response.status_code == 200
+	data = response.json()
+	assert len(data["relations_out"]) == 1
+	assert data["relations_out"][0]["dst_task"] == dst.id
+	assert data["relations_in"] == []

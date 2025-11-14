@@ -122,6 +122,48 @@ class Task(models.Model):
         return super().save(*args, **kwargs)
 
 
+class TaskRelation(models.Model):
+    """Lien directionnel entre deux tâches (ex : blocks, depends)."""
+
+    BLOCKS = "blocks"
+    DEPENDS = "depends"
+    RELATES = "relates"
+    LINK_CHOICES = [
+        (BLOCKS, "Bloque"),
+        (DEPENDS, "Dépend"),
+        (RELATES, "Relatif à"),
+    ]
+
+    src_task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name="relations_out",
+    )
+    dst_task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name="relations_in",
+    )
+    link_type = models.CharField(max_length=20, choices=LINK_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["src_task", "dst_task", "link_type"],
+                name="unique_task_relation",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.src_task_id} {self.link_type} {self.dst_task_id}"
+
+    def clean(self):
+        super().clean()
+        if self.src_task_id and self.dst_task_id and self.src_task_id == self.dst_task_id:
+            raise ValidationError({"dst_task": "Impossible de créer un lien vers la même tâche."})
+
+
 class Need(models.Model):
     """Modèle représentant un besoin déposé par un utilisateur.
 
