@@ -40,105 +40,136 @@ except ValueError:
 THEME_CSS = """
 <style>
 :root {
-    --tf-primary: #6366f1;
-    --tf-bg: #f8fafc;
-    --tf-card: #ffffff;
-    --tf-muted: #94a3b8;
-    --tf-text: #0f172a;
+    --tf-bg: #f4f5f7;
+    --tf-surface: #ffffff;
+    --tf-border: #dfe1e6;
+    --tf-text: #172b4d;
+    --tf-muted: #6b778c;
+    --tf-primary: #0052cc;
 }
 
 body {
-    background-color: var(--tf-bg);
+    background: var(--tf-bg);
+    color: var(--tf-text);
+    font-family: "Helvetica Neue", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 [data-testid="stSidebar"] {
-    background: #0b1220;
-    color: #e2e8f0;
+    background: var(--tf-surface);
+    border-right: 1px solid var(--tf-border);
 }
 
-.hero {
-    background: radial-gradient(circle at top right, rgba(99,102,241,0.2), rgba(15,23,42,0.92));
-    color: #f8fafc;
-    border-radius: 20px;
-    padding: 2rem;
+.board-toolbar {
+    background: var(--tf-surface);
+    border: 1px solid var(--tf-border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
-.hero h1 {
-    font-size: 2.3rem;
-    margin-bottom: 0.25rem;
-}
-
-.hero p {
+.toolbar-left h1 {
+    font-size: 1.3rem;
     margin: 0;
-    color: rgba(248,250,252,0.8);
 }
 
-.hero-pill {
-    background: rgba(15,23,42,0.35);
-    padding: 0.75rem 1.25rem;
+.toolbar-meta {
+    color: var(--tf-muted);
+    font-size: 0.9rem;
+}
+
+.chip {
+    background: #ebecf0;
     border-radius: 999px;
-    border: 1px solid rgba(248,250,252,0.3);
-    font-weight: 600;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--tf-text);
 }
 
 .stat-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .stat-card {
-    background: var(--tf-card);
-    border-radius: 16px;
-    padding: 1.25rem;
-    border: 1px solid rgba(148,163,184,0.3);
-    box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+    background: var(--tf-surface);
+    border-radius: 8px;
+    border: 1px solid var(--tf-border);
+    padding: 0.9rem;
 }
 
 .stat-label {
     color: var(--tf-muted);
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
+    font-size: 0.75rem;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .stat-value {
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--tf-text);
-    margin: 0.25rem 0 0.4rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0.15rem 0;
 }
 
-.stat-helper {
+.board-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.board-column {
+    background: #ebecf0;
+    border-radius: 8px;
+    padding: 0.5rem;
+    min-height: 200px;
+}
+
+.board-column h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
     color: var(--tf-muted);
-    margin: 0;
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.08em;
 }
 
-.kanban-card {
-    border: 1px solid rgba(99,102,241,0.25);
-    padding: 0.7rem;
-    border-radius: 10px;
-    background: #fff;
-    margin-bottom: 0.6rem;
-    box-shadow: 0 4px 14px rgba(15,23,42,0.07);
+.board-card {
+    background: var(--tf-surface);
+    border-radius: 6px;
+    border: 1px solid var(--tf-border);
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+}
+
+.board-card h4 {
+    font-size: 0.95rem;
+    margin: 0 0 0.3rem;
+}
+
+.card-meta {
+    font-size: 0.8rem;
+    color: var(--tf-muted);
 }
 
 .detail-card {
-    border: 1px solid rgba(148,163,184,0.2);
-    border-radius: 14px;
-    padding: 1rem 1.25rem;
+    border: 1px solid var(--tf-border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--tf-surface);
     margin-bottom: 0.8rem;
-    background: var(--tf-card);
 }
 
 .detail-card h4 {
     margin: 0 0 0.4rem;
+}
+
+.stat-helper {
+    color: var(--tf-muted);
 }
 </style>
 """
@@ -251,17 +282,16 @@ def _format_datetime(value) -> str:
     return localized.strftime("%d %b %Y %H:%M")
 
 
-def render_hero(meta: Dict[str, Iterable]) -> None:
+def render_board_toolbar(meta: Dict[str, Iterable]) -> None:
     total = meta.get("count", 0)
     st.markdown(
         f"""
-        <section class="hero">
-            <div>
-                <p class="stat-label">Taskflow radar</p>
-                <h1>Cartographie des appels d'offres</h1>
-                <p>{total} opportunités synchronisées depuis le backend Django.</p>
+        <section class="board-toolbar">
+            <div class="toolbar-left">
+                <h1>Kanban appels d'offres</h1>
+                <p class="toolbar-meta">{total} appels d'offres suivis dans Taskflow</p>
             </div>
-            <div class="hero-pill">Streamlit Cloud · temps réel</div>
+            <div class="chip">Vue type Jira</div>
         </section>
         """,
         unsafe_allow_html=True,
@@ -404,7 +434,7 @@ def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
 
 def main() -> None:
     meta = load_filter_metadata()
-    render_hero(meta)
+    render_board_toolbar(meta)
 
     filters, ordering_label = sidebar_filters(meta)
 
@@ -459,23 +489,32 @@ def render_kanban(df: pd.DataFrame) -> None:
     group_label = st.selectbox("Grouper les colonnes par", list(KANBAN_DIMENSIONS.keys()))
     field = KANBAN_DIMENSIONS[group_label]
     max_cards = st.slider("Cartes max par colonne", 3, 15, 6)
+    st.markdown(f"<p class='stat-helper'>Regroupement actif : <span class='chip'>{html.escape(group_label)}</span></p>", unsafe_allow_html=True)
 
     grouped = df.groupby(field)
     ordered_keys = sorted(grouped.groups.keys(), key=lambda value: str(value or ""))
-
-    for chunk in chunked(ordered_keys, 4):
-        cols = st.columns(len(chunk))
-        for col, key in zip(cols, chunk):
-            subset = grouped.get_group(key)
-            col.markdown(f"**{key or 'Non renseigné'}** ({len(subset)})")
-            for _, row in subset.head(max_cards).iterrows():
-                col.markdown(
-                    f"<div class='kanban-card'>"
-                    f"<strong>{html.escape(row['Titre'])}</strong><br/>"
-                    f"<small>Limite: {_format_datetime(row['Date limite'])}<br/>Procédure: {html.escape(str(row['Procédure']))}</small>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
+    columns_html = []
+    for key in ordered_keys:
+        subset = grouped.get_group(key)
+        cards = []
+        for _, row in subset.head(max_cards).iterrows():
+            cards.append(
+                f"""
+                <article class='board-card'>
+                    <h4>{html.escape(row['Titre'])}</h4>
+                    <div class='card-meta'>Limite : {_format_datetime(row['Date limite'])}</div>
+                    <div class='card-meta'>Acheteur : {html.escape(str(row['Acheteur']))}</div>
+                </article>
+                """
+            )
+        column_html = f"""
+        <section class='board-column'>
+            <h3>{html.escape(str(key or 'Non renseigné'))} · {len(subset)}</h3>
+            {''.join(cards) or "<div class='card-meta'>Aucune carte</div>"}
+        </section>
+        """
+        columns_html.append(column_html)
+    st.markdown(f"<div class='board-columns'>{''.join(columns_html)}</div>", unsafe_allow_html=True)
 
 
 def chunked(seq: Sequence, size: int) -> Iterator[List]:
