@@ -21,3 +21,7 @@ api_metrics.json
 
 # Fichiers médias uploadés
 media/
+
+# Venvironment virtuel
+venv/
+venv312/
