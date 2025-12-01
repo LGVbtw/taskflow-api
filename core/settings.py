@@ -12,9 +12,23 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from typing import List, Optional
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def _str_to_bool(value: Optional[str], default: bool = False) -> bool:
+    """Convert common string toggles to bool."""
+    if value is None:
+        return default
+    return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+def _csv_to_list(value: Optional[str], default: Optional[List[str]] = None) -> List[str]:
+    if not value:
+        return list(default or [])
+    return [item.strip() for item in value.split(',') if item.strip()]
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,9 +38,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$nk=#7=5q!h%4oymngd+cc(3=px++e7y73+uwc9ns!nqyf6!^w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = _str_to_bool(os.getenv('DJANGO_DEBUG', os.getenv('DEBUG')), default=True)
 
-ALLOWED_HOSTS = []
+_default_hosts = ['localhost', '127.0.0.1', '0.0.0.0'] if DEBUG else []
+ALLOWED_HOSTS = _csv_to_list(
+    os.getenv('DJANGO_ALLOWED_HOSTS', os.getenv('ALLOWED_HOSTS')),
+    default=_default_hosts,
+)
+
+render_host = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if render_host:
+    ALLOWED_HOSTS.append(render_host)
+
+ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS))
 
 
 # Application definition
