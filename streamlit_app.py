@@ -637,11 +637,18 @@ def render_scrap_board(df: pd.DataFrame) -> None:
             custom_style=custom_style,
             key="scrap-board-sortable",
         ) or payload
+        new_status: Dict[str, str] = status_map.copy()
+        changed = False
         for column in sorted_payload:
             stage = column.get("header") or BOARD_STAGES[0]
             for item in column.get("items", []):
                 card_id = str(item).split("·", 1)[0].replace("#", "").strip()
-                status_map[card_id] = stage
+                if new_status.get(card_id) != stage:
+                    new_status[card_id] = stage
+                    changed = True
+        if changed:
+            st.session_state["board_status"] = new_status
+            status_map = new_status
         counts = {stage: sum(1 for s in status_map.values() if s == stage) for stage in BOARD_STAGES}
         st.caption(" · ".join(f"{stage}: {counts.get(stage, 0)}" for stage in BOARD_STAGES))
         return
