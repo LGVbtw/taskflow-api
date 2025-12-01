@@ -64,3 +64,17 @@ Les tests couvrent les anciennes API « tasks ». Ajoutez de nouveaux cas auto
 1. Exécuter les migrations sur l'environnement cible.
 2. Lancer `python manage.py fetch_tenders` via cron/Job pour garder les données à jour.
 3. Exposer l'URL `/` (dashboard) et `/api/tenders/` via votre serveur HTTP habituel.
+
+## Mode démo (Option A)
+
+Pendant les ateliers vous pouvez activer un mode "lecture seule" qui sert les endpoints `/api/tasks/` depuis un fichier statique. Cela évite d'avoir à exécuter les migrations ou à alimenter la base lorsqu'une simple démonstration suffit.
+
+1. Laissez l'API fonctionner normalement en local (ne définissez pas de variable d'environnement) afin de disposer des vraies opérations CRUD.
+2. Sur l'environnement de démo, ajoutez `TASKFLOW_USE_DEMO_DATA=1` avant de lancer Django ou Streamlit.
+3. Placez le fichier `demo_tasks.json` à la racine du projet (ou fournissez son chemin via `TASKFLOW_DEMO_FILE=/chemin/vers/demo.json`).
+
+Lorsque ce mode est actif :
+
+- Les endpoints `list/retrieve`, `kanban`, `gantt` et `tasks/filters` lisent directement le JSON.
+- Les écritures (POST/PATCH/DELETE) sont bloquées pour éviter toute incohérence.
+- Vous pouvez adapter le jeu de données en éditant `demo_tasks.json` (même structure que les payloads renvoyés par l'API).

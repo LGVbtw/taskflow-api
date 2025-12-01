@@ -8,6 +8,7 @@ from django.test import override_settings
 
 from tasks.models import Task, TaskType, TaskRelation, Project
 from tasks.models import Attachment
+from tasks import demo_data
 
 
 @pytest.mark.django_db
@@ -370,3 +371,31 @@ def test_task_upload_get_renders_form():
 	response = client.get(reverse("task-upload", args=[task.id]), HTTP_ACCEPT="text/html")
 	assert response.status_code == 200
 	assert "<form" in response.content.decode()
+
+
+@pytest.mark.django_db
+def test_task_list_uses_static_payload_when_demo_enabled(settings):
+	client = APIClient()
+	settings.TASKFLOW_USE_DEMO_DATA = True
+	settings.TASKFLOW_DEMO_FILE = settings.BASE_DIR / "demo_tasks.json"
+	demo_data.reset_cache()
+	response = client.get(reverse("task-list"))
+	assert response.status_code == 200
+	data = response.json()
+	assert data["count"] == 6
+	assert data["results"][0]["title"].startswith("Creer le tableau")
+	demo_data.reset_cache()
+
+
+@pytest.mark.django_db
+def test_kanban_endpoint_reads_demo_file(settings):
+	client = APIClient()
+	settings.TASKFLOW_USE_DEMO_DATA = True
+	settings.TASKFLOW_DEMO_FILE = settings.BASE_DIR / "demo_tasks.json"
+	demo_data.reset_cache()
+	response = client.get(reverse("task-kanban"))
+	assert response.status_code == 200
+	columns = response.json()
+	assert "A faire" in columns
+	assert columns["A faire"]  # au moins une carte
+	demo_data.reset_cache()

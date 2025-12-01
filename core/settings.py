@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -196,3 +197,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'API pour gérer des tâches (Taskflow). Documentation auto-générée.',
     'VERSION': '1.0.0',
 }
+
+# Option A (démo) : utiliser un jeu de données statique quand demandé.
+TASKFLOW_USE_DEMO_DATA = os.getenv('TASKFLOW_USE_DEMO_DATA', '').lower() in {'1', 'true', 'yes', 'on'}
+TASKFLOW_DEMO_FILE = Path(os.getenv('TASKFLOW_DEMO_FILE', str(BASE_DIR / 'demo_tasks.json')))

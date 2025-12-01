@@ -14,6 +14,7 @@ from tasks.serializers import (
     TaskRelationSerializer as TaskRelationSerializer_api_import,
     AttachmentSerializer as AttachmentSerializer_api_import,
 )
+from tasks import demo_data
 
 # Rebind expected names to the imported serializers (keeps rest of the file unchanged)
 TaskSerializer = TaskSerializer_api_import
@@ -24,6 +25,17 @@ TaskRelationSerializer = TaskRelationSerializer_api_import
 AttachmentSerializer = AttachmentSerializer_api_import
 from tasks.exceptions import TaskInProgressDeletionError
 from tasks.services.needs import convert_need
+
+
+DEMO_READ_ONLY_MESSAGE = "API en mode démonstration : opérations d'écriture désactivées (demo_tasks.json)."
+
+
+def _demo_write_forbidden():
+    return Response({"detail": DEMO_READ_ONLY_MESSAGE}, status=status.HTTP_403_FORBIDDEN)
+
+
+def _demo_data_error(exc: Exception):
+    return Response({"detail": str(exc)}, status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -43,6 +55,29 @@ class TaskViewSet(viewsets.ModelViewSet):
         'due_date': ['exact', 'gte', 'lte'],
     }
 
+    def _deny_writes_if_demo(self):
+        if demo_data.is_demo_mode():
+            return _demo_write_forbidden()
+        return None
+
+    def list(self, request, *args, **kwargs):
+        if demo_data.is_demo_mode():
+            try:
+                payload = demo_data.query_demo_tasks(request.query_params)
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            return Response(payload)
+        return super().list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        if demo_data.is_demo_mode():
+            try:
+                task = demo_data.get_demo_task(kwargs.get('pk'))
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            return Response(task)
+        return super().retrieve(request, *args, **kwargs)
+
     def perform_create(self, serializer):
         user = self.request.user if self.request.user.is_authenticated else None
         task = serializer.save(owner=user, reporter=user)
@@ -50,11 +85,32 @@ class TaskViewSet(viewsets.ModelViewSet):
         if msg:
             Message.objects.create(content=msg, author=user if user and user.is_authenticated else None, task=task)
 
+    def create(self, request, *args, **kwargs):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
+        return super().create(request, *args, **kwargs)
+
     def destroy(self, request, *args, **kwargs):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
         task = self.get_object()
         if task.status == 'En cours':
             raise TaskInProgressDeletionError()
         return super().destroy(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
+        return super().update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
+        return super().partial_update(request, *args, **kwargs)
 
     @action(
         detail=True,
@@ -65,6 +121,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         renderer_classes=[JSONRenderer, BrowsableAPIRenderer],
     )
     def upload(self, request, pk=None):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
         task = self.get_object()
         if request.method == 'GET':
             return TemplateResponse(request, 'attachments/upload_form.html', {'task': task})
@@ -80,6 +139,16 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'], url_path='children', url_name='children')
     def children(self, request, pk=None):
+        if demo_data.is_demo_mode():
+            try:
+                parent_id = int(pk)
+            except (TypeError, ValueError):
+                return Response({'detail': 'Identifiant invalide'}, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                rows = [task for task in demo_data.load_demo_tasks() if (task.get('parent') or 0) == parent_id]
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            return Response(rows)
         task = self.get_object()
         children_qs = task.children.all().order_by('created_at')
         serializer = TaskSerializer(children_qs, many=True, context={'request': request})
@@ -87,6 +156,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'], url_path='link', url_name='link')
     def link(self, request, pk=None):
+        blocked = self._deny_writes_if_demo()
+        if blocked:
+            return blocked
         task = self.get_object()
         payload = request.data.copy()
         payload['src_task'] = task.id
@@ -188,6 +260,12 @@ class KanbanView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
+        if demo_data.is_demo_mode():
+            try:
+                columns = demo_data.build_kanban_payload()
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            return Response(columns)
         columns = {"A faire": [], "En cours": [], "Fait": []}
         queryset = Task.objects.all().order_by('created_at')
         serializer_context = {"request": request}
@@ -206,6 +284,12 @@ class GanttView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
+        if demo_data.is_demo_mode():
+            try:
+                payload = demo_data.build_gantt_payload()
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            return Response(payload)
         project_id = request.query_params.get('project')
         projects = Project.objects.prefetch_related('tasks').all()
         if project_id:
@@ -256,6 +340,16 @@ class TaskFilterMetadataView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request):
+        if demo_data.is_demo_mode():
+            try:
+                metadata = demo_data.build_filter_metadata()
+            except demo_data.DemoDataUnavailable as exc:
+                return _demo_data_error(exc)
+            metadata["priorities"] = [
+                {"value": choice[0], "label": choice[1]}
+                for choice in Task.PRIORITY_CHOICES
+            ]
+            return Response(metadata)
         task_types = [
             {
                 "code": tt.code,
