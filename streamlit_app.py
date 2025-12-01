@@ -5,6 +5,7 @@ import json
 import html
 import os
 import sys
+import textwrap
 from datetime import date, datetime, time
 from itertools import islice
 from pathlib import Path
@@ -12,6 +13,14 @@ from typing import Dict, Iterable, Iterator, List, Sequence, Tuple
 
 import pandas as pd
 import streamlit as st
+
+try:
+    from streamlit_sortables import sort_items
+
+    HAS_SORTABLE = True
+except ImportError:  # pragma: no cover - optional dependency
+    sort_items = None  # type: ignore
+    HAS_SORTABLE = False
 
 # Ensure project root is importable and Django is configured before importing models
 BASE_DIR = Path(__file__).resolve().parent
@@ -31,6 +40,7 @@ from django.core.management import call_command  # noqa: E402
 from tenders.models import Tender  # noqa: E402
 
 st.set_page_config(page_title="Tenders dashboard", layout="wide")
+STREAMLIT_HAS_MODAL = hasattr(st, "modal")
 AUTO_BOOTSTRAP_ENABLED = os.getenv("TASKFLOW_AUTO_BOOTSTRAP", "1").lower() not in {"0", "false", "no", "off"}
 try:
     BOOTSTRAP_PAGES = max(1, int(os.getenv("TASKFLOW_BOOTSTRAP_PAGES", "1")))
@@ -40,115 +50,207 @@ except ValueError:
 THEME_CSS = """
 <style>
 :root {
-    --tf-bg: #f4f5f7;
-    --tf-surface: #ffffff;
-    --tf-border: #dfe1e6;
-    --tf-text: #172b4d;
-    --tf-muted: #6b778c;
-    --tf-primary: #0052cc;
+    --tf-bg: radial-gradient(circle at top, #0d1423, #05070d 60%);
+    --tf-surface: rgba(13, 20, 35, 0.75);
+    --tf-glass: rgba(255, 255, 255, 0.08);
+    --tf-border: rgba(255, 255, 255, 0.12);
+    --tf-text: #e8edf7;
+    --tf-muted: #9ba9c9;
+    --tf-accent: linear-gradient(135deg, #7f5dff, #22d3ee);
 }
 
 body {
-    background: var(--tf-bg);
+    background: #05070d;
     color: var(--tf-text);
-    font-family: "Helvetica Neue", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.stApp {
+    background: var(--tf-bg);
 }
 
 [data-testid="stSidebar"] {
-    background: var(--tf-surface);
-    border-right: 1px solid var(--tf-border);
+    background: rgba(5, 7, 13, 0.85);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
 }
 
-.board-toolbar {
+.ambient-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.ambient-glow::before,
+.ambient-glow::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+}
+
+.ambient-glow::before {
+    background: #7f5dff;
+    top: -120px;
+    left: 10%;
+}
+
+.ambient-glow::after {
+    background: #22d3ee;
+    bottom: -160px;
+    right: 5%;
+}
+
+.hero-v2 {
     background: var(--tf-surface);
     border: 1px solid var(--tf-border);
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    border-radius: 24px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.45);
 }
 
-.toolbar-left h1 {
-    font-size: 1.3rem;
+.hero-v2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(127,93,255,0.35), transparent 45%);
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: 2rem;
+    margin: 0 0 0.4rem;
+}
+
+.hero-lede {
+    color: var(--tf-muted);
     margin: 0;
 }
 
-.toolbar-meta {
-    color: var(--tf-muted);
-    font-size: 0.9rem;
+.cta-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
 }
 
-.chip {
-    background: #ebecf0;
+.cta-primary {
+    background: var(--tf-accent);
+    color: #05070d;
+    font-weight: 600;
+    padding: 0.75rem 1.6rem;
     border-radius: 999px;
-    padding: 0.25rem 0.8rem;
-    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.cta-secondary {
+    border: 1px solid var(--tf-border);
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
     color: var(--tf-text);
+    text-decoration: none;
+}
+
+.metric-stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.metric-card {
+    background: var(--tf-glass);
+    border: 1px solid var(--tf-border);
+    border-radius: 16px;
+    padding: 1rem;
+    backdrop-filter: blur(16px);
+}
+
+.metric-card span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--tf-muted);
+}
+
+.metric-card strong {
+    font-size: 1.8rem;
+    display: block;
 }
 
 .stat-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0;
 }
 
 .stat-card {
-    background: var(--tf-surface);
-    border-radius: 8px;
-    border: 1px solid var(--tf-border);
-    padding: 0.9rem;
+    background: var(--tf-glass);
+    border-radius: 18px;
+    padding: 1.2rem;
+    border: 1px solid transparent;
+    background-image: linear-gradient(var(--tf-glass), var(--tf-glass)), var(--tf-accent);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: #05070d;
 }
 
 .stat-label {
-    color: var(--tf-muted);
+    color: #05070daa;
     font-size: 0.75rem;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .stat-value {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin: 0.15rem 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #05070d;
 }
 
 .board-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .board-column {
-    background: #ebecf0;
-    border-radius: 8px;
-    padding: 0.5rem;
-    min-height: 200px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 18px;
+    border: 1px solid var(--tf-border);
+    padding: 1rem;
+    min-height: 280px;
 }
 
 .board-column h3 {
-    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    margin: 0 0 0.8rem;
     text-transform: uppercase;
     color: var(--tf-muted);
-    margin: 0 0 0.5rem;
-    letter-spacing: 0.08em;
 }
 
 .board-card {
-    background: var(--tf-surface);
-    border-radius: 6px;
-    border: 1px solid var(--tf-border);
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25);
+    background: rgba(5, 7, 13, 0.65);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.9rem;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 18px 32px rgba(5,7,13,0.45);
 }
 
 .board-card h4 {
-    font-size: 0.95rem;
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
 }
 
 .card-meta {
@@ -157,24 +259,46 @@ body {
 }
 
 .detail-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 18px;
     border: 1px solid var(--tf-border);
-    border-radius: 8px;
-    padding: 1rem;
-    background: var(--tf-surface);
-    margin-bottom: 0.8rem;
-}
-
-.detail-card h4 {
-    margin: 0 0 0.4rem;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .stat-helper {
-    color: var(--tf-muted);
+    color: rgba(5, 7, 13, 0.75);
+}
+
+.chip {
+    background: rgba(255,255,255,0.1);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.chip-inline {
+    display: inline-block;
+    margin-top: 0.4rem;
+    margin-right: 0.35rem;
+    font-size: 0.72rem;
+    opacity: 0.85;
 }
 </style>
 """
 
 st.markdown(THEME_CSS, unsafe_allow_html=True)
+st.markdown("<div class='ambient-glow'></div>", unsafe_allow_html=True)
+
+if "show_backlog_modal" not in st.session_state:
+    st.session_state["show_backlog_modal"] = False
+if "board_status" not in st.session_state:
+    st.session_state["board_status"] = {}
+
+
+def _html_block(fragment: str) -> str:
+    """Normalize multiline HTML to avoid markdown code blocks."""
+    return textwrap.dedent(fragment).strip()
 
 
 @st.cache_resource(show_spinner=False)
@@ -244,6 +368,7 @@ def build_dataframe(filters: Dict[str, str]) -> pd.DataFrame:
     for tender in _apply_filters(filters):
         rows.append(
             {
+                "ID": tender.id,
                 "Titre": tender.title,
                 "Acheteur": tender.buyer_name,
                 "Localisation": tender.buyer_location,
@@ -265,6 +390,13 @@ KANBAN_DIMENSIONS = {
     "Département": "Département",
 }
 
+BOARD_STAGES = [
+    "Backlog",
+    "Sélectionné pour le développement",
+    "En cours",
+    "Terminé",
+]
+
 
 def _format_datetime(value) -> str:
     if value is None or (isinstance(value, float) and pd.isna(value)):
@@ -282,18 +414,44 @@ def _format_datetime(value) -> str:
     return localized.strftime("%d %b %Y %H:%M")
 
 
-def render_board_toolbar(meta: Dict[str, Iterable]) -> None:
-    total = meta.get("count", 0)
+def render_hero(meta: Dict[str, Iterable], df: pd.DataFrame) -> None:
+    total_db = meta.get("count", 0)
+    filtered = len(df)
+    unique_regions = int(df["Région"].nunique()) if not df.empty else 0
+    unique_proc = int(df["Procédure"].nunique()) if not df.empty else 0
     st.markdown(
-        f"""
-        <section class="board-toolbar">
-            <div class="toolbar-left">
-                <h1>Kanban appels d'offres</h1>
-                <p class="toolbar-meta">{total} appels d'offres suivis dans Taskflow</p>
-            </div>
-            <div class="chip">Vue type Jira</div>
-        </section>
-        """,
+        _html_block(
+            f"""
+            <section class="hero-v2">
+                <div>
+                    <p class="chip">Taskflow Command Center</p>
+                    <h1 class="hero-title">Appels d'offres en temps réel</h1>
+                    <p class="hero-lede">Centralisez les opportunités publiques, priorisez les échéances chaudes et exportez en un clic.</p>
+                    <div class="cta-row">
+                        <a class="cta-primary" href="?refresh=1">🔄 Rafraîchir</a>
+                        <a class="cta-secondary" href="#tableau">⬇️ Export JSON</a>
+                    </div>
+                </div>
+                <div class="metric-stack">
+                    <div class="metric-card">
+                        <span>Total suivi</span>
+                        <strong>{total_db}</strong>
+                        <small>{filtered} visibles avec vos filtres</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Régions représentées</span>
+                        <strong>{unique_regions}</strong>
+                        <small>variété territoriale</small>
+                    </div>
+                    <div class="metric-card">
+                        <span>Procédures</span>
+                        <strong>{unique_proc}</strong>
+                        <small>modes de consultation</small>
+                    </div>
+                </div>
+            </section>
+            """
+        ),
         unsafe_allow_html=True,
     )
 
@@ -331,17 +489,28 @@ def render_summary(df: pd.DataFrame, meta: Dict[str, Iterable]) -> None:
         },
     ]
 
-    cards = "".join(
-        f"""
-        <div class='stat-card'>
-            <p class='stat-label'>{html.escape(str(stat['label']))}</p>
-            <p class='stat-value'>{html.escape(str(stat['value']))}</p>
-            <p class='stat-helper'>{html.escape(str(stat['helper']))}</p>
-        </div>
-        """
+    card_markup = [
+        _html_block(
+            f"""
+            <div class='stat-card'>
+                <p class='stat-label'>{html.escape(str(stat['label']))}</p>
+                <p class='stat-value'>{html.escape(str(stat['value']))}</p>
+                <p class='stat-helper'>{html.escape(str(stat['helper']))}</p>
+            </div>
+            """
+        )
         for stat in stats
+    ]
+    st.markdown(
+        _html_block(
+            f"""
+            <div class='stat-grid'>
+                {''.join(card_markup)}
+            </div>
+            """
+        ),
+        unsafe_allow_html=True,
     )
-    st.markdown(f"<div class='stat-grid'>{cards}</div>", unsafe_allow_html=True)
 
 
 def render_focus_cards(df: pd.DataFrame) -> None:
@@ -363,18 +532,154 @@ def render_focus_cards(df: pd.DataFrame) -> None:
                 )
                 link_section = f"<ul>{items}</ul>"
         st.markdown(
-            f"""
-            <div class='detail-card'>
-                <h4>{html.escape(record.get('Titre', 'Sans titre'))}</h4>
-                <p><strong>Acheteur</strong> : {html.escape(record.get('Acheteur', 'N/A'))}</p>
-                <p><strong>Localisation</strong> : {html.escape(record.get('Localisation', 'Non renseignée'))}</p>
-                <p><strong>Procédure</strong> : {html.escape(record.get('Procédure', '—'))} · <strong>Catégorie</strong> : {html.escape(record.get('Catégorie', '—'))}</p>
-                <p><strong>Échéance</strong> : {deadline}</p>
-                {link_section}
-            </div>
-            """,
+            _html_block(
+                f"""
+                <div class='detail-card'>
+                    <h4>{html.escape(record.get('Titre', 'Sans titre'))}</h4>
+                    <p><strong>Acheteur</strong> : {html.escape(record.get('Acheteur', 'N/A'))}</p>
+                    <p><strong>Localisation</strong> : {html.escape(record.get('Localisation', 'Non renseignée'))}</p>
+                    <p><strong>Procédure</strong> : {html.escape(record.get('Procédure', '—'))} · <strong>Catégorie</strong> : {html.escape(record.get('Catégorie', '—'))}</p>
+                    <p><strong>Échéance</strong> : {deadline}</p>
+                    {link_section}
+                </div>
+                """
+            ),
             unsafe_allow_html=True,
         )
+
+
+def _ensure_board_state(df: pd.DataFrame) -> Dict[str, str]:
+    """Keep session-based statuses aligned with the dataframe content."""
+    status_map = st.session_state.setdefault("board_status", {})
+    if df.empty:
+        status_map.clear()
+        return status_map
+    identifiers = [str(val) for val in (df["ID"].tolist() if "ID" in df.columns else df["Titre"].tolist())]
+    for identifier in identifiers:
+        status_map.setdefault(identifier, BOARD_STAGES[0])
+    for stale in [key for key in status_map.keys() if key not in identifiers]:
+        status_map.pop(stale, None)
+    return status_map
+
+
+def _update_board_stage(card_id: str, widget_key: str) -> None:
+    value = st.session_state.get(widget_key, BOARD_STAGES[0])
+    st.session_state.setdefault("board_status", {})[card_id] = value
+
+
+def render_scrap_board(df: pd.DataFrame) -> None:
+    """Interactive board with Backlog → Done swimlanes."""
+    status_map = _ensure_board_state(df)
+    grouped: Dict[str, List[Tuple[str, Dict[str, str]]]] = {stage: [] for stage in BOARD_STAGES}
+    payload: List[Dict[str, List[str]]] = []
+    for record in df.to_dict("records"):
+        card_id = str(record.get("ID") or record.get("Titre"))
+        stage = status_map.get(card_id, BOARD_STAGES[0])
+        grouped.setdefault(stage, []).append((card_id, record))
+    for stage in BOARD_STAGES:
+        items = []
+        for card_id, record in grouped.get(stage, []):
+            title = record.get("Titre", "Sans titre")
+            buyer = record.get("Acheteur", "N/A")
+            deadline = _format_datetime(record.get("Date limite"))
+            label = f"#{card_id} · {title}\nAcheteur : {buyer}\nÉchéance : {deadline}"
+            items.append(label)
+        payload.append({"header": stage, "items": items})
+
+    if HAS_SORTABLE and not df.empty:
+        custom_style = """
+        .sortable-component {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(220px, 1fr));
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .sortable-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            background: rgba(255,255,255,0.03);
+            border-radius: 18px;
+            border: 1px solid var(--tf-border);
+            min-height: 420px;
+            padding: 1rem;
+        }
+        .sortable-container-header {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--tf-muted);
+            margin-bottom: 0.6rem;
+        }
+        .sortable-container-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: flex-start;
+            gap: 0.6rem;
+        }
+        .sortable-item {
+            background: rgba(5, 7, 13, 0.65);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 0.9rem;
+            color: var(--tf-text);
+            white-space: pre-wrap;
+            line-height: 1.35;
+            box-shadow: 0 18px 32px rgba(5,7,13,0.45);
+        }
+        """
+        sorted_payload = sort_items(  # type: ignore[misc]
+            payload,
+            direction="horizontal",
+            multi_containers=True,
+            custom_style=custom_style,
+            key="scrap-board-sortable",
+        ) or payload
+        for column in sorted_payload:
+            stage = column.get("header") or BOARD_STAGES[0]
+            for item in column.get("items", []):
+                card_id = str(item).split("·", 1)[0].replace("#", "").strip()
+                status_map[card_id] = stage
+        counts = {stage: sum(1 for s in status_map.values() if s == stage) for stage in BOARD_STAGES}
+        st.caption(" · ".join(f"{stage}: {counts.get(stage, 0)}" for stage in BOARD_STAGES))
+        return
+    elif not HAS_SORTABLE:
+        st.info("Installez 'streamlit-sortables' (pip install streamlit-sortables) pour activer le glisser-déposer.")
+
+    columns = st.columns(len(BOARD_STAGES), gap="large")
+    for idx, stage in enumerate(BOARD_STAGES):
+        with columns[idx]:
+            st.markdown(f"**{stage}** ({len(grouped.get(stage, []))})")
+            if not grouped.get(stage):
+                st.caption("Aucune carte")
+                continue
+            for card_id, record in grouped.get(stage, []):
+                st.markdown(
+                    _html_block(
+                        f"""
+                        <article class='board-card'>
+                            <h4>{html.escape(record.get('Titre', 'Sans titre'))}</h4>
+                            <div class='card-meta'>Acheteur : {html.escape(str(record.get('Acheteur', 'N/A')))}</div>
+                            <div class='card-meta'>Échéance : {_format_datetime(record.get('Date limite'))}</div>
+                        </article>
+                        """
+                    ),
+                    unsafe_allow_html=True,
+                )
+                if not HAS_SORTABLE:
+                    select_key = f"stage-select-{card_id}"
+                    if select_key not in st.session_state:
+                        st.session_state[select_key] = status_map.get(card_id, BOARD_STAGES[0])
+                    st.selectbox(
+                        "Changer d'étape",
+                        BOARD_STAGES,
+                        key=select_key,
+                        label_visibility="collapsed",
+                        on_change=_update_board_stage,
+                        args=(card_id, select_key),
+                    )
 
 
 def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
@@ -417,6 +722,11 @@ def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
     }[ordering_label]
 
     limit = st.sidebar.slider("Nombre maximum de lignes", min_value=50, max_value=1000, value=200, step=50)
+    if st.sidebar.button("Afficher le backlog scrapping"):
+        st.session_state["show_backlog_modal"] = True
+    if st.session_state.get("show_backlog_modal"):
+        if st.sidebar.button("Fermer le backlog", key="sidebar-close-backlog"):
+            st.session_state["show_backlog_modal"] = False
 
     filters = {
         "keyword": keyword.strip(),
@@ -434,11 +744,10 @@ def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
 
 def main() -> None:
     meta = load_filter_metadata()
-    render_board_toolbar(meta)
-
     filters, ordering_label = sidebar_filters(meta)
 
     df = build_dataframe(filters)
+    render_hero(meta, df)
     render_summary(df, meta)
 
     st.markdown(
@@ -448,35 +757,33 @@ def main() -> None:
 
     if df.empty:
         st.info("Aucun résultat pour ces filtres.")
+        st.session_state["show_backlog_modal"] = False
         return
 
-    tab_tableau, tab_kanban, tab_fiches = st.tabs([
-        "Tableau interactif",
-        "Vue Kanban",
-        "Cartes détaillées",
-    ])
+    backlog_intro = _html_block(
+        """
+        <section class='detail-card'>
+            <h2>Backlog des dossiers collectés</h2>
+            <p class='stat-helper'>Vue opérée par l'équipe scrapping, prête à dispatcher côté back.</p>
+        </section>
+        """
+    )
 
-    with tab_tableau:
-        st.dataframe(
-            df,
-            use_container_width=True,
-            hide_index=True,
-            column_config={"Liens": st.column_config.TextColumn("Liens JSON")},
-        )
-        json_payload = df.to_json(orient="records", force_ascii=False, indent=2)
-        st.download_button(
-            label="Télécharger le JSON",
-            data=json_payload,
-            file_name="tenders_streamlit.json",
-            mime="application/json",
-            use_container_width=True,
-        )
-
-    with tab_kanban:
-        render_kanban(df)
-
-    with tab_fiches:
-        render_focus_cards(df)
+    if st.session_state.get("show_backlog_modal"):
+        if STREAMLIT_HAS_MODAL:
+            with st.modal("Backlog scrapping", key="backlog-modal"):
+                st.markdown(backlog_intro, unsafe_allow_html=True)
+                render_scrap_board(df)
+                if st.button("Fermer le backlog", key="close-backlog"):
+                    st.session_state["show_backlog_modal"] = False
+        else:
+            st.warning("Cette version de Streamlit ne prend pas en charge les pop-ups natives; affichage intégré ci-dessous.")
+            st.markdown(backlog_intro, unsafe_allow_html=True)
+            render_scrap_board(df)
+            if st.button("Fermer le backlog", key="close-backlog-fallback"):
+                st.session_state["show_backlog_modal"] = False
+    else:
+        st.caption("Cliquez sur \"Afficher le backlog scrapping\" dans la barre latérale pour piloter le board.")
 
 
 def render_kanban(df: pd.DataFrame) -> None:
@@ -499,22 +806,39 @@ def render_kanban(df: pd.DataFrame) -> None:
         cards = []
         for _, row in subset.head(max_cards).iterrows():
             cards.append(
-                f"""
-                <article class='board-card'>
-                    <h4>{html.escape(row['Titre'])}</h4>
-                    <div class='card-meta'>Limite : {_format_datetime(row['Date limite'])}</div>
-                    <div class='card-meta'>Acheteur : {html.escape(str(row['Acheteur']))}</div>
-                </article>
-                """
+                _html_block(
+                    f"""
+                    <article class='board-card'>
+                        <h4>{html.escape(row['Titre'])}</h4>
+                        <div class='card-meta'>Limite : {_format_datetime(row['Date limite'])}</div>
+                        <div class='card-meta'>Acheteur : {html.escape(str(row['Acheteur']))}</div>
+                        <div>
+                            <span class='chip chip-inline'>{html.escape(str(row['Procédure'] or 'Procédure ?'))}</span>
+                            <span class='chip chip-inline'>{html.escape(str(row['Région'] or 'Région ?'))}</span>
+                        </div>
+                    </article>
+                    """
+                )
             )
-        column_html = f"""
-        <section class='board-column'>
-            <h3>{html.escape(str(key or 'Non renseigné'))} · {len(subset)}</h3>
-            {''.join(cards) or "<div class='card-meta'>Aucune carte</div>"}
-        </section>
-        """
+        column_html = _html_block(
+            f"""
+            <section class='board-column'>
+                <h3>{html.escape(str(key or 'Non renseigné'))} · {len(subset)}</h3>
+                {''.join(cards) or "<div class='card-meta'>Aucune carte</div>"}
+            </section>
+            """
+        )
         columns_html.append(column_html)
-    st.markdown(f"<div class='board-columns'>{''.join(columns_html)}</div>", unsafe_allow_html=True)
+    st.markdown(
+        _html_block(
+            f"""
+            <div class='board-columns'>
+                {''.join(columns_html)}
+            </div>
+            """
+        ),
+        unsafe_allow_html=True,
+    )
 
 
 def chunked(seq: Sequence, size: int) -> Iterator[List]:
