@@ -25,10 +25,27 @@ django.setup()
 
 from django.db.models import Min, Max, Q  # noqa: E402
 from django.utils import timezone  # noqa: E402
+from django.core.management import call_command  # noqa: E402
 
 from tenders.models import Tender  # noqa: E402
 
 st.set_page_config(page_title="Tenders dashboard", layout="wide")
+AUTO_BOOTSTRAP_ENABLED = os.getenv("TASKFLOW_AUTO_BOOTSTRAP", "1").lower() not in {"0", "false", "no", "off"}
+try:
+    BOOTSTRAP_PAGES = max(1, int(os.getenv("TASKFLOW_BOOTSTRAP_PAGES", "1")))
+except ValueError:
+    BOOTSTRAP_PAGES = 1
+
+
+@st.cache_resource(show_spinner=False)
+def bootstrap_database(pages: int = BOOTSTRAP_PAGES) -> None:
+    """Run migrations and ensure tenders table has data (Streamlit Cloud bootstrap)."""
+    call_command("migrate", interactive=False)
+    call_command("fetch_tenders", pages=pages)
+
+
+if AUTO_BOOTSTRAP_ENABLED:
+    bootstrap_database()
 
 
 def _ensure_aware(target: datetime) -> datetime:
