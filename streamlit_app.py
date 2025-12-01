@@ -397,6 +397,11 @@ BOARD_STAGES = [
     "Terminé",
 ]
 
+CARD_LABEL_PREFIX = "[TF-ID]"
+
+if "board_layout" not in st.session_state:
+    st.session_state["board_layout"] = {stage: [] for stage in BOARD_STAGES}
+
 
 def _format_datetime(value) -> str:
     if value is None or (isinstance(value, float) and pd.isna(value)):
@@ -567,34 +572,77 @@ def _update_board_stage(card_id: str, widget_key: str) -> None:
     st.session_state.setdefault("board_status", {})[card_id] = value
 
 
+def _sync_board_layout(stage_to_ids: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    layout = st.session_state.setdefault("board_layout", {stage: [] for stage in BOARD_STAGES})
+    for stage in BOARD_STAGES:
+        ids = stage_to_ids.get(stage, [])
+        retained = [card_id for card_id in layout.get(stage, []) if card_id in ids]
+        missing = [card_id for card_id in ids if card_id not in retained]
+        layout[stage] = retained + missing
+    for stage, ids in list(layout.items()):
+        layout[stage] = [card_id for card_id in ids if card_id in stage_to_ids.get(stage, [])]
+    return layout
+
+
+def _build_card_label(card_id: str, record: Dict[str, str]) -> str:
+    title = record.get("Titre", "Sans titre")
+    buyer = record.get("Acheteur", "N/A")
+    deadline = _format_datetime(record.get("Date limite"))
+    return f"{CARD_LABEL_PREFIX}{card_id} {title}\nAcheteur : {buyer}\nÉchéance : {deadline}"
+
+
+def _parse_card_id(item: str) -> str:
+    if item.startswith(CARD_LABEL_PREFIX):
+        tail = item[len(CARD_LABEL_PREFIX):]
+        return tail.split(" ", 1)[0].strip()
+    head = item.split("\n", 1)[0].strip()
+    return head.lstrip("# ")
+
+
 def render_scrap_board(df: pd.DataFrame) -> None:
     """Interactive board with Backlog → Done swimlanes."""
     status_map = _ensure_board_state(df)
-    grouped: Dict[str, List[Tuple[str, Dict[str, str]]]] = {stage: [] for stage in BOARD_STAGES}
-    payload: List[Dict[str, List[str]]] = []
+    record_map: Dict[str, Dict[str, str]] = {}
+    stage_to_ids: Dict[str, List[str]] = {stage: [] for stage in BOARD_STAGES}
     for record in df.to_dict("records"):
         card_id = str(record.get("ID") or record.get("Titre"))
+        record_map[card_id] = record
         stage = status_map.get(card_id, BOARD_STAGES[0])
-        grouped.setdefault(stage, []).append((card_id, record))
+        stage_to_ids.setdefault(stage, []).append(card_id)
+
+    layout = _sync_board_layout(stage_to_ids)
+    payload: List[Dict[str, List[str]]] = []
     for stage in BOARD_STAGES:
+        ordered_ids = layout.get(stage) or stage_to_ids.get(stage, [])
+        if not layout.get(stage):
+            layout[stage] = ordered_ids
         items = []
-        for card_id, record in grouped.get(stage, []):
-            title = record.get("Titre", "Sans titre")
-            buyer = record.get("Acheteur", "N/A")
-            deadline = _format_datetime(record.get("Date limite"))
-            label = f"#{card_id} · {title}\nAcheteur : {buyer}\nÉchéance : {deadline}"
-            items.append(label)
+        for card_id in ordered_ids:
+            record = record_map.get(card_id)
+            if not record:
+                continue
+            items.append(_build_card_label(card_id, record))
         payload.append({"header": stage, "items": items})
+
+    grouped: Dict[str, List[Tuple[str, Dict[str, str]]]] = {
+        stage: [(card_id, record_map[card_id]) for card_id in layout.get(stage, []) if card_id in record_map]
+        for stage in BOARD_STAGES
+    }
 
     if HAS_SORTABLE and not df.empty:
         custom_style = """
         .sortable-component {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(220px, 1fr));
+            display: flex;
+            flex-wrap: nowrap;
             gap: 1rem;
             align-items: flex-start;
+            width: 100%;
+            overflow-x: auto;
         }
         .sortable-container {
+            flex: 1 1 0;
+            min-width: 240px;
+            max-width: 25%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -602,7 +650,8 @@ def render_scrap_board(df: pd.DataFrame) -> None:
             background: rgba(255,255,255,0.03);
             border-radius: 18px;
             border: 1px solid var(--tf-border);
-            min-height: 420px;
+            min-height: 600px;
+            height: 600px;
             padding: 1rem;
         }
         .sortable-container-header {
@@ -638,17 +687,26 @@ def render_scrap_board(df: pd.DataFrame) -> None:
             key="scrap-board-sortable",
         ) or payload
         new_status: Dict[str, str] = status_map.copy()
+        new_layout: Dict[str, List[str]] = {stage: [] for stage in BOARD_STAGES}
         changed = False
+        layout_changed = False
         for column in sorted_payload:
             stage = column.get("header") or BOARD_STAGES[0]
+            new_layout.setdefault(stage, [])
             for item in column.get("items", []):
-                card_id = str(item).split("·", 1)[0].replace("#", "").strip()
+                card_id = _parse_card_id(str(item))
+                new_layout[stage].append(card_id)
                 if new_status.get(card_id) != stage:
                     new_status[card_id] = stage
                     changed = True
+        if new_layout != st.session_state.get("board_layout"):
+            st.session_state["board_layout"] = new_layout
+            layout_changed = True
         if changed:
             st.session_state["board_status"] = new_status
             status_map = new_status
+        if layout_changed:
+            layout = new_layout
         counts = {stage: sum(1 for s in status_map.values() if s == stage) for stage in BOARD_STAGES}
         st.caption(" · ".join(f"{stage}: {counts.get(stage, 0)}" for stage in BOARD_STAGES))
         return
