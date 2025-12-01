@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import html
 import os
 import sys
 from datetime import date, datetime, time
@@ -35,6 +36,114 @@ try:
     BOOTSTRAP_PAGES = max(1, int(os.getenv("TASKFLOW_BOOTSTRAP_PAGES", "1")))
 except ValueError:
     BOOTSTRAP_PAGES = 1
+
+THEME_CSS = """
+<style>
+:root {
+    --tf-primary: #6366f1;
+    --tf-bg: #f8fafc;
+    --tf-card: #ffffff;
+    --tf-muted: #94a3b8;
+    --tf-text: #0f172a;
+}
+
+body {
+    background-color: var(--tf-bg);
+}
+
+[data-testid="stSidebar"] {
+    background: #0b1220;
+    color: #e2e8f0;
+}
+
+.hero {
+    background: radial-gradient(circle at top right, rgba(99,102,241,0.2), rgba(15,23,42,0.92));
+    color: #f8fafc;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+    font-size: 2.3rem;
+    margin-bottom: 0.25rem;
+}
+
+.hero p {
+    margin: 0;
+    color: rgba(248,250,252,0.8);
+}
+
+.hero-pill {
+    background: rgba(15,23,42,0.35);
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(248,250,252,0.3);
+    font-weight: 600;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: var(--tf-card);
+    border-radius: 16px;
+    padding: 1.25rem;
+    border: 1px solid rgba(148,163,184,0.3);
+    box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+}
+
+.stat-label {
+    color: var(--tf-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--tf-text);
+    margin: 0.25rem 0 0.4rem;
+}
+
+.stat-helper {
+    color: var(--tf-muted);
+    margin: 0;
+}
+
+.kanban-card {
+    border: 1px solid rgba(99,102,241,0.25);
+    padding: 0.7rem;
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 0.6rem;
+    box-shadow: 0 4px 14px rgba(15,23,42,0.07);
+}
+
+.detail-card {
+    border: 1px solid rgba(148,163,184,0.2);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.8rem;
+    background: var(--tf-card);
+}
+
+.detail-card h4 {
+    margin: 0 0 0.4rem;
+}
+</style>
+"""
+
+st.markdown(THEME_CSS, unsafe_allow_html=True)
 
 
 @st.cache_resource(show_spinner=False)
@@ -126,6 +235,118 @@ KANBAN_DIMENSIONS = {
 }
 
 
+def _format_datetime(value) -> str:
+    if value is None or (isinstance(value, float) and pd.isna(value)):
+        return "Non renseignée"
+    if isinstance(value, pd.Timestamp):
+        value = value.to_pydatetime()
+    if isinstance(value, str):
+        return value
+    try:
+        if timezone.is_naive(value):
+            value = timezone.make_aware(value, timezone.get_current_timezone())
+        localized = timezone.localtime(value)
+    except Exception:
+        return str(value)
+    return localized.strftime("%d %b %Y %H:%M")
+
+
+def render_hero(meta: Dict[str, Iterable]) -> None:
+    total = meta.get("count", 0)
+    st.markdown(
+        f"""
+        <section class="hero">
+            <div>
+                <p class="stat-label">Taskflow radar</p>
+                <h1>Cartographie des appels d'offres</h1>
+                <p>{total} opportunités synchronisées depuis le backend Django.</p>
+            </div>
+            <div class="hero-pill">Streamlit Cloud · temps réel</div>
+        </section>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_summary(df: pd.DataFrame, meta: Dict[str, Iterable]) -> None:
+    total_displayed = len(df)
+    total_db = meta.get("count", total_displayed)
+    deadlines = pd.to_datetime(df.get("Date limite"), errors="coerce") if not df.empty else pd.Series(dtype="datetime64[ns]")
+    now_ts = pd.Timestamp(timezone.now())
+    next_deadline = deadlines.min() if not deadlines.empty else None
+    closing_soon = deadlines[(deadlines >= now_ts) & (deadlines <= now_ts + pd.Timedelta(days=7))]
+    unique_procedures = int(df["Procédure"].nunique()) if not df.empty else 0
+    unique_regions = int(df["Région"].nunique()) if not df.empty else 0
+
+    stats = [
+        {
+            "label": "Opportunités affichées",
+            "value": f"{total_displayed:,}",
+            "helper": f"sur {total_db:,} enregistrées",
+        },
+        {
+            "label": "Échéances (< 7 jours)",
+            "value": str(len(closing_soon)),
+            "helper": "priorisez ces dossiers",
+        },
+        {
+            "label": "Procédures couvertes",
+            "value": unique_procedures,
+            "helper": f"{unique_regions} régions concernées",
+        },
+        {
+            "label": "Prochaine échéance",
+            "value": _format_datetime(next_deadline) if next_deadline is not None else "—",
+            "helper": "d'après vos filtres",
+        },
+    ]
+
+    cards = "".join(
+        f"""
+        <div class='stat-card'>
+            <p class='stat-label'>{html.escape(str(stat['label']))}</p>
+            <p class='stat-value'>{html.escape(str(stat['value']))}</p>
+            <p class='stat-helper'>{html.escape(str(stat['helper']))}</p>
+        </div>
+        """
+        for stat in stats
+    )
+    st.markdown(f"<div class='stat-grid'>{cards}</div>", unsafe_allow_html=True)
+
+
+def render_focus_cards(df: pd.DataFrame) -> None:
+    st.caption("Fiches détaillées prêtes à partager avec votre équipe.")
+    for record in df.to_dict("records"):
+        deadline = _format_datetime(record.get("Date limite"))
+        links = record.get("Liens")
+        link_section = ""
+        if isinstance(links, str):
+            try:
+                parsed_links = json.loads(links)
+            except json.JSONDecodeError:
+                parsed_links = {}
+            if isinstance(parsed_links, dict) and parsed_links:
+                items = "".join(
+                    f"<li><a href='{html.escape(url)}' target='_blank'>{html.escape(label.title())}</a></li>"
+                    for label, url in parsed_links.items()
+                    if url
+                )
+                link_section = f"<ul>{items}</ul>"
+        st.markdown(
+            f"""
+            <div class='detail-card'>
+                <h4>{html.escape(record.get('Titre', 'Sans titre'))}</h4>
+                <p><strong>Acheteur</strong> : {html.escape(record.get('Acheteur', 'N/A'))}</p>
+                <p><strong>Localisation</strong> : {html.escape(record.get('Localisation', 'Non renseignée'))}</p>
+                <p><strong>Procédure</strong> : {html.escape(record.get('Procédure', '—'))} · <strong>Catégorie</strong> : {html.escape(record.get('Catégorie', '—'))}</p>
+                <p><strong>Échéance</strong> : {deadline}</p>
+                {link_section}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+
 def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
     st.sidebar.header("Filtres")
     keyword = st.sidebar.text_input("Recherche plein texte", placeholder="ex: plomberie, parking...")
@@ -183,56 +404,54 @@ def sidebar_filters(meta: Dict[str, Iterable]) -> Tuple[Dict[str, str], str]:
 
 def main() -> None:
     meta = load_filter_metadata()
-    st.title("Appels d'offres (Streamlit)")
-    st.caption("Visualisation rapide des données scrapées et stockées dans Django")
+    render_hero(meta)
 
     filters, ordering_label = sidebar_filters(meta)
 
     df = build_dataframe(filters)
-    st.write(
-        f"{len(df)} appels d'offres affichés sur {meta['count']} en base • Tri: {ordering_label}"
+    render_summary(df, meta)
+
+    st.markdown(
+        f"<p class='stat-helper'>Filtre actif : <strong>{html.escape(ordering_label)}</strong> · {len(df)} appels d'offres affichés</p>",
+        unsafe_allow_html=True,
     )
 
     if df.empty:
         st.info("Aucun résultat pour ces filtres.")
         return
 
-    st.dataframe(
-        df,
-        use_container_width=True,
-        hide_index=True,
-        column_config={"Liens": st.column_config.TextColumn("Liens JSON")},
-    )
+    tab_tableau, tab_kanban, tab_fiches = st.tabs([
+        "Tableau interactif",
+        "Vue Kanban",
+        "Cartes détaillées",
+    ])
 
-    json_payload = df.to_json(orient="records", force_ascii=False, indent=2)
-    st.download_button(
-        label="Télécharger le JSON",
-        data=json_payload,
-        file_name="tenders_streamlit.json",
-        mime="application/json",
-    )
+    with tab_tableau:
+        st.dataframe(
+            df,
+            use_container_width=True,
+            hide_index=True,
+            column_config={"Liens": st.column_config.TextColumn("Liens JSON")},
+        )
+        json_payload = df.to_json(orient="records", force_ascii=False, indent=2)
+        st.download_button(
+            label="Télécharger le JSON",
+            data=json_payload,
+            file_name="tenders_streamlit.json",
+            mime="application/json",
+            use_container_width=True,
+        )
 
-    st.subheader("Focus par appel d'offre")
-    for _, row in df.iterrows():
-        with st.expander(row["Titre"]):
-            st.write(
-                "**Acheteur**:", row["Acheteur"], " | **Procédure**:", row["Procédure"], " | **Catégorie**:", row["Catégorie"]
-            )
-            st.write("**Localisation**:", row["Localisation"], " | **Région**:", row["Région"], " | **Département**:", row["Département"])
-            st.write("**Date limite**:", row["Date limite"])
-            try:
-                links = json.loads(row["Liens"])
-                for label, url in links.items():
-                    st.markdown(f"- [{label}]({url})")
-            except json.JSONDecodeError:
-                st.write(row["Liens"])
+    with tab_kanban:
+        render_kanban(df)
 
-    render_kanban(df)
+    with tab_fiches:
+        render_focus_cards(df)
 
 
 def render_kanban(df: pd.DataFrame) -> None:
     """Display a lightweight Kanban grouped by a selected dimension."""
-    st.subheader("Vue Kanban (lecture seule)")
+    st.caption("Organisez les marchés par file d'attente thématique.")
     if df.empty:
         st.caption("Ajoutez des appels d'offres pour alimenter le kanban.")
         return
@@ -251,9 +470,9 @@ def render_kanban(df: pd.DataFrame) -> None:
             col.markdown(f"**{key or 'Non renseigné'}** ({len(subset)})")
             for _, row in subset.head(max_cards).iterrows():
                 col.markdown(
-                    f"<div style='border:1px solid #d9d9d9;padding:8px;border-radius:6px;margin-bottom:6px;'>"
-                    f"<strong>{row['Titre']}</strong><br/>"
-                    f"<small>Limite: {row['Date limite']}<br/>Procédure: {row['Procédure']}</small>"
+                    f"<div class='kanban-card'>"
+                    f"<strong>{html.escape(row['Titre'])}</strong><br/>"
+                    f"<small>Limite: {_format_datetime(row['Date limite'])}<br/>Procédure: {html.escape(str(row['Procédure']))}</small>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
